@@ -90,7 +90,232 @@
         "language": "pebble",
         "path": "./snippets/pebble.json"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Pebble",
+      "properties": {
+        "pebble.templateRoots": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "src/main/resources/templates",
+            "src/main/resources",
+            "templates",
+            "resources/templates"
+          ],
+          "scope": "resource",
+          "markdownDescription": "Directories, relative to each workspace folder, that template names in `extends`, `include`, `import`, `from` and `embed` are resolved against. The directory of the current file is always tried first."
+        },
+        "pebble.templateSuffixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".peb",
+            ".pebble",
+            ".html"
+          ],
+          "scope": "resource",
+          "markdownDescription": "Suffixes tried when a referenced template name has no extension (Spring Boot's default suffix is `.peb`)."
+        },
+        "pebble.customFilters": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string",
+                "description": "Shown in completion and hover (Markdown)."
+              },
+              "params": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Parameter names, used for signature help and snippets."
+              }
+            }
+          },
+          "scope": "resource",
+          "markdownDescription": "Filters provided by your own Pebble extensions. They get completion and hover, and are not reported as unknown."
+        },
+        "pebble.customFunctions": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string",
+                "description": "Shown in completion and hover (Markdown)."
+              },
+              "params": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Parameter names, used for signature help and snippets."
+              }
+            }
+          },
+          "scope": "resource",
+          "markdownDescription": "Functions provided by your own Pebble extensions."
+        },
+        "pebble.customTests": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string",
+                "description": "Shown in completion and hover (Markdown)."
+              },
+              "params": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Parameter names, used for signature help and snippets."
+              }
+            }
+          },
+          "scope": "resource",
+          "markdownDescription": "Tests (`is \u2026`) provided by your own Pebble extensions."
+        },
+        "pebble.customTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "scope": "resource",
+          "markdownDescription": "Tag names provided by your own Pebble extensions. Suppresses the unknown-tag error for them."
+        },
+        "pebble.spring.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "markdownDescription": "Include the functions and variables of the Pebble Spring extension (`message`, `href`, `hasErrors`, \u2026, `request`, `session`, `beans`)."
+        },
+        "pebble.diagnostics.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "description": "Report syntax and semantic problems in Pebble templates."
+        },
+        "pebble.diagnostics.unknownFilter": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "information",
+            "off"
+          ],
+          "default": "warning",
+          "scope": "resource",
+          "markdownDescription": "Severity for filters that are neither built in nor listed in `pebble.customFilters` (code W001)."
+        },
+        "pebble.diagnostics.unknownFunction": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "information",
+            "off"
+          ],
+          "default": "off",
+          "scope": "resource",
+          "markdownDescription": "Severity for functions that are neither built in, macros, nor listed in `pebble.customFunctions` (code W003)."
+        },
+        "pebble.diagnostics.unknownTest": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "information",
+            "off"
+          ],
+          "default": "warning",
+          "scope": "resource",
+          "markdownDescription": "Severity for tests that are neither built in nor listed in `pebble.customTests` (code W002)."
+        },
+        "pebble.diagnostics.missingTemplate": {
+          "type": "string",
+          "enum": [
+            "error",
+            "warning",
+            "information",
+            "off"
+          ],
+          "default": "warning",
+          "scope": "resource",
+          "markdownDescription": "Severity when a referenced template cannot be found in any template root (code W006)."
+        },
+        "pebble.html.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "markdownDescription": "Provide Pebble IntelliSense and diagnostics inside `{{ }}` and `{% %}` in `.html` files. Requires a window reload to take effect."
+        },
+        "pebble.html.delegate": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "markdownDescription": "In `.peb`/`.pebble` files, provide HTML tag and attribute completion, hover, folding and symbols via the HTML language service."
+        },
+        "pebble.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "scope": "window",
+          "description": "Traces the communication between VS Code and the Pebble language server."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "pebble.restartServer",
+        "title": "Restart Language Server",
+        "category": "Pebble"
+      },
+      {
+        "command": "pebble.enableDatastarSupport",
+        "title": "Enable Datastar support for Pebble files",
+        "category": "Pebble"
+      }
+    ],
+    "configurationDefaults": {
+      "[pebble]": {
+        "editor.snippetSuggestions": "top"
+      }
+    }
   },
   "scripts": {
     "build": "bun scripts/build.ts",
