@@ -1,92 +1,92 @@
 ><div class="card" data-signals="{count: {{ initial }}}" hx-get="/api/{{ id }}">
-#^ text.html.basic meta.tag.structure.div.start.html punctuation.definition.tag.begin.html
-# ^^^ text.html.basic meta.tag.structure.div.start.html entity.name.tag.html
-#    ^ text.html.basic meta.tag.structure.div.start.html
-#     ^^^^^ text.html.basic meta.tag.structure.div.start.html meta.attribute.class.html entity.other.attribute-name.html
-#          ^ text.html.basic meta.tag.structure.div.start.html meta.attribute.class.html punctuation.separator.key-value.html
-#           ^ text.html.basic meta.tag.structure.div.start.html meta.attribute.class.html string.quoted.double.html punctuation.definition.string.begin.html
-#            ^^^^ text.html.basic meta.tag.structure.div.start.html meta.attribute.class.html string.quoted.double.html
-#                ^ text.html.basic meta.tag.structure.div.start.html meta.attribute.class.html string.quoted.double.html punctuation.definition.string.end.html
-#                 ^ text.html.basic meta.tag.structure.div.start.html
-#                  ^^^^^ text.html.basic meta.tag.structure.div.start.html keyword.operator.datastar.prefix
-#                       ^^^^^^^ text.html.basic meta.tag.structure.div.start.html support.function.datastar.plugin
-#                              ^ text.html.basic meta.tag.structure.div.start.html punctuation.separator.key-value.html
-#                               ^ text.html.basic meta.tag.structure.div.start.html punctuation.definition.string.begin.html
-#                                ^ text.html.basic meta.tag.structure.div.start.html punctuation.definition.object.begin.datastar
-#                                 ^^^^^ text.html.basic meta.tag.structure.div.start.html variable.other.property.datastar
-#                                      ^ text.html.basic meta.tag.structure.div.start.html punctuation.separator.key-value.datastar
-#                                       ^ text.html.basic meta.tag.structure.div.start.html
-#                                        ^^ text.html.basic meta.tag.structure.div.start.html meta.expression.pebble punctuation.definition.tag.begin.pebble
-#                                          ^ text.html.basic meta.tag.structure.div.start.html meta.expression.pebble
-#                                           ^^^^^^^ text.html.basic meta.tag.structure.div.start.html meta.expression.pebble variable.other.pebble
-#                                                  ^ text.html.basic meta.tag.structure.div.start.html meta.expression.pebble
-#                                                   ^^ text.html.basic meta.tag.structure.div.start.html meta.expression.pebble punctuation.definition.tag.end.pebble
-#                                                     ^ text.html.basic meta.tag.structure.div.start.html punctuation.definition.object.end.datastar
-#                                                      ^ text.html.basic meta.tag.structure.div.start.html punctuation.definition.string.end.html
-#                                                       ^ text.html.basic meta.tag.structure.div.start.html
-#                                                        ^^^^^^ text.html.basic meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html entity.other.attribute-name.html
-#                                                              ^ text.html.basic meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html punctuation.separator.key-value.html
-#                                                               ^ text.html.basic meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html punctuation.definition.string.begin.html
-#                                                                ^^^^^ text.html.basic meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html
-#                                                                     ^^ text.html.basic meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html meta.expression.pebble punctuation.definition.tag.begin.pebble
-#                                                                       ^ text.html.basic meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html meta.expression.pebble
-#                                                                        ^^ text.html.basic meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html meta.expression.pebble variable.other.pebble
-#                                                                          ^ text.html.basic meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html meta.expression.pebble
-#                                                                           ^^ text.html.basic meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html meta.expression.pebble punctuation.definition.tag.end.pebble
-#                                                                             ^ text.html.basic meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html punctuation.definition.string.end.html
-#                                                                              ^ text.html.basic meta.tag.structure.div.start.html punctuation.definition.tag.end.html
+#^ text.html.derivative meta.tag.structure.div.start.html punctuation.definition.tag.begin.html
+# ^^^ text.html.derivative meta.tag.structure.div.start.html entity.name.tag.html
+#    ^ text.html.derivative meta.tag.structure.div.start.html
+#     ^^^^^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.class.html entity.other.attribute-name.html
+#          ^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.class.html punctuation.separator.key-value.html
+#           ^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.class.html string.quoted.double.html punctuation.definition.string.begin.html
+#            ^^^^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.class.html string.quoted.double.html
+#                ^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.class.html string.quoted.double.html punctuation.definition.string.end.html
+#                 ^ text.html.derivative meta.tag.structure.div.start.html
+#                  ^^^^^ text.html.derivative meta.tag.structure.div.start.html keyword.operator.datastar.prefix
+#                       ^^^^^^^ text.html.derivative meta.tag.structure.div.start.html support.function.datastar.plugin
+#                              ^ text.html.derivative meta.tag.structure.div.start.html punctuation.separator.key-value.html
+#                               ^ text.html.derivative meta.tag.structure.div.start.html punctuation.definition.string.begin.html
+#                                ^ text.html.derivative meta.tag.structure.div.start.html punctuation.definition.object.begin.datastar
+#                                 ^^^^^ text.html.derivative meta.tag.structure.div.start.html variable.other.property.datastar
+#                                      ^ text.html.derivative meta.tag.structure.div.start.html punctuation.separator.key-value.datastar
+#                                       ^ text.html.derivative meta.tag.structure.div.start.html
+#                                        ^^ text.html.derivative meta.tag.structure.div.start.html meta.expression.pebble punctuation.definition.tag.begin.pebble
+#                                          ^ text.html.derivative meta.tag.structure.div.start.html meta.expression.pebble
+#                                           ^^^^^^^ text.html.derivative meta.tag.structure.div.start.html meta.expression.pebble variable.other.pebble
+#                                                  ^ text.html.derivative meta.tag.structure.div.start.html meta.expression.pebble
+#                                                   ^^ text.html.derivative meta.tag.structure.div.start.html meta.expression.pebble punctuation.definition.tag.end.pebble
+#                                                     ^ text.html.derivative meta.tag.structure.div.start.html punctuation.definition.object.end.datastar
+#                                                      ^ text.html.derivative meta.tag.structure.div.start.html punctuation.definition.string.end.html
+#                                                       ^ text.html.derivative meta.tag.structure.div.start.html
+#                                                        ^^^^^^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html entity.other.attribute-name.html
+#                                                              ^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html punctuation.separator.key-value.html
+#                                                               ^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html punctuation.definition.string.begin.html
+#                                                                ^^^^^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html
+#                                                                     ^^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html meta.expression.pebble punctuation.definition.tag.begin.pebble
+#                                                                       ^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html meta.expression.pebble
+#                                                                        ^^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html meta.expression.pebble variable.other.pebble
+#                                                                          ^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html meta.expression.pebble
+#                                                                           ^^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html meta.expression.pebble punctuation.definition.tag.end.pebble
+#                                                                             ^ text.html.derivative meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html string.quoted.double.html punctuation.definition.string.end.html
+#                                                                              ^ text.html.derivative meta.tag.structure.div.start.html punctuation.definition.tag.end.html
 >  {# comment #}
-#^^ text.html.basic
-#  ^^ text.html.basic comment.block.pebble
-#    ^ text.html.basic comment.block.pebble comment.block.pebble
-#     ^ text.html.basic comment.block.pebble comment.block.pebble
-#      ^ text.html.basic comment.block.pebble comment.block.pebble
-#       ^ text.html.basic comment.block.pebble comment.block.pebble
-#        ^ text.html.basic comment.block.pebble comment.block.pebble
-#         ^ text.html.basic comment.block.pebble comment.block.pebble
-#          ^ text.html.basic comment.block.pebble comment.block.pebble
-#           ^ text.html.basic comment.block.pebble comment.block.pebble
-#            ^ text.html.basic comment.block.pebble comment.block.pebble
-#             ^^ text.html.basic comment.block.pebble
+#^^ text.html.derivative
+#  ^^ text.html.derivative comment.block.pebble
+#    ^ text.html.derivative comment.block.pebble comment.block.pebble
+#     ^ text.html.derivative comment.block.pebble comment.block.pebble
+#      ^ text.html.derivative comment.block.pebble comment.block.pebble
+#       ^ text.html.derivative comment.block.pebble comment.block.pebble
+#        ^ text.html.derivative comment.block.pebble comment.block.pebble
+#         ^ text.html.derivative comment.block.pebble comment.block.pebble
+#          ^ text.html.derivative comment.block.pebble comment.block.pebble
+#           ^ text.html.derivative comment.block.pebble comment.block.pebble
+#            ^ text.html.derivative comment.block.pebble comment.block.pebble
+#             ^^ text.html.derivative comment.block.pebble
 >  {% if user.isActive %}
-#^^ text.html.basic
-#  ^^ text.html.basic meta.tag.template.pebble punctuation.definition.tag.begin.pebble
-#    ^ text.html.basic meta.tag.template.pebble
-#     ^^ text.html.basic meta.tag.template.pebble keyword.control.pebble
-#       ^ text.html.basic meta.tag.template.pebble
-#        ^^^^ text.html.basic meta.tag.template.pebble variable.other.pebble
-#            ^ text.html.basic meta.tag.template.pebble punctuation.accessor.pebble
-#             ^^^^^^^^ text.html.basic meta.tag.template.pebble variable.other.pebble
-#                     ^ text.html.basic meta.tag.template.pebble
-#                      ^^ text.html.basic meta.tag.template.pebble punctuation.definition.tag.end.pebble
+#^^ text.html.derivative
+#  ^^ text.html.derivative meta.tag.template.pebble punctuation.definition.tag.begin.pebble
+#    ^ text.html.derivative meta.tag.template.pebble
+#     ^^ text.html.derivative meta.tag.template.pebble keyword.control.pebble
+#       ^ text.html.derivative meta.tag.template.pebble
+#        ^^^^ text.html.derivative meta.tag.template.pebble variable.other.pebble
+#            ^ text.html.derivative meta.tag.template.pebble punctuation.accessor.pebble
+#             ^^^^^^^^ text.html.derivative meta.tag.template.pebble variable.other.pebble
+#                     ^ text.html.derivative meta.tag.template.pebble
+#                      ^^ text.html.derivative meta.tag.template.pebble punctuation.definition.tag.end.pebble
 >    <p>Welcome, {{ user.name | upper }}!</p>
-#^^^^ text.html.basic
-#    ^ text.html.basic meta.tag.structure.p.start.html punctuation.definition.tag.begin.html
-#     ^ text.html.basic meta.tag.structure.p.start.html entity.name.tag.html
-#      ^ text.html.basic meta.tag.structure.p.start.html punctuation.definition.tag.end.html
-#       ^^^^^^^^^ text.html.basic
-#                ^^ text.html.basic meta.expression.pebble punctuation.definition.tag.begin.pebble
-#                  ^ text.html.basic meta.expression.pebble
-#                   ^^^^ text.html.basic meta.expression.pebble variable.other.pebble
-#                       ^ text.html.basic meta.expression.pebble punctuation.accessor.pebble
-#                        ^^^^ text.html.basic meta.expression.pebble variable.other.pebble
-#                            ^ text.html.basic meta.expression.pebble
-#                             ^^^^^^^ text.html.basic meta.expression.pebble support.function.filter.pebble
-#                                    ^ text.html.basic meta.expression.pebble
-#                                     ^^ text.html.basic meta.expression.pebble punctuation.definition.tag.end.pebble
-#                                       ^ text.html.basic
-#                                        ^^ text.html.basic meta.tag.structure.p.end.html punctuation.definition.tag.begin.html
-#                                          ^ text.html.basic meta.tag.structure.p.end.html entity.name.tag.html
-#                                           ^ text.html.basic meta.tag.structure.p.end.html punctuation.definition.tag.end.html
+#^^^^ text.html.derivative
+#    ^ text.html.derivative meta.tag.structure.p.start.html punctuation.definition.tag.begin.html
+#     ^ text.html.derivative meta.tag.structure.p.start.html entity.name.tag.html
+#      ^ text.html.derivative meta.tag.structure.p.start.html punctuation.definition.tag.end.html
+#       ^^^^^^^^^ text.html.derivative
+#                ^^ text.html.derivative meta.expression.pebble punctuation.definition.tag.begin.pebble
+#                  ^ text.html.derivative meta.expression.pebble
+#                   ^^^^ text.html.derivative meta.expression.pebble variable.other.pebble
+#                       ^ text.html.derivative meta.expression.pebble punctuation.accessor.pebble
+#                        ^^^^ text.html.derivative meta.expression.pebble variable.other.pebble
+#                            ^ text.html.derivative meta.expression.pebble
+#                             ^^^^^^^ text.html.derivative meta.expression.pebble support.function.filter.pebble
+#                                    ^ text.html.derivative meta.expression.pebble
+#                                     ^^ text.html.derivative meta.expression.pebble punctuation.definition.tag.end.pebble
+#                                       ^ text.html.derivative
+#                                        ^^ text.html.derivative meta.tag.structure.p.end.html punctuation.definition.tag.begin.html
+#                                          ^ text.html.derivative meta.tag.structure.p.end.html entity.name.tag.html
+#                                           ^ text.html.derivative meta.tag.structure.p.end.html punctuation.definition.tag.end.html
 >  {% endif %}
-#^^ text.html.basic
-#  ^^ text.html.basic meta.tag.template.pebble punctuation.definition.tag.begin.pebble
-#    ^ text.html.basic meta.tag.template.pebble
-#     ^^^^^ text.html.basic meta.tag.template.pebble keyword.control.pebble
-#          ^ text.html.basic meta.tag.template.pebble
-#           ^^ text.html.basic meta.tag.template.pebble punctuation.definition.tag.end.pebble
+#^^ text.html.derivative
+#  ^^ text.html.derivative meta.tag.template.pebble punctuation.definition.tag.begin.pebble
+#    ^ text.html.derivative meta.tag.template.pebble
+#     ^^^^^ text.html.derivative meta.tag.template.pebble keyword.control.pebble
+#          ^ text.html.derivative meta.tag.template.pebble
+#           ^^ text.html.derivative meta.tag.template.pebble punctuation.definition.tag.end.pebble
 ></div>
-#^^ text.html.basic meta.tag.structure.div.end.html punctuation.definition.tag.begin.html
-#  ^^^ text.html.basic meta.tag.structure.div.end.html entity.name.tag.html
-#     ^ text.html.basic meta.tag.structure.div.end.html punctuation.definition.tag.end.html
+#^^ text.html.derivative meta.tag.structure.div.end.html punctuation.definition.tag.begin.html
+#  ^^^ text.html.derivative meta.tag.structure.div.end.html entity.name.tag.html
+#     ^ text.html.derivative meta.tag.structure.div.end.html punctuation.definition.tag.end.html
 >

@@ -3,11 +3,16 @@
     "languages": [
       {
         "id": "pebble",
-        "extensions": [".peb", ".pebble"]
+        "extensions": [
+          ".peb",
+          ".pebble"
+        ]
       },
       {
         "id": "html",
-        "extensions": [".html"]
+        "extensions": [
+          ".html"
+        ]
       }
     ],
     "grammars": [
@@ -19,16 +24,20 @@
       {
         "scopeName": "injection.html.pebble",
         "path": "../../syntaxes/pebble-injection.tmLanguage.json",
-        "injectTo": ["text.html.basic", "text.html.derivative", "text.html.pebble"]
+        "injectTo": [
+          "text.html.basic",
+          "text.html.derivative",
+          "text.html.pebble"
+        ]
       },
       {
-        "language": "html",
         "scopeName": "text.html.basic",
         "path": "./vendor/html.tmLanguage.json"
       },
       {
         "scopeName": "text.html.derivative",
-        "path": "./vendor/html-derivative.tmLanguage.json"
+        "path": "./vendor/html-derivative.tmLanguage.json",
+        "language": "html"
       },
       {
         "scopeName": "source.datastar.html.injection",
