@@ -102,12 +102,13 @@
     "test:unit": "bun test test/unit",
     "test:grammar": "vscode-tmgrammar-test --config test/grammar/config.json 'test/grammar/spec/**/*.{peb,html}' && vscode-tmgrammar-snap --config test/grammar/config.json 'test/grammar/fixtures/**/*.{peb,html}'",
     "test:grammar:update": "vscode-tmgrammar-snap --config test/grammar/config.json --updateSnapshot 'test/grammar/fixtures/**/*.{peb,html}'",
-    "check": "bun run lint && bun run typecheck && bun run test:unit && bun run test:grammar",
+    "check": "bun run lint && bun run typecheck && bun scripts/generate-grammar-names.ts --check && bun run test:unit && bun run test:grammar",
     "package": "bun run build:prod && vsce package --no-dependencies",
     "vscode:prepublish": "bun run check && bun run build:prod",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
-    "version:major": "npm version major"
+    "version:major": "npm version major",
+    "generate:grammar": "bun scripts/generate-grammar-names.ts"
   },
   "dependencies": {
     "vscode-html-languageservice": "^5.3.0",
