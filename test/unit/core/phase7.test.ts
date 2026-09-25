@@ -213,3 +213,33 @@ describe("references", () => {
     ])
   })
 })
+
+describe("semantic tokens", () => {
+  const { semanticTokens } = require("../../../src/core") as typeof import("../../../src/core")
+  test("classifies definitions, uses, macros and built-ins", () => {
+    const text =
+      '{% import "f.peb" as forms %}{% macro m(p) %}{{ p | upper | money }}{% endmacro %}{% for i in items %}{{ i }} {{ loop.index }} {{ unknown }} {{ m(1) }} {{ max(1) }} {{ forms.input() }} {{ request }}{% endfor %}'
+    const a = analyze(text)
+    const tokens = semanticTokens(a, spec).map(
+      (t) =>
+        `${text.slice(t.start, t.start + t.length)}:${t.type}${t.modifiers.length ? `[${t.modifiers.join(",")}]` : ""}`,
+    )
+    expect(tokens).toEqual([
+      "forms:variable[declaration,readonly]",
+      "m:macro[declaration]",
+      "p:parameter[declaration]",
+      "p:parameter",
+      "upper:function[defaultLibrary]",
+      "money:function",
+      "i:variable[declaration]",
+      "i:variable",
+      "loop:variable[readonly]",
+      "index:property[readonly]",
+      "m:macro",
+      "max:function[defaultLibrary]",
+      "forms:variable[readonly]",
+      "input:macro",
+      "request:variable[readonly]",
+    ])
+  })
+})

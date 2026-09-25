@@ -60,6 +60,11 @@
           "text.html.jinja",
           "text.html.jsp"
         ]
+      },
+      {
+        "scopeName": "source.datastar.html.injection.pebble",
+        "path": "../../syntaxes/datastar-injection.tmLanguage.json",
+        "injectTo": ["text.html.pebble"]
       }
     ]
   }

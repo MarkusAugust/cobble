@@ -79,6 +79,13 @@
         "embeddedLanguages": {
           "meta.embedded.block.html": "html"
         }
+      },
+      {
+        "scopeName": "source.datastar.html.injection.pebble",
+        "path": "./syntaxes/datastar-injection.tmLanguage.json",
+        "injectTo": [
+          "text.html.pebble"
+        ]
       }
     ],
     "snippets": [
@@ -365,7 +372,8 @@
     "version:major": "npm version major",
     "generate:grammar": "bun scripts/generate-grammar-names.ts",
     "test:e2e": "bun run build && tsc -p test/e2e/tsconfig.json && vscode-test --label standard",
-    "test:e2e:datastar": "bun run build && tsc -p test/e2e/tsconfig.json && vscode-test --label datastar"
+    "test:e2e:datastar": "bun run build && tsc -p test/e2e/tsconfig.json && vscode-test --label datastar",
+    "update:datastar-grammar": "bun scripts/update-datastar-grammar.ts"
   },
   "dependencies": {
     "vscode-html-languageservice": "^5.3.0",

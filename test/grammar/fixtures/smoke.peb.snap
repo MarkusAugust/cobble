@@ -8,17 +8,21 @@
 #            ^^^^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.class.html string.quoted.double.html
 #                ^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.class.html string.quoted.double.html punctuation.definition.string.end.html
 #                 ^ text.html.pebble meta.tag.structure.div.start.html
-#                  ^^^^^^^^^^^^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.data-x.data-signals.html entity.other.attribute-name.html
-#                              ^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.data-x.data-signals.html punctuation.separator.key-value.html
-#                               ^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.data-x.data-signals.html string.quoted.double.html punctuation.definition.string.begin.html
-#                                ^^^^^^^^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.data-x.data-signals.html string.quoted.double.html
-#                                        ^^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.data-x.data-signals.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.begin.pebble
-#                                          ^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.data-x.data-signals.html string.quoted.double.html meta.expression.pebble
-#                                           ^^^^^^^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.data-x.data-signals.html string.quoted.double.html meta.expression.pebble variable.other.pebble
-#                                                  ^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.data-x.data-signals.html string.quoted.double.html meta.expression.pebble
-#                                                   ^^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.data-x.data-signals.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.end.pebble
-#                                                     ^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.data-x.data-signals.html string.quoted.double.html
-#                                                      ^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.data-x.data-signals.html string.quoted.double.html punctuation.definition.string.end.html
+#                  ^^^^^ text.html.pebble meta.tag.structure.div.start.html keyword.operator.datastar.prefix
+#                       ^^^^^^^ text.html.pebble meta.tag.structure.div.start.html support.function.datastar.plugin
+#                              ^ text.html.pebble meta.tag.structure.div.start.html punctuation.separator.key-value.html
+#                               ^ text.html.pebble meta.tag.structure.div.start.html punctuation.definition.string.begin.html
+#                                ^ text.html.pebble meta.tag.structure.div.start.html punctuation.definition.object.begin.datastar
+#                                 ^^^^^ text.html.pebble meta.tag.structure.div.start.html variable.other.property.datastar
+#                                      ^ text.html.pebble meta.tag.structure.div.start.html punctuation.separator.key-value.datastar
+#                                       ^ text.html.pebble meta.tag.structure.div.start.html
+#                                        ^^ text.html.pebble meta.tag.structure.div.start.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                          ^ text.html.pebble meta.tag.structure.div.start.html meta.expression.pebble
+#                                           ^^^^^^^ text.html.pebble meta.tag.structure.div.start.html meta.expression.pebble variable.other.pebble
+#                                                  ^ text.html.pebble meta.tag.structure.div.start.html meta.expression.pebble
+#                                                   ^^ text.html.pebble meta.tag.structure.div.start.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                                     ^ text.html.pebble meta.tag.structure.div.start.html punctuation.definition.object.end.datastar
+#                                                      ^ text.html.pebble meta.tag.structure.div.start.html punctuation.definition.string.end.html
 #                                                       ^ text.html.pebble meta.tag.structure.div.start.html
 #                                                        ^^^^^^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html entity.other.attribute-name.html
 #                                                              ^ text.html.pebble meta.tag.structure.div.start.html meta.attribute.unrecognized.hx-get.html punctuation.separator.key-value.html

@@ -16,6 +16,7 @@ import {
   type Hover as LspHover,
   MarkupKind,
   ProposedFeatures,
+  SemanticTokensBuilder,
   type SignatureHelp,
   TextDocumentSyncKind,
   TextDocuments,
@@ -42,6 +43,9 @@ import {
   listTemplates,
   resolveTemplate,
   type Spec,
+  semanticTokenModifiers,
+  semanticTokens,
+  semanticTokenTypes,
   type TemplateSettings,
   templateCandidates,
 } from "../core"
@@ -88,6 +92,13 @@ connection.onInitialize((params): InitializeResult => {
       inlayHintProvider: true,
       documentLinkProvider: { resolveProvider: false },
       workspaceSymbolProvider: true,
+      semanticTokensProvider: {
+        legend: {
+          tokenTypes: [...semanticTokenTypes],
+          tokenModifiers: [...semanticTokenModifiers],
+        },
+        full: true,
+      },
       workspace: { workspaceFolders: { supported: true, changeNotifications: true } },
     },
   }
@@ -690,6 +701,22 @@ connection.onWorkspaceSymbol(async (params) => {
     templateSettings(settings),
     settings.customTags,
   )
+})
+
+connection.languages.semanticTokens.on(async (params) => {
+  const doc = documents.get(params.textDocument.uri)
+  if (!doc) return { data: [] }
+  const result = await getAnalysis(doc)
+  if (!result) return { data: [] }
+  const builder = new SemanticTokensBuilder()
+  for (const t of semanticTokens(result.analysis, result.spec)) {
+    const pos = doc.positionAt(t.start)
+    const typeIndex = semanticTokenTypes.indexOf(t.type)
+    let modifierBits = 0
+    for (const m of t.modifiers) modifierBits |= 1 << semanticTokenModifiers.indexOf(m)
+    builder.push(pos.line, pos.character, t.length, typeIndex, modifierBits)
+  }
+  return builder.build()
 })
 
 documents.listen(connection)
