@@ -296,6 +296,24 @@
           "default": "off",
           "scope": "window",
           "description": "Traces the communication between VS Code and the Pebble language server."
+        },
+        "pebble.autoClosingTags": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "markdownDescription": "Insert the matching end tag (for example `{% endif %}`) after typing an opening block tag."
+        },
+        "pebble.codeLens.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "markdownDescription": "Show CodeLens for templates that extend this one, overridden blocks and macro usages."
+        },
+        "pebble.inlayHints.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "markdownDescription": "Show the block name after a bare `{% endblock %}`."
         }
       }
     },
@@ -309,6 +327,18 @@
         "command": "pebble.enableDatastarSupport",
         "title": "Enable Datastar support for Pebble files",
         "category": "Pebble"
+      },
+      {
+        "command": "pebble.showLocations",
+        "title": "Show Locations",
+        "category": "Pebble",
+        "enablement": "false"
+      },
+      {
+        "command": "pebble.goTo",
+        "title": "Go To",
+        "category": "Pebble",
+        "enablement": "false"
       }
     ],
     "configurationDefaults": {

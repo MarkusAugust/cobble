@@ -149,9 +149,8 @@ const contains = (r: ast.Range, offset: number) => offset >= r.start && offset <
 export function scopeAt(template: ast.Template, model: TemplateModel, offset: number): Scope {
   const variables = new Map<string, VariableInScope>()
   const enclosing: ast.Statement[] = []
-  const add = (v: VariableInScope) => {
-    if (!variables.has(v.name)) variables.set(v.name, v)
-  }
+  // Inner definitions shadow outer ones, and a later `set` replaces an earlier one.
+  const add = (v: VariableInScope) => variables.set(v.name, v)
   for (const imp of model.imports) {
     if (imp.kind === "import" && imp.alias)
       add({

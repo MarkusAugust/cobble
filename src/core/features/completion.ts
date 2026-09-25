@@ -17,6 +17,8 @@ export interface CompletionOptions {
   templateNames?: string[]
   /** Macro names of an imported template, when known. */
   importedMacros?: (templateName: string) => string[] | undefined
+  /** Block names defined up the extends chain, with the template they come from. */
+  inheritedBlocks?: { name: string; from: string }[]
 }
 
 const docOf = (e: SpecEntry) =>
@@ -85,7 +87,13 @@ export function completionsFor(
         .filter((n) => n.startsWith(ctx.prefix) || ctx.prefix === "")
         .map((n) => ({ label: n, kind: "file", replaceRange: ctx.replaceRange }))
     case "blockName":
-      return blockNameCompletions(analysis, offset, ctx.isEnd, ctx.replaceRange)
+      return blockNameCompletions(
+        analysis,
+        offset,
+        ctx.isEnd,
+        ctx.replaceRange,
+        options.inheritedBlocks ?? [],
+      )
     case "macroName": {
       const names = ctx.template ? (options.importedMacros?.(ctx.template) ?? []) : []
       return names.map((n) => ({ label: n, kind: "macro", replaceRange: ctx.replaceRange }))
@@ -189,6 +197,7 @@ function blockNameCompletions(
   offset: number,
   isEnd: boolean,
   replaceRange: CompletionItem["replaceRange"],
+  inherited: { name: string; from: string }[],
 ): CompletionItem[] {
   const scope = scopeAt(analysis.ast, analysis.model, offset)
   if (isEnd) {
@@ -197,10 +206,30 @@ function blockNameCompletions(
       ? [{ label: block.name.name, kind: "block", replaceRange }]
       : []
   }
-  // Names of blocks already defined in this template (typically overriding a parent).
-  return analysis.model.blocks
-    .filter((b) => b.nameRange.start !== replaceRange?.start)
-    .map((b) => ({ label: b.name, kind: "block", replaceRange }))
+  const defined = new Set(
+    analysis.model.blocks
+      .filter((b) => b.nameRange.start !== replaceRange?.start)
+      .map((b) => b.name),
+  )
+  const items: CompletionItem[] = inherited.map((b) => ({
+    label: b.name,
+    kind: "block",
+    detail: `${defined.has(b.name) ? "already overridden, " : ""}defined in ${b.from}`,
+    sortText: `${defined.has(b.name) ? "1" : "0"}_${b.name}`,
+    replaceRange,
+  }))
+  for (const name of defined) {
+    if (!inherited.some((b) => b.name === name)) {
+      items.push({
+        label: name,
+        kind: "block",
+        detail: "defined in this template",
+        sortText: `2_${name}`,
+        replaceRange,
+      })
+    }
+  }
+  return items
 }
 
 function expressionCompletions(

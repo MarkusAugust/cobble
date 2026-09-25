@@ -17,6 +17,8 @@ export interface PebbleSettings {
     missingTemplate: Level
   }
   html: { enabled: boolean; delegate: boolean }
+  codeLens: { enabled: boolean }
+  inlayHints: { enabled: boolean }
 }
 
 export const defaultSettings: PebbleSettings = {
@@ -40,6 +42,8 @@ export const defaultSettings: PebbleSettings = {
     missingTemplate: "warning",
   },
   html: { enabled: true, delegate: true },
+  codeLens: { enabled: true },
+  inlayHints: { enabled: true },
 }
 
 /** Deep-merges a partial configuration object over the defaults. */
@@ -51,6 +55,8 @@ export function mergeSettings(partial: unknown): PebbleSettings {
     spring: { ...defaultSettings.spring, ...(p.spring ?? {}) },
     diagnostics: { ...defaultSettings.diagnostics, ...(p.diagnostics ?? {}) },
     html: { ...defaultSettings.html, ...(p.html ?? {}) },
+    codeLens: { ...defaultSettings.codeLens, ...(p.codeLens ?? {}) },
+    inlayHints: { ...defaultSettings.inlayHints, ...(p.inlayHints ?? {}) },
     templateRoots: Array.isArray(p.templateRoots) ? p.templateRoots : defaultSettings.templateRoots,
     templateSuffixes: Array.isArray(p.templateSuffixes)
       ? p.templateSuffixes

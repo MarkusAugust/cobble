@@ -78,6 +78,19 @@
   },
   "onEnterRules": [
     {
+      "beforeText": "^\\s*\\{%-?\\s*(if|for|block|macro|filter|autoescape|cache|parallel|embed)\\b[^%]*%\\}\\s*$",
+      "afterText": "^\\s*\\{%-?\\s*end(if|for|block|macro|filter|autoescape|cache|parallel|embed)\\b",
+      "action": {
+        "indent": "indentOutdent"
+      }
+    },
+    {
+      "beforeText": "^\\s*\\{%-?\\s*(if|for|block|macro|filter|autoescape|cache|parallel|embed|else|elseif)\\b[^%]*%\\}\\s*$",
+      "action": {
+        "indent": "indent"
+      }
+    },
+    {
       "beforeText": {
         "pattern": "<(?!(?:area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr))([_:\\w][_:\\w-.\\d]*)(?:(?:[^'\"/>]|\"[^\"]*\"|'[^']*')*?(?!\\/)>)[^<]*$",
         "flags": "i"

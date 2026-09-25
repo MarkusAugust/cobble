@@ -1,10 +1,14 @@
 import { fileURLToPath, pathToFileURL } from "node:url"
 import {
+  type CodeAction,
+  CodeActionKind,
   type CompletionItem,
   type CompletionList,
+  CreateFile,
   createConnection,
   DidChangeConfigurationNotification,
   type InitializeResult,
+  type LinkedEditingRanges,
   type LocationLink,
   type Definition as LspDefinition,
   type DocumentSymbol as LspDocumentSymbol,
@@ -15,14 +19,18 @@ import {
   type SignatureHelp,
   TextDocumentSyncKind,
   TextDocuments,
+  TextEdit,
+  type WorkspaceEdit,
 } from "vscode-languageserver/node"
 import { TextDocument } from "vscode-languageserver-textdocument"
 import {
   type Analysis,
   analyze,
+  autoCloseTag,
   buildSpec,
   completionContext,
   completionsFor,
+  codeActions as coreCodeActions,
   diagnostics as coreDiagnostics,
   hover as coreHover,
   signatureHelp as coreSignatureHelp,
@@ -30,20 +38,26 @@ import {
   documentSymbols,
   foldingRanges,
   hasPebble,
+  linkedEditingRanges,
   listTemplates,
   resolveTemplate,
   type Spec,
   type TemplateSettings,
+  templateCandidates,
 } from "../core"
 import { toLspCompletion, toLspDiagnostic, toLspRange, toLspSymbol } from "./convert"
 import { NodeTemplateFileSystem } from "./fs"
 import { HtmlDelegate } from "./html"
 import { defaultSettings, mergeSettings, type PebbleSettings } from "./settings"
+import { TemplateIndex } from "./templates"
+import { symbolAt, WorkspaceFeatures } from "./workspace-features"
 
 const connection = createConnection(ProposedFeatures.all)
 const documents = new TextDocuments(TextDocument)
 const fs = new NodeTemplateFileSystem()
 const html = new HtmlDelegate()
+const index = new TemplateIndex(fs, documents)
+const workspaceFeatures = new WorkspaceFeatures(index)
 
 let hasConfigurationCapability = false
 const settingsCache = new Map<string, Promise<PebbleSettings>>()
@@ -66,6 +80,14 @@ connection.onInitialize((params): InitializeResult => {
       definitionProvider: true,
       documentSymbolProvider: true,
       foldingRangeProvider: true,
+      linkedEditingRangeProvider: true,
+      codeActionProvider: { codeActionKinds: [CodeActionKind.QuickFix] },
+      referencesProvider: true,
+      renameProvider: { prepareProvider: true },
+      codeLensProvider: { resolveProvider: false },
+      inlayHintProvider: true,
+      documentLinkProvider: { resolveProvider: false },
+      workspaceSymbolProvider: true,
       workspace: { workspaceFolders: { supported: true, changeNotifications: true } },
     },
   }
@@ -89,8 +111,9 @@ connection.onDidChangeConfiguration(() => {
   for (const doc of documents.all()) scheduleValidation(doc)
 })
 
-connection.onDidChangeWatchedFiles(() => {
+connection.onDidChangeWatchedFiles((params) => {
   fs.invalidate()
+  index.invalidate(params.changes.map((c) => filePathOf(c.uri)).filter((p): p is string => !!p))
   for (const doc of documents.all()) scheduleValidation(doc)
 })
 
@@ -163,6 +186,7 @@ const filePathOf = (uri: string): string | undefined =>
 documents.onDidChangeContent((e) => scheduleValidation(e.document))
 documents.onDidClose((e) => {
   analysisCache.delete(e.document.uri)
+  index.invalidateDocument(e.document.uri)
   settingsCache.delete(e.document.uri)
   connection.sendDiagnostics({ uri: e.document.uri, diagnostics: [] })
 })
@@ -247,9 +271,19 @@ connection.onCompletion(async (params): Promise<CompletionList | CompletionItem[
       if (macros) importedMacros.set(name, macros)
     }
   }
+  const inheritedBlocks =
+    ctx.kind === "blockName" && !ctx.isEnd
+      ? (await index.graph(ts, settings.customTags).inheritedBlocks(fromFile, analysis)).map(
+          (b) => ({
+            name: b.name,
+            from: index.displayName(b.from.filePath, ts),
+          }),
+        )
+      : undefined
   const items = completionsFor(ctx, analysis, offset, spec, {
     templateNames,
     importedMacros: (n) => importedMacros.get(n),
+    inheritedBlocks,
   })
   return { isIncomplete: false, items: items.map((i) => toLspCompletion(doc, i)) }
 })
@@ -284,11 +318,22 @@ connection.onHover(async (params): Promise<LspHover | null> => {
     }
   }
   const h = coreHover(analysis, offset, spec, { resolveTemplate: (n) => resolvedRefs.get(n) })
-  if (h)
-    return {
-      contents: { kind: MarkupKind.Markdown, value: h.markdown },
-      range: toLspRange(doc, h.range),
+  if (h) {
+    let value = h.markdown
+    const resolvedPath = [...resolvedRefs.values()].find((p) => p)
+    if (value.startsWith("Template `") && resolvedPath) {
+      const target = await index.analysisOf(resolvedPath, settings.customTags)
+      if (target) {
+        const blocks = target.model.blocks.map((b) => `\`${b.name}\``)
+        const macros = target.model.macros.map((m) => `\`${m.name}(${m.params.join(", ")})\``)
+        if (blocks.length > 0) value += `\n\nBlocks: ${blocks.join(", ")}`
+        if (macros.length > 0) value += `\n\nMacros: ${macros.join(", ")}`
+        if (target.model.extends?.literalName)
+          value += `\n\nExtends \`${target.model.extends.literalName}\``
+      }
     }
+    return { contents: { kind: MarkupKind.Markdown, value }, range: toLspRange(doc, h.range) }
+  }
   if (
     doc.languageId === "pebble" &&
     settings.html.delegate &&
@@ -459,6 +504,192 @@ connection.onDefinition(async (params): Promise<LspDefinition | LocationLink[] |
       return null
     }
   }
+})
+
+// ----- auto close, linked editing, quick fixes -----
+
+connection.onRequest(
+  "pebble/autoClose",
+  async (params: {
+    textDocument: { uri: string }
+    position: { line: number; character: number }
+  }) => {
+    const doc = documents.get(params.textDocument.uri)
+    if (!doc) return null
+    const result = await getAnalysis(doc)
+    if (!result) return null
+    return autoCloseTag(result.analysis, doc.offsetAt(params.position))
+  },
+)
+
+connection.languages.onLinkedEditingRange(async (params): Promise<LinkedEditingRanges | null> => {
+  const doc = documents.get(params.textDocument.uri)
+  if (!doc) return null
+  const result = await getAnalysis(doc)
+  if (!result) return null
+  const ranges = linkedEditingRanges(result.analysis, doc.offsetAt(params.position))
+  if (!ranges) return null
+  return { ranges: ranges.map((r) => toLspRange(doc, r)), wordPattern: "[\\p{L}_][\\p{L}\\p{N}_]*" }
+})
+
+connection.onCodeAction(async (params): Promise<CodeAction[]> => {
+  const doc = documents.get(params.textDocument.uri)
+  if (!doc) return []
+  const result = await getAnalysis(doc)
+  if (!result) return []
+  const { analysis, settings } = result
+  const start = doc.offsetAt(params.range.start)
+  const end = doc.offsetAt(params.range.end)
+  const relevant = params.context.diagnostics.filter((d) => d.source === "pebble")
+  const coreDiags = relevant.map((d) => ({
+    code: String(d.code) as import("../core").DiagnosticCode,
+    message: typeof d.message === "string" ? d.message : d.message.value,
+    start: doc.offsetAt(d.range.start),
+    end: doc.offsetAt(d.range.end),
+    severity: "error" as const,
+  }))
+  const inRange = coreDiags.filter((d) => d.end >= start && d.start <= end)
+  const out: CodeAction[] = []
+  for (const action of coreCodeActions(analysis, inRange)) {
+    const lspDiag = relevant[coreDiags.findIndex((d) => d === action.diagnostic)]
+    const base = { kind: CodeActionKind.QuickFix, diagnostics: lspDiag ? [lspDiag] : [] }
+    if (action.kind === "edit") {
+      const edit: WorkspaceEdit = {
+        changes: {
+          [doc.uri]: action.edits.map((e) => TextEdit.replace(toLspRange(doc, e), e.newText)),
+        },
+      }
+      out.push({ ...base, title: action.title, edit })
+    } else if (action.kind === "createFile") {
+      const candidates = templateCandidates(
+        action.templateName,
+        filePathOf(doc.uri),
+        templateSettings(settings),
+        fs.workspaceFolders,
+      )
+      const target = candidates.find((c) => /\.[A-Za-z0-9]+$/.test(c)) ?? candidates[0]
+      if (!target) continue
+      const uri = pathToFileURL(target).toString()
+      out.push({
+        ...base,
+        title: action.title,
+        edit: { documentChanges: [CreateFile.create(uri, { ignoreIfExists: true })] },
+      })
+    } else {
+      out.push({
+        ...base,
+        title: action.title,
+        command: {
+          title: action.title,
+          command: "pebble.addCustomEntry",
+          arguments: [action.entryKind, action.name],
+        },
+      })
+    }
+  }
+  return out
+})
+
+// ----- workspace features -----
+
+connection.onReferences(async (params) => {
+  const doc = documents.get(params.textDocument.uri)
+  if (!doc) return []
+  const result = await getAnalysis(doc)
+  if (!result) return []
+  const symbol = symbolAt(result.analysis, doc.offsetAt(params.position))
+  if (!symbol) return []
+  return workspaceFeatures.references(
+    doc,
+    filePathOf(doc.uri),
+    result.analysis,
+    symbol,
+    templateSettings(result.settings),
+    result.settings.customTags,
+  )
+})
+
+connection.onPrepareRename(async (params) => {
+  const doc = documents.get(params.textDocument.uri)
+  if (!doc) return null
+  const result = await getAnalysis(doc)
+  if (!result) return null
+  const symbol = symbolAt(result.analysis, doc.offsetAt(params.position))
+  if (!symbol) return null
+  return {
+    range: toLspRange(doc, symbol.range),
+    placeholder: symbol.kind === "macro" ? symbol.name : doc.getText(toLspRange(doc, symbol.range)),
+  }
+})
+
+connection.onRenameRequest(async (params) => {
+  const doc = documents.get(params.textDocument.uri)
+  if (!doc) return null
+  const result = await getAnalysis(doc)
+  if (!result) return null
+  const symbol = symbolAt(result.analysis, doc.offsetAt(params.position))
+  if (!symbol) return null
+  if (!/^[\p{L}_][\p{L}\p{N}_]*$/u.test(params.newName))
+    throw new Error("Not a valid Pebble identifier")
+  return workspaceFeatures.rename(
+    doc,
+    filePathOf(doc.uri),
+    result.analysis,
+    symbol,
+    params.newName,
+    templateSettings(result.settings),
+    result.settings.customTags,
+  )
+})
+
+connection.onCodeLens(async (params) => {
+  const doc = documents.get(params.textDocument.uri)
+  if (!doc) return []
+  const result = await getAnalysis(doc)
+  if (!result || !result.settings.codeLens.enabled) return []
+  if (doc.languageId === "html" && !hasPebble(doc.getText())) return []
+  return workspaceFeatures.codeLenses(
+    doc,
+    filePathOf(doc.uri),
+    result.analysis,
+    templateSettings(result.settings),
+    result.settings.customTags,
+  )
+})
+
+connection.languages.inlayHint.on(async (params) => {
+  const doc = documents.get(params.textDocument.uri)
+  if (!doc) return []
+  const result = await getAnalysis(doc)
+  if (!result || !result.settings.inlayHints.enabled) return []
+  return workspaceFeatures.inlayHints(
+    doc,
+    result.analysis,
+    doc.offsetAt(params.range.start),
+    doc.offsetAt(params.range.end),
+  )
+})
+
+connection.onDocumentLinks(async (params) => {
+  const doc = documents.get(params.textDocument.uri)
+  if (!doc) return []
+  const result = await getAnalysis(doc)
+  if (!result) return []
+  return workspaceFeatures.documentLinks(
+    doc,
+    filePathOf(doc.uri),
+    result.analysis,
+    templateSettings(result.settings),
+  )
+})
+
+connection.onWorkspaceSymbol(async (params) => {
+  const settings = await getSettings(documents.all()[0]?.uri ?? "")
+  return workspaceFeatures.workspaceSymbols(
+    params.query,
+    templateSettings(settings),
+    settings.customTags,
+  )
 })
 
 documents.listen(connection)
