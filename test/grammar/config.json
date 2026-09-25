@@ -1,0 +1,66 @@
+{
+  "contributes": {
+    "languages": [
+      {
+        "id": "pebble",
+        "extensions": [".peb", ".pebble"]
+      },
+      {
+        "id": "html",
+        "extensions": [".html"]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "pebble",
+        "scopeName": "text.html.pebble",
+        "path": "../../syntaxes/pebble.tmLanguage.json"
+      },
+      {
+        "scopeName": "injection.html.pebble",
+        "path": "../../syntaxes/pebble-injection.tmLanguage.json",
+        "injectTo": ["text.html.basic", "text.html.derivative", "text.html.pebble"]
+      },
+      {
+        "language": "html",
+        "scopeName": "text.html.basic",
+        "path": "./vendor/html.tmLanguage.json"
+      },
+      {
+        "scopeName": "text.html.derivative",
+        "path": "./vendor/html-derivative.tmLanguage.json"
+      },
+      {
+        "scopeName": "source.datastar.html.injection",
+        "path": "./vendor/datastar.html.injection.tmLanguage.json",
+        "injectTo": [
+          "text.html.basic",
+          "text.html.derivative",
+          "text.html.php",
+          "text.html.twig",
+          "text.html.php.blade",
+          "text.html.edge",
+          "text.html.nunjucks",
+          "text.html.njk",
+          "source.templ",
+          "source.astro",
+          "source.gohtml",
+          "text.html.vue",
+          "source.vue",
+          "source.svelte",
+          "text.html.svelte",
+          "text.html.handlebars",
+          "source.mustache",
+          "source.liquid",
+          "text.html.erb",
+          "text.html.ejs",
+          "text.pug",
+          "text.aspnetcorerazor",
+          "text.html.django",
+          "text.html.jinja",
+          "text.html.jsp"
+        ]
+      }
+    ]
+  }
+}
