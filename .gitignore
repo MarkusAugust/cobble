@@ -1,0 +1,12 @@
+node_modules
+dist
+out
+.vscode-test
+*.vsix
+*.tsbuildinfo
+coverage
+.DS_Store
+.idea
+
+# local tooling state
+.claude
