@@ -20,3 +20,41 @@ jobs:
         with:
           name: vsix
           path: "*.vsix"
+
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: bun install --frozen-lockfile
+      - uses: actions/cache@v4
+        with:
+          path: .vscode-test
+          key: vscode-test-${{ runner.os }}-stable
+      - name: Integration tests in VS Code
+        run: xvfb-run -a bun run test:e2e
+
+  e2e-datastar:
+    # Installs the Datastar extension from the Marketplace, which can be flaky in CI.
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: bun install --frozen-lockfile
+      - uses: actions/cache@v4
+        with:
+          path: .vscode-test
+          key: vscode-test-${{ runner.os }}-stable
+      - name: Integration tests with the Datastar extension installed
+        run: xvfb-run -a bun run test:e2e:datastar

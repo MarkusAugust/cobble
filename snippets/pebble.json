@@ -1,106 +1,282 @@
 {
-  "Pebble Expression": {
-    "prefix": ["{{", "pebble-expression", "expr"],
-    "body": ["{{ $1 }}"],
-    "description": "Pebble expression block"
-  },
-  "Pebble Statement": {
-    "prefix": ["pebble-statement", "stmt"],
-    "body": ["{% $1 %}"],
-    "description": "Pebble statement block"
-  },
-  "Pebble Comment": {
-    "prefix": ["{#", "pebble-comment", "comment"],
-    "body": ["{# $1 #}"],
-    "description": "Pebble comment block"
-  },
-  "Pebble If Statement": {
-    "prefix": ["if", "pebble-if"],
+  "Expression": {
+    "prefix": [
+      "pebble-expression",
+      "expr"
+    ],
     "body": [
-      "{% if $1 %}",
-      "\t$2",
+      "{{ ${1:expression} }}"
+    ],
+    "description": "Pebble output expression {{ }}"
+  },
+  "Statement": {
+    "prefix": [
+      "pebble-statement",
+      "stmt"
+    ],
+    "body": [
+      "{% ${1:statement} %}"
+    ],
+    "description": "Pebble statement {% %}"
+  },
+  "Comment": {
+    "prefix": [
+      "pebble-comment",
+      "comment"
+    ],
+    "body": [
+      "{# ${1:comment} #}"
+    ],
+    "description": "Pebble comment {# #}"
+  },
+  "If statement": {
+    "prefix": [
+      "if",
+      "pebble-if"
+    ],
+    "body": [
+      "{% if ${1:condition} %}",
+      "\t$0",
       "{% endif %}"
     ],
-    "description": "Pebble if statement"
+    "description": "{% if %} … {% endif %}"
   },
-  "Pebble If-Else Statement": {
-    "prefix": ["ifelse", "pebble-ifelse"],
+  "If-else statement": {
+    "prefix": [
+      "ifelse",
+      "pebble-ifelse"
+    ],
     "body": [
-      "{% if $1 %}",
+      "{% if ${1:condition} %}",
       "\t$2",
       "{% else %}",
-      "\t$3",
+      "\t$0",
       "{% endif %}"
     ],
-    "description": "Pebble if-else statement"
+    "description": "{% if %} … {% else %} … {% endif %}"
   },
-  "Pebble For Loop": {
-    "prefix": ["for", "pebble-for"],
+  "Elseif branch": {
+    "prefix": [
+      "elseif",
+      "pebble-elseif"
+    ],
     "body": [
-      "{% for $1 in $2 %}",
-      "\t$3",
+      "{% elseif ${1:condition} %}"
+    ],
+    "description": "{% elseif %}"
+  },
+  "Else branch": {
+    "prefix": [
+      "else",
+      "pebble-else"
+    ],
+    "body": [
+      "{% else %}"
+    ],
+    "description": "{% else %}"
+  },
+  "For loop": {
+    "prefix": [
+      "for",
+      "pebble-for"
+    ],
+    "body": [
+      "{% for ${1:item} in ${2:items} %}",
+      "\t$0",
       "{% endfor %}"
     ],
-    "description": "Pebble for loop"
+    "description": "{% for %} … {% endfor %}"
   },
-  "Pebble Block": {
-    "prefix": ["block", "pebble-block"],
-    "body": [
-      "{% block $1 %}",
-      "\t$2",
-      "{% endblock %}"
+  "For loop with else": {
+    "prefix": [
+      "forelse",
+      "pebble-forelse"
     ],
-    "description": "Pebble block definition"
-  },
-  "Pebble Extends": {
-    "prefix": ["extends", "pebble-extends"],
-    "body": ["{% extends \"$1\" %}"],
-    "description": "Extend parent template"
-  },
-  "Pebble Include": {
-    "prefix": ["include", "pebble-include"],
-    "body": ["{% include \"$1\" %}"],
-    "description": "Include another template"
-  },
-  "Pebble Macro": {
-    "prefix": ["macro", "pebble-macro"],
     "body": [
-      "{% macro $1($2) %}",
+      "{% for ${1:item} in ${2:items} %}",
       "\t$3",
+      "{% else %}",
+      "\t$0",
+      "{% endfor %}"
+    ],
+    "description": "{% for %} … {% else %} … {% endfor %}"
+  },
+  "Block": {
+    "prefix": [
+      "block",
+      "pebble-block"
+    ],
+    "body": [
+      "{% block ${1:name} %}",
+      "\t$0",
+      "{% endblock ${1:name} %}"
+    ],
+    "description": "{% block %} … {% endblock %}"
+  },
+  "Extends": {
+    "prefix": [
+      "extends",
+      "pebble-extends"
+    ],
+    "body": [
+      "{% extends \"${1:base.peb}\" %}"
+    ],
+    "description": "{% extends %}"
+  },
+  "Include": {
+    "prefix": [
+      "include",
+      "pebble-include"
+    ],
+    "body": [
+      "{% include \"${1:template.peb}\" %}"
+    ],
+    "description": "{% include %}"
+  },
+  "Include with variables": {
+    "prefix": [
+      "includewith",
+      "pebble-includewith"
+    ],
+    "body": [
+      "{% include \"${1:template.peb}\" with {\"${2:key}\": ${3:value}} %}"
+    ],
+    "description": "{% include … with {…} %}"
+  },
+  "Import macros": {
+    "prefix": [
+      "import",
+      "pebble-import"
+    ],
+    "body": [
+      "{% import \"${1:macros.peb}\" as ${2:alias} %}"
+    ],
+    "description": "{% import … as … %}"
+  },
+  "Import specific macros": {
+    "prefix": [
+      "from",
+      "pebble-from"
+    ],
+    "body": [
+      "{% from \"${1:macros.peb}\" import ${2:name} %}"
+    ],
+    "description": "{% from … import … %}"
+  },
+  "Embed": {
+    "prefix": [
+      "embed",
+      "pebble-embed"
+    ],
+    "body": [
+      "{% embed \"${1:template.peb}\" %}",
+      "\t{% block ${2:name} %}",
+      "\t\t$0",
+      "\t{% endblock %}",
+      "{% endembed %}"
+    ],
+    "description": "{% embed %} … {% endembed %}"
+  },
+  "Macro": {
+    "prefix": [
+      "macro",
+      "pebble-macro"
+    ],
+    "body": [
+      "{% macro ${1:name}(${2:args}) %}",
+      "\t$0",
       "{% endmacro %}"
     ],
-    "description": "Pebble macro definition"
+    "description": "{% macro %} … {% endmacro %}"
   },
-  "Pebble Set Variable": {
-    "prefix": ["set", "pebble-set"],
-    "body": ["{% set $1 = $2 %}"],
-    "description": "Set a variable"
-  },
-  "Pebble Filter": {
-    "prefix": ["filter", "pebble-filter"],
+  "Set variable": {
+    "prefix": [
+      "set",
+      "pebble-set"
+    ],
     "body": [
-      "{% filter $1 %}",
-      "\t$2",
+      "{% set ${1:name} = ${2:value} %}"
+    ],
+    "description": "{% set %}"
+  },
+  "Filter block": {
+    "prefix": [
+      "filter",
+      "pebble-filter"
+    ],
+    "body": [
+      "{% filter ${1:upper} %}",
+      "\t$0",
       "{% endfilter %}"
     ],
-    "description": "Apply filter to block"
+    "description": "{% filter %} … {% endfilter %}"
   },
-  "Pebble Verbatim": {
-    "prefix": ["verbatim", "pebble-verbatim"],
+  "Autoescape block": {
+    "prefix": [
+      "autoescape",
+      "pebble-autoescape"
+    ],
+    "body": [
+      "{% autoescape ${1:\"js\"} %}",
+      "\t$0",
+      "{% endautoescape %}"
+    ],
+    "description": "{% autoescape %} … {% endautoescape %}"
+  },
+  "Verbatim block": {
+    "prefix": [
+      "verbatim",
+      "pebble-verbatim"
+    ],
     "body": [
       "{% verbatim %}",
-      "\t$1",
+      "\t$0",
       "{% endverbatim %}"
     ],
-    "description": "Verbatim block (no processing)"
+    "description": "{% verbatim %} … {% endverbatim %}"
   },
-  "Pebble Cache": {
-    "prefix": ["cache", "pebble-cache"],
+  "Cache block": {
+    "prefix": [
+      "cache",
+      "pebble-cache"
+    ],
     "body": [
-      "{% cache $1 %}",
-      "\t$2",
+      "{% cache \"${1:key}\" %}",
+      "\t$0",
       "{% endcache %}"
     ],
-    "description": "Cache block"
+    "description": "{% cache %} … {% endcache %}"
+  },
+  "Parallel block": {
+    "prefix": [
+      "parallel",
+      "pebble-parallel"
+    ],
+    "body": [
+      "{% parallel %}",
+      "\t$0",
+      "{% endparallel %}"
+    ],
+    "description": "{% parallel %} … {% endparallel %}"
+  },
+  "Flush": {
+    "prefix": [
+      "flush",
+      "pebble-flush"
+    ],
+    "body": [
+      "{% flush %}"
+    ],
+    "description": "{% flush %}"
+  },
+  "Parent block": {
+    "prefix": [
+      "parent",
+      "pebble-parent"
+    ],
+    "body": [
+      "{{ parent() }}"
+    ],
+    "description": "Render the parent template's block"
   }
 }

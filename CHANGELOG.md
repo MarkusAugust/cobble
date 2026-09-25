@@ -7,19 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-09-25
+
+Ground-up rewrite as a language server. The project now lives at https://github.com/MarkusAugust/cobble.
+
 ### Added
-- Dedicated `pebble` language for `.peb` and `.pebble` files, built on the HTML grammar.
-- Language server skeleton (`vscode-languageserver`) started by the extension.
-- Complete TextMate grammar for Pebble 4.1 (all tags, filters, functions, tests, operators, literals, interpolation, verbatim, whitespace control), with distinct scopes for template names, block names, macro parameters and built-in versus custom filters.
-- Grammar snapshot and assertion tests that load the real HTML grammar and the Datastar injection grammar, proving Pebble inside `data-*` and `hx-*` attribute values highlights correctly.
+- Dedicated `pebble` language for `.peb` and `.pebble` files, built on the HTML grammar, with HTML
+  tag and attribute completion, hover, folding and symbols delegated to the HTML language service.
+- Complete TextMate grammar for Pebble 4.1: every tag, filter, function (including the Spring
+  extension) and test, all operators, literals, string interpolation, whitespace control and
+  `verbatim`, with distinct scopes for template names, block names, macro parameters and custom
+  versus built-in filters.
+- Language server with completion (tags with the matching end tag first, filters, functions,
+  tests, operators, loop variables, variables in scope, local and imported macros, block names,
+  template names, named arguments, escape strategies), hover documentation, signature help,
+  diagnostics, document symbols, folding and go to definition (templates, blocks through the
+  `extends` chain, `parent()`, macros, variables).
+- Diagnostics for unclosed delimiters and tags, mismatched `endblock` names, stray end tags,
+  expression syntax errors, invalid `embed` bodies, unknown filters/tests/functions, `loop`
+  outside `for`, `parent()` outside `block` and missing templates.
+- Settings for template roots and suffixes, custom filters/functions/tests/tags, the Spring
+  extension, diagnostic severities and HTML behaviour.
+- Command **Pebble: Enable Datastar support for Pebble files** and a one-time prompt that adds
+  `pebble` to `datastar.enabledLanguages`.
+- Snippets for every tag, plus `ifelse`, `forelse`, `includewith` and `parent`.
+- Grammar snapshot and assertion tests that load the real HTML grammar and the Datastar injection
+  grammar, unit tests for the core, and integration tests in a real VS Code instance, including a
+  suite that runs with the Datastar extension installed.
 
 ### Changed
-- Ground-up rewrite. The project now lives at https://github.com/MarkusAugust/cobble.
-- Build with esbuild; bun is used for scripts and unit tests.
-- Minimum VS Code version is 1.91.
+- Build with esbuild; bun runs scripts and unit tests. Minimum VS Code version is 1.91.
+- Snippet prefixes no longer include `{{` or `{#` (they conflicted with auto-closing pairs).
 
 ### Removed
-- The previous in-process completion provider. IntelliSense returns via the language server.
+- The previous in-process completion provider; IntelliSense now comes from the language server.
 
 ## Earlier versions
 
