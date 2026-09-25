@@ -31,6 +31,14 @@ Ground-up rewrite as a language server. The project now lives at https://github.
 - Command **Pebble: Enable Datastar support for Pebble files** and a one-time prompt that adds
   `pebble` to `datastar.enabledLanguages`.
 - Snippets for every tag, plus `ifelse`, `forelse`, `includewith` and `parent`.
+- Auto-closing tags, linked editing of block names, quick fixes (insert end tag, fix `endblock`
+  name, create missing template, declare custom entries), find references and rename for blocks,
+  macros and variables, CodeLens (extends, overrides, usages), inlay hints, document links,
+  workspace symbols and semantic highlighting.
+- Java and Kotlin awareness: typed model attributes and bean properties from Spring MVC (Java and
+  Kotlin), Ktor, Javalin and plain Pebble code; hover with types; go to definition into the
+  sources; filters, functions and tests discovered from extension classes.
+- Datastar attribute highlighting in `.peb` files via a vendored copy of the Datastar grammar.
 - Grammar snapshot and assertion tests that load the real HTML grammar and the Datastar injection
   grammar, unit tests for the core, and integration tests in a real VS Code instance, including a
   suite that runs with the Datastar extension installed.

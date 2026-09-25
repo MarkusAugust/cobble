@@ -45,6 +45,7 @@ function entryItem(
     insertText:
       snippet ?? (e.params.length > 0 && kind === "function" ? `${e.name}($1)` : undefined),
     isSnippet: snippet !== undefined || (e.params.length > 0 && kind === "function"),
+    sortText: `${e.source === "custom" ? "1" : "2"}_${e.name}`,
     replaceRange,
   }
 }

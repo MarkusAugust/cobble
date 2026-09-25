@@ -22,8 +22,22 @@ Language support for [Pebble Templates](https://pebbletemplates.io) 4.x in Visua
 - **Diagnostics**: unclosed delimiters and tags, mismatched end tags, syntax errors in expressions,
   unknown filters and tests, missing templates. Custom extensions are declared in settings.
 - **Go to definition** for `extends`, `include`, `import`, `from` and `embed`, for block names
-  (following the `extends` chain), `parent()`, macros and variables.
-- **Outline** (blocks, macros, variables) and **folding**.
+  (following the `extends` chain), `parent()`, macros and variables. Template names are also
+  clickable links.
+- **Find references and rename** for blocks (across the whole `extends` hierarchy), macros
+  (definition and every importing template) and variables.
+- **CodeLens**: which templates extend this one, which block is overridden where, and how often a
+  macro is used. **Inlay hints** show the block name after a bare `{% endblock %}`.
+- **Auto-closing tags**: typing `{% if x %}` inserts `{% endif %}`; block and endblock names are
+  edited together.
+- **Quick fixes**: insert a missing end tag, fix an `endblock` name, create a missing template,
+  declare an unknown filter/function/test/tag in settings.
+- **Java and Kotlin awareness** (see below): typed completion for model attributes and bean
+  properties, hover with types, jump from a template variable into the controller that provides
+  it, and filters/functions/tests discovered in your extension classes.
+- **Semantic highlighting** distinguishes defined variables, macro parameters, macros and built-in
+  versus custom filters and functions.
+- **Outline** (blocks, macros, variables), **workspace symbols** and **folding**.
 - **HTML tooling in `.peb` files**: tag and attribute completion, hover, folding and symbols from
   the HTML language service, outside Pebble syntax.
 - A language server does the work, so everything above stays responsive in large templates.
@@ -42,7 +56,7 @@ completion from the Datastar extension and any HTMX tooling are untouched.
 
 | | `.html` | `.peb` / `.pebble` |
 |---|---|---|
-| Datastar highlighting of `data-*` attributes | yes | no (the Datastar grammar targets a fixed list of languages) |
+| Datastar highlighting of `data-*` attributes | yes | yes (a copy of the Datastar grammar ships with this extension for `.peb` files) |
 | Datastar completion, hover, diagnostics, signal navigation | yes | yes, after enabling it (below) |
 | Pebble highlighting, IntelliSense, diagnostics | yes | yes |
 
@@ -56,6 +70,28 @@ Tip for Emmet in `.peb` files:
 ```json
 "emmet.includeLanguages": { "pebble": "html" }
 ```
+
+## Java and Kotlin awareness
+
+With `pebble.java.enabled` (default on), the extension reads the sources under
+`pebble.java.sourceRoots` (`src/main/java`, `src/main/kotlin`) and learns:
+
+- **Which code renders which template**, and what it puts in the model:
+  - Spring MVC in Java or Kotlin: `@GetMapping` handlers returning a view name, `ModelAndView`,
+    `model.addAttribute("user", user)`, `model["user"] = user`, `@ModelAttribute` methods and
+    parameters, `@ControllerAdvice`.
+  - Ktor: `call.respond(PebbleContent("x.peb", mapOf("user" to user)))` and `call.respondTemplate(...)`.
+  - Javalin: `ctx.render("x.peb", Map.of("user", user))`.
+  - Plain Pebble: `engine.getTemplate("x")` followed by `template.evaluate(writer, context)`.
+- **Types**: getters, record components, Lombok `@Data` fields, Kotlin properties and data
+  classes, including collections (`List<Order>` gives the loop variable type `Order`).
+- **Extensions**: classes implementing `Filter`, `Function` or `Test`, their `getArgumentNames()`,
+  and registrations in `getFilters()` / `getFunctions()` / `getTests()`.
+
+In a template rendered by such code, `{{ ` offers the model attributes with their types,
+`{{ user.` offers the bean's properties, hover shows the Java type and where the attribute was
+added, and Go to Definition jumps into the Java or Kotlin source. Type inference is heuristic
+(no compiler involved) and silently gives up when it cannot follow an expression.
 
 ## Snippets
 
@@ -82,6 +118,11 @@ Extra snippets: `ifelse`, `forelse`, `includewith`, `parent`, `expr`, `stmt`, `c
 | `pebble.diagnostics.missingTemplate` | `warning` | As above. |
 | `pebble.html.enabled` | `true` | Pebble IntelliSense and diagnostics inside Pebble syntax in `.html` files (reload after changing). |
 | `pebble.html.delegate` | `true` | HTML completion, hover, folding and symbols in `.peb` files. |
+| `pebble.autoClosingTags` | `true` | Insert the matching end tag after typing an opening block tag. |
+| `pebble.codeLens.enabled` | `true` | CodeLens for extends/overrides/usages. |
+| `pebble.inlayHints.enabled` | `true` | Block name after a bare `{% endblock %}`. |
+| `pebble.java.enabled` | `true` | Read Java/Kotlin sources for typed completion and discovered extensions. |
+| `pebble.java.sourceRoots` | `src/main/java`, `src/main/kotlin` | Source directories to scan. |
 
 Example for a Spring Boot project with custom filters:
 
@@ -131,6 +172,7 @@ bun run test:e2e              # integration tests in a real VS Code instance
 bun run test:e2e:datastar     # same, with the Datastar extension installed alongside
 bun run test:grammar:update   # regenerate grammar snapshots after a grammar change
 bun run generate:grammar      # sync built-in name lists from src/core/spec into the grammar
+bun run update:datastar-grammar   # refresh the vendored Datastar grammar used for .peb files
 bun run package               # build a .vsix
 ```
 

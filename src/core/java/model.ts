@@ -573,11 +573,22 @@ export class JavaModel {
     if (ctor) return parseType(ctor[1].replace(/<>$/, ""))
     const ktCtor = /^([A-Z][\w.]*(?:<[^>]*>)?)\s*\(/.exec(e)
     if (ktCtor && this.classNamed(ktCtor[1].replace(/<.*$/, ""))) return parseType(ktCtor[1])
-    if (/^(listOf|mutableListOf|arrayListOf)\s*\(/.test(e)) return parseType("List<Object>")
-    if (/^(setOf|mutableSetOf)\s*\(/.test(e)) return parseType("Set<Object>")
+    const ktFactory =
+      /^(listOf|mutableListOf|arrayListOf|setOf|mutableSetOf)\s*\(([\s\S]*)\)$/.exec(e)
+    if (ktFactory) {
+      const first = splitTopLevel(ktFactory[2])[0]
+      const element = first ? this.inferType(first, cls, method, depth + 1) : undefined
+      const container = ktFactory[1].toLowerCase().includes("set") ? "Set" : "List"
+      return parseType(`${container}<${element?.raw ?? "Object"}>`)
+    }
     if (/^(mapOf|mutableMapOf|hashMapOf)\s*\(/.test(e)) return parseType("Map<Object, Object>")
-    if (/^(List|Arrays|Set|Stream)\.(of|asList)\s*\(/.test(e))
-      return parseType(e.startsWith("Set") ? "Set<Object>" : "List<Object>")
+    const factory = /^(List|Arrays|Set|Stream)\.(of|asList)\s*\(([\s\S]*)\)$/.exec(e)
+    if (factory) {
+      const first = splitTopLevel(factory[3])[0]
+      const element = first ? this.inferType(first, cls, method, depth + 1) : undefined
+      const container = factory[1] === "Set" ? "Set" : "List"
+      return parseType(`${container}<${element?.raw ?? "Object"}>`)
+    }
     if (/^Map\.of\s*\(/.test(e)) return parseType("Map<Object, Object>")
     // trailing method call chain: base.method(...)
     const call = splitCall(e)
