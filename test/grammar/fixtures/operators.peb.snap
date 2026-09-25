@@ -1,0 +1,203 @@
+>{{ a + b - c * d / e % f }}
+#^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#  ^ text.html.pebble meta.expression.pebble
+#   ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#    ^ text.html.pebble meta.expression.pebble
+#     ^ text.html.pebble meta.expression.pebble keyword.operator.arithmetic.pebble
+#      ^ text.html.pebble meta.expression.pebble
+#       ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#        ^ text.html.pebble meta.expression.pebble
+#         ^ text.html.pebble meta.expression.pebble keyword.operator.arithmetic.pebble
+#          ^ text.html.pebble meta.expression.pebble
+#           ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#            ^ text.html.pebble meta.expression.pebble
+#             ^ text.html.pebble meta.expression.pebble keyword.operator.arithmetic.pebble
+#              ^ text.html.pebble meta.expression.pebble
+#               ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                ^ text.html.pebble meta.expression.pebble
+#                 ^ text.html.pebble meta.expression.pebble keyword.operator.arithmetic.pebble
+#                  ^ text.html.pebble meta.expression.pebble
+#                   ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                    ^ text.html.pebble meta.expression.pebble
+#                     ^ text.html.pebble meta.expression.pebble keyword.operator.arithmetic.pebble
+#                      ^ text.html.pebble meta.expression.pebble
+#                       ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                        ^ text.html.pebble meta.expression.pebble
+#                         ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>{{ a == b and c != d or not e }}
+#^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#  ^ text.html.pebble meta.expression.pebble
+#   ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#    ^ text.html.pebble meta.expression.pebble
+#     ^^ text.html.pebble meta.expression.pebble keyword.operator.comparison.pebble
+#       ^ text.html.pebble meta.expression.pebble
+#        ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#         ^ text.html.pebble meta.expression.pebble
+#          ^^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#             ^ text.html.pebble meta.expression.pebble
+#              ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#               ^ text.html.pebble meta.expression.pebble
+#                ^^ text.html.pebble meta.expression.pebble keyword.operator.comparison.pebble
+#                  ^ text.html.pebble meta.expression.pebble
+#                   ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                    ^ text.html.pebble meta.expression.pebble
+#                     ^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#                       ^ text.html.pebble meta.expression.pebble
+#                        ^^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#                           ^ text.html.pebble meta.expression.pebble
+#                            ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                             ^ text.html.pebble meta.expression.pebble
+#                              ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>{{ a < b and c <= d and e > f and f >= g }}
+#^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#  ^ text.html.pebble meta.expression.pebble
+#   ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#    ^ text.html.pebble meta.expression.pebble
+#     ^ text.html.pebble meta.expression.pebble keyword.operator.comparison.pebble
+#      ^ text.html.pebble meta.expression.pebble
+#       ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#        ^ text.html.pebble meta.expression.pebble
+#         ^^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#            ^ text.html.pebble meta.expression.pebble
+#             ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#              ^ text.html.pebble meta.expression.pebble
+#               ^^ text.html.pebble meta.expression.pebble keyword.operator.comparison.pebble
+#                 ^ text.html.pebble meta.expression.pebble
+#                  ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                   ^ text.html.pebble meta.expression.pebble
+#                    ^^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#                       ^ text.html.pebble meta.expression.pebble
+#                        ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                         ^ text.html.pebble meta.expression.pebble
+#                          ^ text.html.pebble meta.expression.pebble keyword.operator.comparison.pebble
+#                           ^ text.html.pebble meta.expression.pebble
+#                            ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                             ^ text.html.pebble meta.expression.pebble
+#                              ^^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#                                 ^ text.html.pebble meta.expression.pebble
+#                                  ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                                   ^ text.html.pebble meta.expression.pebble
+#                                    ^^ text.html.pebble meta.expression.pebble keyword.operator.comparison.pebble
+#                                      ^ text.html.pebble meta.expression.pebble
+#                                       ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                                        ^ text.html.pebble meta.expression.pebble
+#                                         ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>{{ a equals b and list contains "x" }}
+#^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#  ^ text.html.pebble meta.expression.pebble
+#   ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#    ^ text.html.pebble meta.expression.pebble
+#     ^^^^^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#           ^ text.html.pebble meta.expression.pebble
+#            ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#             ^ text.html.pebble meta.expression.pebble
+#              ^^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#                 ^ text.html.pebble meta.expression.pebble
+#                  ^^^^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                      ^ text.html.pebble meta.expression.pebble
+#                       ^^^^^^^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#                               ^ text.html.pebble meta.expression.pebble
+#                                ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble punctuation.definition.string.begin.pebble
+#                                 ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble
+#                                  ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble punctuation.definition.string.end.pebble
+#                                   ^ text.html.pebble meta.expression.pebble
+#                                    ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>{{ ok ? "yes" : "no" }}
+#^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#  ^ text.html.pebble meta.expression.pebble
+#   ^^ text.html.pebble meta.expression.pebble variable.other.pebble
+#     ^ text.html.pebble meta.expression.pebble
+#      ^ text.html.pebble meta.expression.pebble keyword.operator.ternary.pebble
+#       ^ text.html.pebble meta.expression.pebble
+#        ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble punctuation.definition.string.begin.pebble
+#         ^^^ text.html.pebble meta.expression.pebble string.quoted.double.pebble
+#            ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble punctuation.definition.string.end.pebble
+#             ^ text.html.pebble meta.expression.pebble
+#              ^ text.html.pebble meta.expression.pebble keyword.operator.ternary.pebble
+#               ^ text.html.pebble meta.expression.pebble
+#                ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble punctuation.definition.string.begin.pebble
+#                 ^^ text.html.pebble meta.expression.pebble string.quoted.double.pebble
+#                   ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble punctuation.definition.string.end.pebble
+#                    ^ text.html.pebble meta.expression.pebble
+#                     ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>{{ "a" ~ "b" ~ c }}
+#^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#  ^ text.html.pebble meta.expression.pebble
+#   ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble punctuation.definition.string.begin.pebble
+#    ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble
+#     ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble punctuation.definition.string.end.pebble
+#      ^ text.html.pebble meta.expression.pebble
+#       ^ text.html.pebble meta.expression.pebble keyword.operator.concat.pebble
+#        ^ text.html.pebble meta.expression.pebble
+#         ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble punctuation.definition.string.begin.pebble
+#          ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble
+#           ^ text.html.pebble meta.expression.pebble string.quoted.double.pebble punctuation.definition.string.end.pebble
+#            ^ text.html.pebble meta.expression.pebble
+#             ^ text.html.pebble meta.expression.pebble keyword.operator.concat.pebble
+#              ^ text.html.pebble meta.expression.pebble
+#               ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                ^ text.html.pebble meta.expression.pebble
+#                 ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>{{ 1..5 }} {{ 'a'..'e' }} {{ a..b }}
+#^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#  ^ text.html.pebble meta.expression.pebble
+#   ^ text.html.pebble meta.expression.pebble constant.numeric.pebble
+#    ^^ text.html.pebble meta.expression.pebble keyword.operator.range.pebble
+#      ^ text.html.pebble meta.expression.pebble constant.numeric.pebble
+#       ^ text.html.pebble meta.expression.pebble
+#        ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+#          ^ text.html.pebble
+#           ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#             ^ text.html.pebble meta.expression.pebble
+#              ^ text.html.pebble meta.expression.pebble string.quoted.single.pebble punctuation.definition.string.begin.pebble
+#               ^ text.html.pebble meta.expression.pebble string.quoted.single.pebble
+#                ^ text.html.pebble meta.expression.pebble string.quoted.single.pebble punctuation.definition.string.end.pebble
+#                 ^^ text.html.pebble meta.expression.pebble keyword.operator.range.pebble
+#                   ^ text.html.pebble meta.expression.pebble string.quoted.single.pebble punctuation.definition.string.begin.pebble
+#                    ^ text.html.pebble meta.expression.pebble string.quoted.single.pebble
+#                     ^ text.html.pebble meta.expression.pebble string.quoted.single.pebble punctuation.definition.string.end.pebble
+#                      ^ text.html.pebble meta.expression.pebble
+#                       ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+#                         ^ text.html.pebble
+#                          ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                            ^ text.html.pebble meta.expression.pebble
+#                             ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                              ^^ text.html.pebble meta.expression.pebble keyword.operator.range.pebble
+#                                ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                                 ^ text.html.pebble meta.expression.pebble
+#                                  ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>{{ x is even and y is not null }}
+#^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#  ^ text.html.pebble meta.expression.pebble
+#   ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#    ^ text.html.pebble meta.expression.pebble
+#     ^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#       ^ text.html.pebble meta.expression.pebble
+#        ^^^^ text.html.pebble meta.expression.pebble support.function.test.pebble
+#            ^ text.html.pebble meta.expression.pebble
+#             ^^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#                ^ text.html.pebble meta.expression.pebble
+#                 ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                  ^ text.html.pebble meta.expression.pebble
+#                   ^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#                     ^ text.html.pebble meta.expression.pebble
+#                      ^^^ text.html.pebble meta.expression.pebble keyword.operator.logical.pebble
+#                         ^ text.html.pebble meta.expression.pebble
+#                          ^^^^ text.html.pebble meta.expression.pebble support.function.test.pebble
+#                              ^ text.html.pebble meta.expression.pebble
+#                               ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>{{ +a }} {{ -a }}
+#^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#  ^ text.html.pebble meta.expression.pebble
+#   ^ text.html.pebble meta.expression.pebble keyword.operator.arithmetic.pebble
+#    ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#     ^ text.html.pebble meta.expression.pebble
+#      ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+#        ^ text.html.pebble
+#         ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#           ^ text.html.pebble meta.expression.pebble
+#            ^ text.html.pebble meta.expression.pebble keyword.operator.arithmetic.pebble
+#             ^ text.html.pebble meta.expression.pebble variable.other.pebble
+#              ^ text.html.pebble meta.expression.pebble
+#               ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>

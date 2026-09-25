@@ -1,0 +1,11 @@
+{{ "a}}b" }}
+{{ {"k": 1} }}
+{{-x-}}
+{%endif%}
+{% unknownTag "arg" %}
+{% %}
+{{ }}
+{{ a }}{{ b }}{% if c %}{% endif %}
+<div {% if active %}class="on"{% endif %}>x</div>
+<p title="{{ t }}" data-x="{% if a %}1{% endif %}">y</p>
+{{ unterminated

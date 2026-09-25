@@ -75,7 +75,10 @@
           "text.html.basic",
           "text.html.derivative",
           "text.html.pebble"
-        ]
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.html": "html"
+        }
       }
     ],
     "snippets": [
@@ -97,7 +100,7 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "test:unit": "bun test test/unit",
-    "test:grammar": "vscode-tmgrammar-snap --config test/grammar/config.json 'test/grammar/fixtures/**/*.{peb,html}'",
+    "test:grammar": "vscode-tmgrammar-test --config test/grammar/config.json 'test/grammar/spec/**/*.{peb,html}' && vscode-tmgrammar-snap --config test/grammar/config.json 'test/grammar/fixtures/**/*.{peb,html}'",
     "test:grammar:update": "vscode-tmgrammar-snap --config test/grammar/config.json --updateSnapshot 'test/grammar/fixtures/**/*.{peb,html}'",
     "check": "bun run lint && bun run typecheck && bun run test:unit && bun run test:grammar",
     "package": "bun run build:prod && vsce package --no-dependencies",

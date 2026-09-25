@@ -1,0 +1,9 @@
+<div data-signals="{count: {{ initial }}, name: '{{ user.name }}'}"
+     data-on:click="$count++"
+     data-on-intersect__once="@get('/items/{{ item.id }}')"
+     data-attr:title="{{ title | escape('js') }}"
+     data-text="$count"
+     data-class="{active: $count > {{ threshold }}}"
+     hx-get="/api/{{ id }}" hx-target="#{{ target }}" hx-swap="outerHTML">
+  {% if user %}<span data-show="$open">{{ user.name }}</span>{% endif %}
+</div>

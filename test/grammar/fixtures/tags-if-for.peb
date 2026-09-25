@@ -1,0 +1,14 @@
+{% if user.isActive %}
+  active
+{% elseif user.isPending %}
+  pending
+{% else %}
+  inactive
+{% endif %}
+{% for item in items %}
+  {{ loop.index }} {{ loop.length }} {{ loop.first }} {{ loop.last }} {{ loop.revindex }}
+  {{ item.name }}
+{% else %}
+  no items
+{% endfor %}
+{% for entry in map %}{{ entry.key }}={{ entry.value }}{% endfor %}

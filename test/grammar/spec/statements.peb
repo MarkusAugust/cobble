@@ -1,0 +1,28 @@
+{# SYNTAX TEST "text.html.pebble"
+
+{%- if a >= 1 -%}{% elseif b %}{% else %}{% endif %}
+{# <- meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+{#^ keyword.operator.whitespace.pebble
+{#  ^^ keyword.control.pebble
+{#       ^^ keyword.operator.comparison.pebble
+{#                  ^^^^^^ keyword.control.pebble
+{#                                          ^^^^^ keyword.control.pebble
+{% for item in items | sort %}{% endfor %}
+{#     ^^^^ variable.other.pebble
+{#          ^^ keyword.control.pebble
+{#                     ^^^^ support.function.filter.pebble
+{% extends "base.peb" %}{% include 'x.peb' with {"a": 1} %}
+{#         ^^^^^^^^^^ string.quoted.double.pebble entity.name.template.pebble
+{#                                 ^^^^^^^ string.quoted.single.pebble entity.name.template.pebble
+{#                                         ^^^^ keyword.control.pebble
+{% block content %}{% endblock content %}{% macro input(type="text", name) %}{% endmacro %}
+{#       ^^^^^^^ entity.name.section.block.pebble
+{#                             ^^^^^^^ entity.name.section.block.pebble
+{#                                                ^^^^^ entity.name.function.macro.pebble
+{#                                                      ^^^^ variable.parameter.pebble
+{#                                                                   ^^^^ variable.parameter.pebble
+{% filter upper | escape %}x{% endfilter %}{% unknownTag 1 %}{% set v = 2 %}
+{#        ^^^^^ support.function.filter.pebble
+{#                ^^^^^^ support.function.filter.pebble
+{#                                            ^^^^^^^^^^ entity.name.tag.pebble
+{#                                                                  ^ variable.other.pebble

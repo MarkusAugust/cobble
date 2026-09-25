@@ -1,0 +1,10 @@
+{{ name | upper | trim }}
+{{ text | abbreviate(10) }}
+{{ d | date("yyyy-MM-dd", timeZone="UTC", existingFormat="MMMM dd, yyyy") }}
+{{ x | default("n/a") | escape("js") }}
+{{ list | join(", ") | length }}
+{{ s | replace({'%this%': foo, '%that%': "bar"}) }}
+{{ things | slice(1, 3) | sort | reverse | first }}
+{{ "Hello %s" | format(name) | nl2br | raw }}
+{{ value | myCustomFilter(1) }}
+{{ value|upper }}

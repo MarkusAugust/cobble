@@ -1,0 +1,11 @@
+{# SYNTAX TEST "text.html.pebble"
+
+{% verbatim %}{{ raw }} {% not_tag %}{% endverbatim %}{{ real }}
+{# ^^^^^^^^ meta.verbatim.pebble keyword.control.pebble
+{#            ^^^^^^^^^ meta.verbatim.pebble meta.embedded.block.html - meta.expression.pebble
+{#                         ^^^^^^^ meta.embedded.block.html - meta.tag.statement.pebble
+{#                                      ^^^^^^^^^^^ keyword.control.pebble
+{#                                                       ^^^^ meta.expression.pebble variable.other.pebble
+{# {{ not }} #}{{ yes }}
+{# ^^^^^^^^^ comment.block.pebble - meta.expression.pebble
+{#                ^^^ meta.expression.pebble variable.other.pebble

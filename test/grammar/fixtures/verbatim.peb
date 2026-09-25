@@ -1,0 +1,6 @@
+{% verbatim %}
+  {{ not_an_expression }} {% not_a_tag %} {# not a comment #}
+  <p class="{{ x }}">html is still html</p>
+{% endverbatim %}
+{{ back_to_normal }}
+{%- verbatim -%}{{ raw }}{%- endverbatim -%}

@@ -1,0 +1,22 @@
+>{# a comment with {{ not an expression }} and {% not a tag %} #}
+#^^ text.html.pebble comment.block.pebble punctuation.definition.comment.begin.pebble
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ text.html.pebble comment.block.pebble
+#                                                              ^^ text.html.pebble comment.block.pebble punctuation.definition.comment.end.pebble
+><p>{# inline #}text{#
+#^ text.html.pebble meta.tag.structure.p.start.html punctuation.definition.tag.begin.html
+# ^ text.html.pebble meta.tag.structure.p.start.html entity.name.tag.html
+#  ^ text.html.pebble meta.tag.structure.p.start.html punctuation.definition.tag.end.html
+#   ^^ text.html.pebble comment.block.pebble punctuation.definition.comment.begin.pebble
+#     ^^^^^^^^ text.html.pebble comment.block.pebble
+#             ^^ text.html.pebble comment.block.pebble punctuation.definition.comment.end.pebble
+#               ^^^^ text.html.pebble
+#                   ^^ text.html.pebble comment.block.pebble punctuation.definition.comment.begin.pebble
+>multi
+#^^^^^^ text.html.pebble comment.block.pebble
+>line #}</p>
+#^^^^^ text.html.pebble comment.block.pebble
+#     ^^ text.html.pebble comment.block.pebble punctuation.definition.comment.end.pebble
+#       ^^ text.html.pebble meta.tag.structure.p.end.html punctuation.definition.tag.begin.html
+#         ^ text.html.pebble meta.tag.structure.p.end.html entity.name.tag.html
+#          ^ text.html.pebble meta.tag.structure.p.end.html punctuation.definition.tag.end.html
+>

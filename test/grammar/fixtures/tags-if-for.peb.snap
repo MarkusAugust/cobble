@@ -1,0 +1,147 @@
+>{% if user.isActive %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#     ^ text.html.pebble meta.tag.statement.pebble
+#      ^^^^ text.html.pebble meta.tag.statement.pebble variable.other.pebble
+#          ^ text.html.pebble meta.tag.statement.pebble punctuation.accessor.pebble
+#           ^^^^^^^^ text.html.pebble meta.tag.statement.pebble variable.other.property.pebble
+#                   ^ text.html.pebble meta.tag.statement.pebble
+#                    ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>  active
+#^^^^^^^^^ text.html.pebble
+>{% elseif user.isPending %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#         ^ text.html.pebble meta.tag.statement.pebble
+#          ^^^^ text.html.pebble meta.tag.statement.pebble variable.other.pebble
+#              ^ text.html.pebble meta.tag.statement.pebble punctuation.accessor.pebble
+#               ^^^^^^^^^ text.html.pebble meta.tag.statement.pebble variable.other.property.pebble
+#                        ^ text.html.pebble meta.tag.statement.pebble
+#                         ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>  pending
+#^^^^^^^^^^ text.html.pebble
+>{% else %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#       ^ text.html.pebble meta.tag.statement.pebble
+#        ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>  inactive
+#^^^^^^^^^^^ text.html.pebble
+>{% endif %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#        ^ text.html.pebble meta.tag.statement.pebble
+#         ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>{% for item in items %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#      ^ text.html.pebble meta.tag.statement.pebble
+#       ^^^^ text.html.pebble meta.tag.statement.pebble variable.other.pebble
+#           ^ text.html.pebble meta.tag.statement.pebble
+#            ^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#              ^ text.html.pebble meta.tag.statement.pebble
+#               ^^^^^ text.html.pebble meta.tag.statement.pebble variable.other.pebble
+#                    ^ text.html.pebble meta.tag.statement.pebble
+#                     ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>  {{ loop.index }} {{ loop.length }} {{ loop.first }} {{ loop.last }} {{ loop.revindex }}
+#^^ text.html.pebble
+#  ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#    ^ text.html.pebble meta.expression.pebble
+#     ^^^^ text.html.pebble meta.expression.pebble variable.language.loop.pebble
+#         ^ text.html.pebble meta.expression.pebble punctuation.accessor.pebble
+#          ^^^^^ text.html.pebble meta.expression.pebble variable.other.property.pebble
+#               ^ text.html.pebble meta.expression.pebble
+#                ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+#                  ^ text.html.pebble
+#                   ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                     ^ text.html.pebble meta.expression.pebble
+#                      ^^^^ text.html.pebble meta.expression.pebble variable.language.loop.pebble
+#                          ^ text.html.pebble meta.expression.pebble punctuation.accessor.pebble
+#                           ^^^^^^ text.html.pebble meta.expression.pebble variable.other.property.pebble
+#                                 ^ text.html.pebble meta.expression.pebble
+#                                  ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                    ^ text.html.pebble
+#                                     ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                       ^ text.html.pebble meta.expression.pebble
+#                                        ^^^^ text.html.pebble meta.expression.pebble variable.language.loop.pebble
+#                                            ^ text.html.pebble meta.expression.pebble punctuation.accessor.pebble
+#                                             ^^^^^ text.html.pebble meta.expression.pebble variable.other.property.pebble
+#                                                  ^ text.html.pebble meta.expression.pebble
+#                                                   ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                                     ^ text.html.pebble
+#                                                      ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                                        ^ text.html.pebble meta.expression.pebble
+#                                                         ^^^^ text.html.pebble meta.expression.pebble variable.language.loop.pebble
+#                                                             ^ text.html.pebble meta.expression.pebble punctuation.accessor.pebble
+#                                                              ^^^^ text.html.pebble meta.expression.pebble variable.other.property.pebble
+#                                                                  ^ text.html.pebble meta.expression.pebble
+#                                                                   ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                                                     ^ text.html.pebble
+#                                                                      ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                                                        ^ text.html.pebble meta.expression.pebble
+#                                                                         ^^^^ text.html.pebble meta.expression.pebble variable.language.loop.pebble
+#                                                                             ^ text.html.pebble meta.expression.pebble punctuation.accessor.pebble
+#                                                                              ^^^^^^^^ text.html.pebble meta.expression.pebble variable.other.property.pebble
+#                                                                                      ^ text.html.pebble meta.expression.pebble
+#                                                                                       ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>  {{ item.name }}
+#^^ text.html.pebble
+#  ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#    ^ text.html.pebble meta.expression.pebble
+#     ^^^^ text.html.pebble meta.expression.pebble variable.other.pebble
+#         ^ text.html.pebble meta.expression.pebble punctuation.accessor.pebble
+#          ^^^^ text.html.pebble meta.expression.pebble variable.other.property.pebble
+#              ^ text.html.pebble meta.expression.pebble
+#               ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>{% else %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#       ^ text.html.pebble meta.tag.statement.pebble
+#        ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>  no items
+#^^^^^^^^^^^ text.html.pebble
+>{% endfor %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#         ^ text.html.pebble meta.tag.statement.pebble
+#          ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>{% for entry in map %}{{ entry.key }}={{ entry.value }}{% endfor %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#      ^ text.html.pebble meta.tag.statement.pebble
+#       ^^^^^ text.html.pebble meta.tag.statement.pebble variable.other.pebble
+#            ^ text.html.pebble meta.tag.statement.pebble
+#             ^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#               ^ text.html.pebble meta.tag.statement.pebble
+#                ^^^ text.html.pebble meta.tag.statement.pebble variable.other.pebble
+#                   ^ text.html.pebble meta.tag.statement.pebble
+#                    ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+#                      ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                        ^ text.html.pebble meta.expression.pebble
+#                         ^^^^^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                              ^ text.html.pebble meta.expression.pebble punctuation.accessor.pebble
+#                               ^^^ text.html.pebble meta.expression.pebble variable.other.property.pebble
+#                                  ^ text.html.pebble meta.expression.pebble
+#                                   ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                     ^ text.html.pebble
+#                                      ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                        ^ text.html.pebble meta.expression.pebble
+#                                         ^^^^^ text.html.pebble meta.expression.pebble variable.other.pebble
+#                                              ^ text.html.pebble meta.expression.pebble punctuation.accessor.pebble
+#                                               ^^^^^ text.html.pebble meta.expression.pebble variable.other.property.pebble
+#                                                    ^ text.html.pebble meta.expression.pebble
+#                                                     ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                                       ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#                                                         ^ text.html.pebble meta.tag.statement.pebble
+#                                                          ^^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#                                                                ^ text.html.pebble meta.tag.statement.pebble
+#                                                                 ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>

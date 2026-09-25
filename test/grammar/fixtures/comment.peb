@@ -1,0 +1,4 @@
+{# a comment with {{ not an expression }} and {% not a tag %} #}
+<p>{# inline #}text{#
+multi
+line #}</p>

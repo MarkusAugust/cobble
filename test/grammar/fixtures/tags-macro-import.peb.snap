@@ -1,0 +1,179 @@
+>{% macro input(type="text", name, value) %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#        ^ text.html.pebble meta.tag.statement.pebble
+#         ^^^^^ text.html.pebble meta.tag.statement.pebble entity.name.function.macro.pebble
+#              ^ text.html.pebble meta.tag.statement.pebble punctuation.separator.parameter.pebble
+#               ^^^^ text.html.pebble meta.tag.statement.pebble variable.parameter.pebble
+#                   ^ text.html.pebble meta.tag.statement.pebble keyword.operator.assignment.pebble
+#                    ^ text.html.pebble meta.tag.statement.pebble string.quoted.double.pebble punctuation.definition.string.begin.pebble
+#                     ^^^^ text.html.pebble meta.tag.statement.pebble string.quoted.double.pebble
+#                         ^ text.html.pebble meta.tag.statement.pebble string.quoted.double.pebble punctuation.definition.string.end.pebble
+#                          ^ text.html.pebble meta.tag.statement.pebble punctuation.separator.parameter.pebble
+#                           ^ text.html.pebble meta.tag.statement.pebble
+#                            ^^^^ text.html.pebble meta.tag.statement.pebble variable.parameter.pebble
+#                                ^ text.html.pebble meta.tag.statement.pebble punctuation.separator.parameter.pebble
+#                                 ^ text.html.pebble meta.tag.statement.pebble
+#                                  ^^^^^ text.html.pebble meta.tag.statement.pebble variable.parameter.pebble
+#                                       ^ text.html.pebble meta.tag.statement.pebble punctuation.separator.parameter.pebble
+#                                        ^ text.html.pebble meta.tag.statement.pebble
+#                                         ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>  <input type="{{ type }}" name="{{ name }}" value="{{ value }}">
+#^^ text.html.pebble
+#  ^ text.html.pebble meta.tag.structure.input.void.html punctuation.definition.tag.begin.html
+#   ^^^^^ text.html.pebble meta.tag.structure.input.void.html entity.name.tag.html
+#        ^ text.html.pebble meta.tag.structure.input.void.html
+#         ^^^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.type.html entity.other.attribute-name.html
+#             ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.type.html punctuation.separator.key-value.html
+#              ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.type.html string.quoted.double.html punctuation.definition.string.begin.html
+#               ^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.type.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                 ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.type.html string.quoted.double.html meta.expression.pebble
+#                  ^^^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.type.html string.quoted.double.html meta.expression.pebble variable.other.pebble
+#                      ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.type.html string.quoted.double.html meta.expression.pebble
+#                       ^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.type.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                         ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.type.html string.quoted.double.html punctuation.definition.string.end.html
+#                          ^ text.html.pebble meta.tag.structure.input.void.html
+#                           ^^^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.name.html entity.other.attribute-name.html
+#                               ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.name.html punctuation.separator.key-value.html
+#                                ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.name.html string.quoted.double.html punctuation.definition.string.begin.html
+#                                 ^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.name.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                   ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.name.html string.quoted.double.html meta.expression.pebble
+#                                    ^^^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.name.html string.quoted.double.html meta.expression.pebble variable.other.pebble
+#                                        ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.name.html string.quoted.double.html meta.expression.pebble
+#                                         ^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.name.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                           ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.name.html string.quoted.double.html punctuation.definition.string.end.html
+#                                            ^ text.html.pebble meta.tag.structure.input.void.html
+#                                             ^^^^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.value.html entity.other.attribute-name.html
+#                                                  ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.value.html punctuation.separator.key-value.html
+#                                                   ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.value.html string.quoted.double.html punctuation.definition.string.begin.html
+#                                                    ^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.value.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                                      ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.value.html string.quoted.double.html meta.expression.pebble
+#                                                       ^^^^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.value.html string.quoted.double.html meta.expression.pebble variable.other.pebble
+#                                                            ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.value.html string.quoted.double.html meta.expression.pebble
+#                                                             ^^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.value.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                                               ^ text.html.pebble meta.tag.structure.input.void.html meta.attribute.value.html string.quoted.double.html punctuation.definition.string.end.html
+#                                                                ^ text.html.pebble meta.tag.structure.input.void.html punctuation.definition.tag.end.html
+>{% endmacro %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#           ^ text.html.pebble meta.tag.statement.pebble
+#            ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>{% macro ctx(_context) %}{{ _context.foo }}{% endmacro %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#        ^ text.html.pebble meta.tag.statement.pebble
+#         ^^^ text.html.pebble meta.tag.statement.pebble entity.name.function.macro.pebble
+#            ^ text.html.pebble meta.tag.statement.pebble punctuation.separator.parameter.pebble
+#             ^^^^^^^^ text.html.pebble meta.tag.statement.pebble variable.parameter.pebble
+#                     ^ text.html.pebble meta.tag.statement.pebble punctuation.separator.parameter.pebble
+#                      ^ text.html.pebble meta.tag.statement.pebble
+#                       ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+#                         ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                           ^ text.html.pebble meta.expression.pebble
+#                            ^^^^^^^^ text.html.pebble meta.expression.pebble variable.language.pebble
+#                                    ^ text.html.pebble meta.expression.pebble punctuation.accessor.pebble
+#                                     ^^^ text.html.pebble meta.expression.pebble variable.other.property.pebble
+#                                        ^ text.html.pebble meta.expression.pebble
+#                                         ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                           ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#                                             ^ text.html.pebble meta.tag.statement.pebble
+#                                              ^^^^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#                                                      ^ text.html.pebble meta.tag.statement.pebble
+#                                                       ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>{% import "forms.peb" %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#         ^ text.html.pebble meta.tag.statement.pebble
+#          ^^^^^^^^^^^ text.html.pebble meta.tag.statement.pebble string.quoted.double.pebble entity.name.template.pebble
+#                     ^ text.html.pebble meta.tag.statement.pebble
+#                      ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>{% import "forms.peb" as forms %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#         ^ text.html.pebble meta.tag.statement.pebble
+#          ^^^^^^^^^^^ text.html.pebble meta.tag.statement.pebble string.quoted.double.pebble entity.name.template.pebble
+#                     ^ text.html.pebble meta.tag.statement.pebble
+#                      ^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#                        ^ text.html.pebble meta.tag.statement.pebble
+#                         ^^^^^ text.html.pebble meta.tag.statement.pebble variable.other.pebble
+#                              ^ text.html.pebble meta.tag.statement.pebble
+#                               ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>{% import modern ? 'ajax_form_util' : 'simple_form_util' %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#         ^ text.html.pebble meta.tag.statement.pebble
+#          ^^^^^^ text.html.pebble meta.tag.statement.pebble variable.other.pebble
+#                ^ text.html.pebble meta.tag.statement.pebble
+#                 ^ text.html.pebble meta.tag.statement.pebble keyword.operator.ternary.pebble
+#                  ^ text.html.pebble meta.tag.statement.pebble
+#                   ^ text.html.pebble meta.tag.statement.pebble string.quoted.single.pebble punctuation.definition.string.begin.pebble
+#                    ^^^^^^^^^^^^^^ text.html.pebble meta.tag.statement.pebble string.quoted.single.pebble
+#                                  ^ text.html.pebble meta.tag.statement.pebble string.quoted.single.pebble punctuation.definition.string.end.pebble
+#                                   ^ text.html.pebble meta.tag.statement.pebble
+#                                    ^ text.html.pebble meta.tag.statement.pebble keyword.operator.ternary.pebble
+#                                     ^ text.html.pebble meta.tag.statement.pebble
+#                                      ^ text.html.pebble meta.tag.statement.pebble string.quoted.single.pebble punctuation.definition.string.begin.pebble
+#                                       ^^^^^^^^^^^^^^^^ text.html.pebble meta.tag.statement.pebble string.quoted.single.pebble
+#                                                       ^ text.html.pebble meta.tag.statement.pebble string.quoted.single.pebble punctuation.definition.string.end.pebble
+#                                                        ^ text.html.pebble meta.tag.statement.pebble
+#                                                         ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>{% from 'forms.peb' import input as field, textarea %}
+#^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#  ^ text.html.pebble meta.tag.statement.pebble
+#   ^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#       ^ text.html.pebble meta.tag.statement.pebble
+#        ^^^^^^^^^^^ text.html.pebble meta.tag.statement.pebble string.quoted.single.pebble entity.name.template.pebble
+#                   ^ text.html.pebble meta.tag.statement.pebble
+#                    ^^^^^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#                          ^ text.html.pebble meta.tag.statement.pebble
+#                           ^^^^^ text.html.pebble meta.tag.statement.pebble variable.other.pebble
+#                                ^ text.html.pebble meta.tag.statement.pebble
+#                                 ^^ text.html.pebble meta.tag.statement.pebble keyword.control.pebble
+#                                   ^ text.html.pebble meta.tag.statement.pebble
+#                                    ^^^^^ text.html.pebble meta.tag.statement.pebble variable.other.pebble
+#                                         ^ text.html.pebble meta.tag.statement.pebble punctuation.separator.comma.pebble
+#                                          ^ text.html.pebble meta.tag.statement.pebble
+#                                           ^^^^^^^^ text.html.pebble meta.tag.statement.pebble variable.other.pebble
+#                                                   ^ text.html.pebble meta.tag.statement.pebble
+#                                                    ^^ text.html.pebble meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+>{{ forms.input("text", "name") }} {{ field("x", "y") }}
+#^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#  ^ text.html.pebble meta.expression.pebble
+#   ^^^^^ text.html.pebble meta.expression.pebble variable.other.pebble
+#        ^ text.html.pebble meta.expression.pebble punctuation.accessor.pebble
+#         ^^^^^ text.html.pebble meta.expression.pebble entity.name.function.method.pebble
+#              ^ text.html.pebble meta.expression.pebble meta.parens.pebble punctuation.section.parens.begin.pebble
+#               ^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble punctuation.definition.string.begin.pebble
+#                ^^^^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble
+#                    ^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble punctuation.definition.string.end.pebble
+#                     ^ text.html.pebble meta.expression.pebble meta.parens.pebble punctuation.separator.comma.pebble
+#                      ^ text.html.pebble meta.expression.pebble meta.parens.pebble
+#                       ^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble punctuation.definition.string.begin.pebble
+#                        ^^^^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble
+#                            ^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble punctuation.definition.string.end.pebble
+#                             ^ text.html.pebble meta.expression.pebble meta.parens.pebble punctuation.section.parens.end.pebble
+#                              ^ text.html.pebble meta.expression.pebble
+#                               ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                 ^ text.html.pebble
+#                                  ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                    ^ text.html.pebble meta.expression.pebble
+#                                     ^^^^^ text.html.pebble meta.expression.pebble entity.name.function.pebble
+#                                          ^ text.html.pebble meta.expression.pebble meta.parens.pebble punctuation.section.parens.begin.pebble
+#                                           ^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble punctuation.definition.string.begin.pebble
+#                                            ^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble
+#                                             ^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble punctuation.definition.string.end.pebble
+#                                              ^ text.html.pebble meta.expression.pebble meta.parens.pebble punctuation.separator.comma.pebble
+#                                               ^ text.html.pebble meta.expression.pebble meta.parens.pebble
+#                                                ^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble punctuation.definition.string.begin.pebble
+#                                                 ^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble
+#                                                  ^ text.html.pebble meta.expression.pebble meta.parens.pebble string.quoted.double.pebble punctuation.definition.string.end.pebble
+#                                                   ^ text.html.pebble meta.expression.pebble meta.parens.pebble punctuation.section.parens.end.pebble
+#                                                    ^ text.html.pebble meta.expression.pebble
+#                                                     ^^ text.html.pebble meta.expression.pebble punctuation.definition.expression.end.pebble
+>

@@ -1,0 +1,22 @@
+{# SYNTAX TEST "text.html.derivative"
+
+<div data-signals="{count: {{ initial }}, name: '{{ user.name }}'}">
+{#        ^^^^^^^ support.function.datastar.plugin
+{#                 ^ punctuation.definition.object.begin.datastar
+{#                  ^^^^^ variable.other.property.datastar
+{#                         ^^ meta.expression.pebble punctuation.definition.expression.begin.pebble
+{#                            ^^^^^^^ meta.expression.pebble variable.other.pebble
+{#                                    ^^ punctuation.definition.expression.end.pebble
+{#                                                  ^^^^ meta.expression.pebble variable.other.pebble
+{#                                                               ^ punctuation.definition.object.end.datastar
+<div data-text="$count" data-on:click="$count++" data-class="{active: $count > {{ threshold }}}">
+{#              ^^^^^^ variable.other.datastar.signal - meta.expression.pebble
+{#                                     ^^^^^^ variable.other.datastar.signal - meta.expression.pebble
+{#                                           ^^ keyword.operator.datastar - meta.expression.pebble
+{#                              ^^^^^ variable.parameter.datastar.key - meta.expression.pebble
+{#                                                                                ^^^^^^^^^ meta.expression.pebble variable.other.pebble
+<div data-on-intersect__once="@get('/items/{{ item.id }}')">
+{#                            ^^^^ support.function.datastar.action - meta.expression.pebble
+{#                      ^^^^ storage.modifier.datastar
+{#                                            ^^^^ meta.expression.pebble variable.other.pebble
+{#                                                 ^^ variable.other.property.pebble

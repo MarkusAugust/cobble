@@ -1,0 +1,11 @@
+{% autoescape %}{{ raw }}{% endautoescape %}
+{% autoescape "js" %}var x = "{{ s }}";{% endautoescape %}
+{% autoescape false %}{{ html }}{% endautoescape %}
+{% set title = "Test Page" %}
+{% set total = price * qty %}
+{% filter upper %}text{% endfilter %}
+{% filter upper | escape("html") %}text{% endfilter %}
+{% filter custom %}text{% endfilter %}
+{% cache "menu" %}{% include "menu.peb" %}{% endcache %}
+{% parallel %}{{ slow() }}{% endparallel %}
+{% flush %}

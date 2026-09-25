@@ -1,0 +1,7 @@
+{{ max(a, 10) }} {{ min(a, b, c) }}
+{{ range(0, 10, 2) }}
+{{ block("sidebar") }} {{ parent() }}
+{{ i18n("messages", "greeting", user.name) }}
+{{ message("label.name") }} {{ href("/path") }} {{ hasErrors("form") }}
+{{ customFunction(1, key=value) }}
+{{ user.getName() }} {{ user.address.street }} {{ items[0] }} {{ map["key"] }}

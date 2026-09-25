@@ -1,0 +1,31 @@
+{# SYNTAX TEST "text.html.pebble"
+
+{{ {"k": 1} }}
+{# ^ meta.map.pebble punctuation.section.braces.begin.pebble
+{#   ^ meta.map.pebble string.quoted.double.pebble
+{#       ^ meta.map.pebble constant.numeric.pebble
+{#        ^ meta.map.pebble punctuation.section.braces.end.pebble
+{#          ^^ meta.expression.pebble punctuation.definition.expression.end.pebble
+{{ "a}}b" | upper }}
+{#  ^^^^ string.quoted.double.pebble
+{#        ^ keyword.operator.pipe.pebble
+{#          ^^^^^ support.function.filter.pebble
+{#                ^^ punctuation.definition.expression.end.pebble
+{{ "Hi #{user.name}" | myFilter(1, k=2) }}
+{#     ^^ meta.interpolation.pebble punctuation.section.interpolation.begin.pebble
+{#       ^^^^ meta.interpolation.pebble variable.other.pebble
+{#                     ^^^^^^^^ entity.name.function.filter.pebble
+{#                                 ^ variable.other.pebble
+{#                                  ^ keyword.operator.assignment.pebble
+{{ x is not empty and y is customTest or max(a, 1..3) }}
+{#   ^^ keyword.operator.logical.pebble
+{#      ^^^ keyword.operator.logical.pebble
+{#          ^^^^^ support.function.test.pebble
+{#                         ^^^^^^^^^^ entity.name.function.test.pebble
+{#                                       ^^^ support.function.builtin.pebble
+{#                                               ^^ keyword.operator.range.pebble
+{{ loop.index }} {{ _context.x }} {{ user.getName() }}
+{# ^^^^ variable.language.loop.pebble
+{#      ^^^^^ variable.other.property.pebble
+{#                  ^^^^^^^^ variable.language.pebble
+{#                                        ^^^^^^^ entity.name.function.method.pebble

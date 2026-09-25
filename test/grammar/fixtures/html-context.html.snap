@@ -1,0 +1,199 @@
+><!DOCTYPE html>
+#^^ text.html.derivative meta.tag.metadata.doctype.html punctuation.definition.tag.begin.html
+#  ^^^^^^^ text.html.derivative meta.tag.metadata.doctype.html entity.name.tag.html
+#         ^ text.html.derivative meta.tag.metadata.doctype.html
+#          ^^^^ text.html.derivative meta.tag.metadata.doctype.html entity.other.attribute-name.html
+#              ^ text.html.derivative meta.tag.metadata.doctype.html punctuation.definition.tag.end.html
+><html>
+#^ text.html.derivative meta.tag.structure.html.start.html punctuation.definition.tag.begin.html
+# ^^^^ text.html.derivative meta.tag.structure.html.start.html entity.name.tag.html
+#     ^ text.html.derivative meta.tag.structure.html.start.html punctuation.definition.tag.end.html
+><head>
+#^ text.html.derivative meta.tag.structure.head.start.html punctuation.definition.tag.begin.html
+# ^^^^ text.html.derivative meta.tag.structure.head.start.html entity.name.tag.html
+#     ^ text.html.derivative meta.tag.structure.head.start.html punctuation.definition.tag.end.html
+>  <title>{{ title }}</title>
+#^^ text.html.derivative
+#  ^ text.html.derivative meta.tag.metadata.title.start.html punctuation.definition.tag.begin.html
+#   ^^^^^ text.html.derivative meta.tag.metadata.title.start.html entity.name.tag.html
+#        ^ text.html.derivative meta.tag.metadata.title.start.html punctuation.definition.tag.end.html
+#         ^^ text.html.derivative meta.expression.pebble punctuation.definition.expression.begin.pebble
+#           ^ text.html.derivative meta.expression.pebble
+#            ^^^^^ text.html.derivative meta.expression.pebble variable.other.pebble
+#                 ^ text.html.derivative meta.expression.pebble
+#                  ^^ text.html.derivative meta.expression.pebble punctuation.definition.expression.end.pebble
+#                    ^^ text.html.derivative meta.tag.metadata.title.end.html punctuation.definition.tag.begin.html
+#                      ^^^^^ text.html.derivative meta.tag.metadata.title.end.html entity.name.tag.html
+#                           ^ text.html.derivative meta.tag.metadata.title.end.html punctuation.definition.tag.end.html
+>  <style>.x { color: {{ color }}; }</style>
+#^^ text.html.derivative punctuation.whitespace.embedded.leading.html
+#  ^ text.html.derivative meta.embedded.block.html meta.tag.metadata.style.start.html punctuation.definition.tag.begin.html
+#   ^^^^^ text.html.derivative meta.embedded.block.html meta.tag.metadata.style.start.html entity.name.tag.html
+#        ^ text.html.derivative meta.embedded.block.html meta.tag.metadata.style.start.html punctuation.definition.tag.end.html
+#         ^^^^^^^^^^^^ text.html.derivative meta.embedded.block.html
+#                     ^^ text.html.derivative meta.embedded.block.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                       ^ text.html.derivative meta.embedded.block.html meta.expression.pebble
+#                        ^^^^^ text.html.derivative meta.embedded.block.html meta.expression.pebble variable.other.pebble
+#                             ^ text.html.derivative meta.embedded.block.html meta.expression.pebble
+#                              ^^ text.html.derivative meta.embedded.block.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                ^^^ text.html.derivative meta.embedded.block.html
+#                                   ^ text.html.derivative meta.embedded.block.html meta.tag.metadata.style.end.html punctuation.definition.tag.begin.html source.css-ignored-vscode
+#                                    ^ text.html.derivative meta.embedded.block.html meta.tag.metadata.style.end.html punctuation.definition.tag.begin.html
+#                                     ^^^^^ text.html.derivative meta.embedded.block.html meta.tag.metadata.style.end.html entity.name.tag.html
+#                                          ^ text.html.derivative meta.embedded.block.html meta.tag.metadata.style.end.html punctuation.definition.tag.end.html
+>  <script>var data = {{ json | raw }}; if ({{ flag }}) {}</script>
+#^^ text.html.derivative punctuation.whitespace.embedded.leading.html
+#  ^ text.html.derivative meta.embedded.block.html meta.tag.metadata.script.start.html punctuation.definition.tag.begin.html
+#   ^^^^^^ text.html.derivative meta.embedded.block.html meta.tag.metadata.script.start.html entity.name.tag.html
+#         ^ text.html.derivative meta.embedded.block.html meta.tag.metadata.script.start.html punctuation.definition.tag.end.html
+#          ^^^^^^^^^^^ text.html.derivative meta.embedded.block.html source.js
+#                     ^^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                       ^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble
+#                        ^^^^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble variable.other.pebble
+#                            ^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble
+#                             ^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble keyword.operator.pipe.pebble
+#                              ^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble
+#                               ^^^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble support.function.filter.pebble
+#                                  ^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble
+#                                   ^^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                     ^^^^^^ text.html.derivative meta.embedded.block.html source.js
+#                                           ^^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                             ^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble
+#                                              ^^^^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble variable.other.pebble
+#                                                  ^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble
+#                                                   ^^ text.html.derivative meta.embedded.block.html source.js meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                                     ^^^^ text.html.derivative meta.embedded.block.html source.js
+#                                                         ^ text.html.derivative meta.embedded.block.html meta.tag.metadata.script.end.html punctuation.definition.tag.begin.html source.js-ignored-vscode
+#                                                          ^ text.html.derivative meta.embedded.block.html meta.tag.metadata.script.end.html punctuation.definition.tag.begin.html
+#                                                           ^^^^^^ text.html.derivative meta.embedded.block.html meta.tag.metadata.script.end.html entity.name.tag.html
+#                                                                 ^ text.html.derivative meta.embedded.block.html meta.tag.metadata.script.end.html punctuation.definition.tag.end.html
+></head>
+#^^ text.html.derivative meta.tag.structure.head.end.html punctuation.definition.tag.begin.html
+#  ^^^^ text.html.derivative meta.tag.structure.head.end.html entity.name.tag.html
+#      ^ text.html.derivative meta.tag.structure.head.end.html punctuation.definition.tag.end.html
+><body class="{{ bodyClass }}" data-id="{{ id }}">
+#^ text.html.derivative meta.tag.structure.body.start.html punctuation.definition.tag.begin.html
+# ^^^^ text.html.derivative meta.tag.structure.body.start.html entity.name.tag.html
+#     ^ text.html.derivative meta.tag.structure.body.start.html
+#      ^^^^^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.class.html entity.other.attribute-name.html
+#           ^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.class.html punctuation.separator.key-value.html
+#            ^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.class.html string.quoted.double.html punctuation.definition.string.begin.html
+#             ^^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.class.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#               ^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.class.html string.quoted.double.html meta.expression.pebble
+#                ^^^^^^^^^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.class.html string.quoted.double.html meta.expression.pebble variable.other.pebble
+#                         ^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.class.html string.quoted.double.html meta.expression.pebble
+#                          ^^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.class.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                            ^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.class.html string.quoted.double.html punctuation.definition.string.end.html
+#                             ^ text.html.derivative meta.tag.structure.body.start.html
+#                              ^^^^^^^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.data-x.data-id.html entity.other.attribute-name.html
+#                                     ^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.data-x.data-id.html punctuation.separator.key-value.html
+#                                      ^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.data-x.data-id.html string.quoted.double.html punctuation.definition.string.begin.html
+#                                       ^^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.data-x.data-id.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                         ^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.data-x.data-id.html string.quoted.double.html meta.expression.pebble
+#                                          ^^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.data-x.data-id.html string.quoted.double.html meta.expression.pebble variable.other.pebble
+#                                            ^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.data-x.data-id.html string.quoted.double.html meta.expression.pebble
+#                                             ^^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.data-x.data-id.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                               ^ text.html.derivative meta.tag.structure.body.start.html meta.attribute.data-x.data-id.html string.quoted.double.html punctuation.definition.string.end.html
+#                                                ^ text.html.derivative meta.tag.structure.body.start.html punctuation.definition.tag.end.html
+>  <!-- {{ inside_html_comment }} {% if x %}{% endif %} -->
+#^^ text.html.derivative
+#  ^^^^ text.html.derivative comment.block.html punctuation.definition.comment.html
+#      ^ text.html.derivative comment.block.html
+#       ^^ text.html.derivative comment.block.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#         ^ text.html.derivative comment.block.html meta.expression.pebble
+#          ^^^^^^^^^^^^^^^^^^^ text.html.derivative comment.block.html meta.expression.pebble variable.other.pebble
+#                             ^ text.html.derivative comment.block.html meta.expression.pebble
+#                              ^^ text.html.derivative comment.block.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                ^ text.html.derivative comment.block.html
+#                                 ^^ text.html.derivative comment.block.html meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#                                   ^ text.html.derivative comment.block.html meta.tag.statement.pebble
+#                                    ^^ text.html.derivative comment.block.html meta.tag.statement.pebble keyword.control.pebble
+#                                      ^ text.html.derivative comment.block.html meta.tag.statement.pebble
+#                                       ^ text.html.derivative comment.block.html meta.tag.statement.pebble variable.other.pebble
+#                                        ^ text.html.derivative comment.block.html meta.tag.statement.pebble
+#                                         ^^ text.html.derivative comment.block.html meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+#                                           ^^ text.html.derivative comment.block.html meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#                                             ^ text.html.derivative comment.block.html meta.tag.statement.pebble
+#                                              ^^^^^ text.html.derivative comment.block.html meta.tag.statement.pebble keyword.control.pebble
+#                                                   ^ text.html.derivative comment.block.html meta.tag.statement.pebble
+#                                                    ^^ text.html.derivative comment.block.html meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+#                                                      ^ text.html.derivative comment.block.html
+#                                                       ^^^ text.html.derivative comment.block.html punctuation.definition.comment.html
+>  <a href="/items/{{ item.id }}?q={{ q | urlencode }}">{{ item.name }}</a>
+#^^ text.html.derivative
+#  ^ text.html.derivative meta.tag.inline.a.start.html punctuation.definition.tag.begin.html
+#   ^ text.html.derivative meta.tag.inline.a.start.html entity.name.tag.html
+#    ^ text.html.derivative meta.tag.inline.a.start.html
+#     ^^^^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html entity.other.attribute-name.html
+#         ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html punctuation.separator.key-value.html
+#          ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html punctuation.definition.string.begin.html
+#           ^^^^^^^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html
+#                  ^^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                    ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble
+#                     ^^^^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble variable.other.pebble
+#                         ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble punctuation.accessor.pebble
+#                          ^^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble variable.other.property.pebble
+#                            ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble
+#                             ^^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                               ^^^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html
+#                                  ^^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                    ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble
+#                                     ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble variable.other.pebble
+#                                      ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble
+#                                       ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble keyword.operator.pipe.pebble
+#                                        ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble
+#                                         ^^^^^^^^^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble support.function.filter.pebble
+#                                                  ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble
+#                                                   ^^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                                     ^ text.html.derivative meta.tag.inline.a.start.html meta.attribute.href.html string.quoted.double.html punctuation.definition.string.end.html
+#                                                      ^ text.html.derivative meta.tag.inline.a.start.html punctuation.definition.tag.end.html
+#                                                       ^^ text.html.derivative meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                                         ^ text.html.derivative meta.expression.pebble
+#                                                          ^^^^ text.html.derivative meta.expression.pebble variable.other.pebble
+#                                                              ^ text.html.derivative meta.expression.pebble punctuation.accessor.pebble
+#                                                               ^^^^ text.html.derivative meta.expression.pebble variable.other.property.pebble
+#                                                                   ^ text.html.derivative meta.expression.pebble
+#                                                                    ^^ text.html.derivative meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                                                      ^^ text.html.derivative meta.tag.inline.a.end.html punctuation.definition.tag.begin.html
+#                                                                        ^ text.html.derivative meta.tag.inline.a.end.html entity.name.tag.html
+#                                                                         ^ text.html.derivative meta.tag.inline.a.end.html punctuation.definition.tag.end.html
+>  {% for i in 1..3 %}<span>{{ i }}</span>{% endfor %}
+#^^ text.html.derivative
+#  ^^ text.html.derivative meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#    ^ text.html.derivative meta.tag.statement.pebble
+#     ^^^ text.html.derivative meta.tag.statement.pebble keyword.control.pebble
+#        ^ text.html.derivative meta.tag.statement.pebble
+#         ^ text.html.derivative meta.tag.statement.pebble variable.other.pebble
+#          ^ text.html.derivative meta.tag.statement.pebble
+#           ^^ text.html.derivative meta.tag.statement.pebble keyword.control.pebble
+#             ^ text.html.derivative meta.tag.statement.pebble
+#              ^ text.html.derivative meta.tag.statement.pebble constant.numeric.pebble
+#               ^^ text.html.derivative meta.tag.statement.pebble keyword.operator.range.pebble
+#                 ^ text.html.derivative meta.tag.statement.pebble constant.numeric.pebble
+#                  ^ text.html.derivative meta.tag.statement.pebble
+#                   ^^ text.html.derivative meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+#                     ^ text.html.derivative meta.tag.inline.span.start.html punctuation.definition.tag.begin.html
+#                      ^^^^ text.html.derivative meta.tag.inline.span.start.html entity.name.tag.html
+#                          ^ text.html.derivative meta.tag.inline.span.start.html punctuation.definition.tag.end.html
+#                           ^^ text.html.derivative meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                             ^ text.html.derivative meta.expression.pebble
+#                              ^ text.html.derivative meta.expression.pebble variable.other.pebble
+#                               ^ text.html.derivative meta.expression.pebble
+#                                ^^ text.html.derivative meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                  ^^ text.html.derivative meta.tag.inline.span.end.html punctuation.definition.tag.begin.html
+#                                    ^^^^ text.html.derivative meta.tag.inline.span.end.html entity.name.tag.html
+#                                        ^ text.html.derivative meta.tag.inline.span.end.html punctuation.definition.tag.end.html
+#                                         ^^ text.html.derivative meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#                                           ^ text.html.derivative meta.tag.statement.pebble
+#                                            ^^^^^^ text.html.derivative meta.tag.statement.pebble keyword.control.pebble
+#                                                  ^ text.html.derivative meta.tag.statement.pebble
+#                                                   ^^ text.html.derivative meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+></body>
+#^^ text.html.derivative meta.tag.structure.body.end.html punctuation.definition.tag.begin.html
+#  ^^^^ text.html.derivative meta.tag.structure.body.end.html entity.name.tag.html
+#      ^ text.html.derivative meta.tag.structure.body.end.html punctuation.definition.tag.end.html
+></html>
+#^^ text.html.derivative meta.tag.structure.html.end.html punctuation.definition.tag.begin.html
+#  ^^^^ text.html.derivative meta.tag.structure.html.end.html entity.name.tag.html
+#      ^ text.html.derivative meta.tag.structure.html.end.html punctuation.definition.tag.end.html
+>

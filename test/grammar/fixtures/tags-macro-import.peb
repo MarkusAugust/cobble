@@ -1,0 +1,9 @@
+{% macro input(type="text", name, value) %}
+  <input type="{{ type }}" name="{{ name }}" value="{{ value }}">
+{% endmacro %}
+{% macro ctx(_context) %}{{ _context.foo }}{% endmacro %}
+{% import "forms.peb" %}
+{% import "forms.peb" as forms %}
+{% import modern ? 'ajax_form_util' : 'simple_form_util' %}
+{% from 'forms.peb' import input as field, textarea %}
+{{ forms.input("text", "name") }} {{ field("x", "y") }}

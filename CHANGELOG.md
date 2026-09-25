@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Dedicated `pebble` language for `.peb` and `.pebble` files, built on the HTML grammar.
 - Language server skeleton (`vscode-languageserver`) started by the extension.
-- Grammar snapshot tests that load the real HTML grammar and the Datastar injection grammar.
+- Complete TextMate grammar for Pebble 4.1 (all tags, filters, functions, tests, operators, literals, interpolation, verbatim, whitespace control), with distinct scopes for template names, block names, macro parameters and built-in versus custom filters.
+- Grammar snapshot and assertion tests that load the real HTML grammar and the Datastar injection grammar, proving Pebble inside `data-*` and `hx-*` attribute values highlights correctly.
 
 ### Changed
 - Ground-up rewrite. The project now lives at https://github.com/MarkusAugust/cobble.

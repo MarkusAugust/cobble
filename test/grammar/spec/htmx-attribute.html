@@ -1,0 +1,9 @@
+{# SYNTAX TEST "text.html.derivative"
+
+<a hx-get="/api/{{ id }}" hx-target="#{{ target }}" hx-swap="outerHTML">x</a>
+{# ^^^^^^ entity.other.attribute-name.html - pebble
+{#         ^^^^^ string.quoted.double.html - meta.expression.pebble
+{#                 ^^ meta.expression.pebble variable.other.pebble
+{#                        ^^^^^^^^^ entity.other.attribute-name.html - pebble
+{#                                       ^^^^^^ meta.expression.pebble variable.other.pebble
+{#                                                           ^^^^^^^^^ string.quoted.double.html - pebble

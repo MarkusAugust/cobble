@@ -1,0 +1,5 @@
+<p>  {{- value -}}  </p>
+{%- if ok -%}
+yes
+{%- endif %}
+{{ plain }}{{- left }}{{ right -}}

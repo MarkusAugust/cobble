@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ title }}</title>
+  <style>.x { color: {{ color }}; }</style>
+  <script>var data = {{ json | raw }}; if ({{ flag }}) {}</script>
+</head>
+<body class="{{ bodyClass }}" data-id="{{ id }}">
+  <!-- {{ inside_html_comment }} {% if x %}{% endif %} -->
+  <a href="/items/{{ item.id }}?q={{ q | urlencode }}">{{ item.name }}</a>
+  {% for i in 1..3 %}<span>{{ i }}</span>{% endfor %}
+</body>
+</html>

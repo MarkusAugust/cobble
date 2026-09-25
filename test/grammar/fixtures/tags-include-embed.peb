@@ -1,0 +1,7 @@
+{% include "footer.peb" %}
+{% include "advert.peb" with {"foo": "bar"} %}
+{% include admin ? 'adminFooter' : 'defaultFooter' %}
+{% embed "card.peb" %}
+  {% block body %}Body{% endblock %}
+{% endembed %}
+{% embed "card.peb" with {"title": "Hi"} %}{% endembed %}

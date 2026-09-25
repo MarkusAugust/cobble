@@ -1,0 +1,5 @@
+{{ "Hello #{user.name}, you have #{count | numberformat("#")} items" }}
+{{ 'single #{not_interpolated} \' quote' }}
+{{ "escaped \" quote and \\ backslash" }}
+{{ "a}}b" }}
+{{ "unterminated

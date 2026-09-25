@@ -1,0 +1,5 @@
+<button hx-post="/clicked/{{ id }}" hx-trigger="click" hx-target="#parent-div" hx-swap="outerHTML"
+        hx-vals='{"name": "{{ name }}"}' hx-headers='{"X-CSRF": "{{ csrf }}"}'>
+  {{ label | default("Click") }}
+</button>
+<form hx-put="/items/{{ item.id }}" hx-indicator="#spinner">{% include "fields.peb" %}</form>

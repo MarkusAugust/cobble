@@ -1,0 +1,7 @@
+{% extends "base.peb" %}
+{% extends ajax ? 'ajax.peb' : 'base.peb' %}
+{% block content %}
+  {{ parent() }}
+{% endblock content %}
+{% block "quoted" %}{% endblock %}
+{% block title %}Home{% endblock title %}

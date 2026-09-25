@@ -1,0 +1,23 @@
+{# kommentar #}
+{% extends ajax ? "ajax.peb" : "base.peb" %}
+{% import "forms.peb" as forms %}
+{% from "macros.peb" import input as field, textarea %}
+{% set title = "Hei #{user.name}" %}
+{% block content %}
+  {%- for item in items | sort -%}
+    {{ loop.index }}: {{ item.name | upper | abbreviate(10) }}
+    {{ item.price is not null ? item.price | numberformat("#.00") : "n/a" }}
+  {% else %}
+    <p>{{ i18n("messages", "list.empty") }}</p>
+  {%- endfor %}
+  {% if a > 1 and b == "x" or not c contains ["y"] %}{{ 1..5 | join(", ") ~ "!" }}{% elseif d is even %}{% else %}{% endif %}
+  {{ forms.input("text", "name", value=user.name) }}
+  {{ parent() }}
+{% endblock content %}
+{% macro input(type="text", name, value) %}<input type="{{ type }}" name="{{ name }}" value="{{ value | escape("html") }}">{% endmacro %}
+{% embed "card.peb" with {"title": "Hi"} %}{% block body %}…{% endblock %}{% endembed %}
+{% autoescape "js" %}var x = "{{ s }}";{% endautoescape %}
+{% verbatim %}{{ not pebble }}{% endverbatim %}
+{% cache "menu" %}{% include "menu.peb" with {"active": page} %}{% endcache %}
+{% filter upper | trim %} text {% endfilter %}
+{% parallel %}{{ slow() }}{% endparallel %}{% flush %}

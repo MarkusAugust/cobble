@@ -3,4 +3,5 @@
   {% if user.isActive %}
     <p>Welcome, {{ user.name | upper }}!</p>
   {% endif %}
+  <div>A</div>
 </div>

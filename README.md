@@ -21,6 +21,20 @@ Under construction: the 1.0 rewrite is in progress and is not published yet. See
 | `.html` files | Pebble syntax is injected into the built-in HTML language. HTML tooling, Datastar and HTMX extensions keep working as before. |
 | `.peb` and `.pebble` files | A dedicated `pebble` language built on top of HTML. |
 
+## Supported syntax
+
+The grammar follows Pebble 4.1: `{{ }}`, `{% %}`, `{# #}`, whitespace control (`{{-` / `-}}`),
+string interpolation (`"Hello #{name}"`), all built-in tags (`if`/`elseif`/`else`, `for`/`else`,
+`block`, `extends`, `include`, `import`, `from`, `embed`, `macro`, `set`, `filter`, `autoescape`,
+`verbatim`, `cache`, `parallel`, `flush`), all built-in filters, functions and tests (including the
+Spring extension functions), every operator with its precedence, list and map literals, ranges and
+the ternary operator. Unknown tags, filters, functions and tests are highlighted as such rather than
+flagged as errors, so custom extensions look fine.
+
+Pebble inside attribute values is highlighted correctly, also inside Datastar expressions such as
+`data-signals="{count: {{ initial }}}"` and HTMX attributes such as `hx-get="/api/{{ id }}"`, with
+the Datastar and HTMX highlighting left intact.
+
 ## Development
 
 Requires [bun](https://bun.sh) and VS Code 1.91 or later.

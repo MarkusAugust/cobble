@@ -1,0 +1,112 @@
+><button hx-post="/clicked/{{ id }}" hx-trigger="click" hx-target="#parent-div" hx-swap="outerHTML"
+#^ text.html.derivative meta.tag.structure.button.start.html punctuation.definition.tag.begin.html
+# ^^^^^^ text.html.derivative meta.tag.structure.button.start.html entity.name.tag.html
+#       ^ text.html.derivative meta.tag.structure.button.start.html
+#        ^^^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-post.html entity.other.attribute-name.html
+#               ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-post.html punctuation.separator.key-value.html
+#                ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-post.html string.quoted.double.html punctuation.definition.string.begin.html
+#                 ^^^^^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-post.html string.quoted.double.html
+#                          ^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-post.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                            ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-post.html string.quoted.double.html meta.expression.pebble
+#                             ^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-post.html string.quoted.double.html meta.expression.pebble variable.other.pebble
+#                               ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-post.html string.quoted.double.html meta.expression.pebble
+#                                ^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-post.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                  ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-post.html string.quoted.double.html punctuation.definition.string.end.html
+#                                   ^ text.html.derivative meta.tag.structure.button.start.html
+#                                    ^^^^^^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-trigger.html entity.other.attribute-name.html
+#                                              ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-trigger.html punctuation.separator.key-value.html
+#                                               ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-trigger.html string.quoted.double.html punctuation.definition.string.begin.html
+#                                                ^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-trigger.html string.quoted.double.html
+#                                                     ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-trigger.html string.quoted.double.html punctuation.definition.string.end.html
+#                                                      ^ text.html.derivative meta.tag.structure.button.start.html
+#                                                       ^^^^^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-target.html entity.other.attribute-name.html
+#                                                                ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-target.html punctuation.separator.key-value.html
+#                                                                 ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-target.html string.quoted.double.html punctuation.definition.string.begin.html
+#                                                                  ^^^^^^^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-target.html string.quoted.double.html
+#                                                                             ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-target.html string.quoted.double.html punctuation.definition.string.end.html
+#                                                                              ^ text.html.derivative meta.tag.structure.button.start.html
+#                                                                               ^^^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-swap.html entity.other.attribute-name.html
+#                                                                                      ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-swap.html punctuation.separator.key-value.html
+#                                                                                       ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-swap.html string.quoted.double.html punctuation.definition.string.begin.html
+#                                                                                        ^^^^^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-swap.html string.quoted.double.html
+#                                                                                                 ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-swap.html string.quoted.double.html punctuation.definition.string.end.html
+>        hx-vals='{"name": "{{ name }}"}' hx-headers='{"X-CSRF": "{{ csrf }}"}'>
+#^^^^^^^^ text.html.derivative meta.tag.structure.button.start.html
+#        ^^^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-vals.html entity.other.attribute-name.html
+#               ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-vals.html punctuation.separator.key-value.html
+#                ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-vals.html string.quoted.single.html punctuation.definition.string.begin.html
+#                 ^^^^^^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-vals.html string.quoted.single.html
+#                           ^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-vals.html string.quoted.single.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                             ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-vals.html string.quoted.single.html meta.expression.pebble
+#                              ^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-vals.html string.quoted.single.html meta.expression.pebble variable.other.pebble
+#                                  ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-vals.html string.quoted.single.html meta.expression.pebble
+#                                   ^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-vals.html string.quoted.single.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                     ^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-vals.html string.quoted.single.html
+#                                       ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-vals.html string.quoted.single.html punctuation.definition.string.end.html
+#                                        ^ text.html.derivative meta.tag.structure.button.start.html
+#                                         ^^^^^^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-headers.html entity.other.attribute-name.html
+#                                                   ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-headers.html punctuation.separator.key-value.html
+#                                                    ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-headers.html string.quoted.single.html punctuation.definition.string.begin.html
+#                                                     ^^^^^^^^^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-headers.html string.quoted.single.html
+#                                                                 ^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-headers.html string.quoted.single.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                                                                   ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-headers.html string.quoted.single.html meta.expression.pebble
+#                                                                    ^^^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-headers.html string.quoted.single.html meta.expression.pebble variable.other.pebble
+#                                                                        ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-headers.html string.quoted.single.html meta.expression.pebble
+#                                                                         ^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-headers.html string.quoted.single.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                                                           ^^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-headers.html string.quoted.single.html
+#                                                                             ^ text.html.derivative meta.tag.structure.button.start.html meta.attribute.unrecognized.hx-headers.html string.quoted.single.html punctuation.definition.string.end.html
+#                                                                              ^ text.html.derivative meta.tag.structure.button.start.html punctuation.definition.tag.end.html
+>  {{ label | default("Click") }}
+#^^ text.html.derivative
+#  ^^ text.html.derivative meta.expression.pebble punctuation.definition.expression.begin.pebble
+#    ^ text.html.derivative meta.expression.pebble
+#     ^^^^^ text.html.derivative meta.expression.pebble variable.other.pebble
+#          ^ text.html.derivative meta.expression.pebble
+#           ^ text.html.derivative meta.expression.pebble keyword.operator.pipe.pebble
+#            ^ text.html.derivative meta.expression.pebble
+#             ^^^^^^^ text.html.derivative meta.expression.pebble support.function.filter.pebble
+#                    ^ text.html.derivative meta.expression.pebble meta.parens.pebble punctuation.section.parens.begin.pebble
+#                     ^ text.html.derivative meta.expression.pebble meta.parens.pebble string.quoted.double.pebble punctuation.definition.string.begin.pebble
+#                      ^^^^^ text.html.derivative meta.expression.pebble meta.parens.pebble string.quoted.double.pebble
+#                           ^ text.html.derivative meta.expression.pebble meta.parens.pebble string.quoted.double.pebble punctuation.definition.string.end.pebble
+#                            ^ text.html.derivative meta.expression.pebble meta.parens.pebble punctuation.section.parens.end.pebble
+#                             ^ text.html.derivative meta.expression.pebble
+#                              ^^ text.html.derivative meta.expression.pebble punctuation.definition.expression.end.pebble
+></button>
+#^^ text.html.derivative meta.tag.structure.button.end.html punctuation.definition.tag.begin.html
+#  ^^^^^^ text.html.derivative meta.tag.structure.button.end.html entity.name.tag.html
+#        ^ text.html.derivative meta.tag.structure.button.end.html punctuation.definition.tag.end.html
+><form hx-put="/items/{{ item.id }}" hx-indicator="#spinner">{% include "fields.peb" %}</form>
+#^ text.html.derivative meta.tag.structure.form.start.html punctuation.definition.tag.begin.html
+# ^^^^ text.html.derivative meta.tag.structure.form.start.html entity.name.tag.html
+#     ^ text.html.derivative meta.tag.structure.form.start.html
+#      ^^^^^^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html entity.other.attribute-name.html
+#            ^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html punctuation.separator.key-value.html
+#             ^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html string.quoted.double.html punctuation.definition.string.begin.html
+#              ^^^^^^^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html string.quoted.double.html
+#                     ^^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.begin.pebble
+#                       ^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html string.quoted.double.html meta.expression.pebble
+#                        ^^^^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html string.quoted.double.html meta.expression.pebble variable.other.pebble
+#                            ^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html string.quoted.double.html meta.expression.pebble punctuation.accessor.pebble
+#                             ^^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html string.quoted.double.html meta.expression.pebble variable.other.property.pebble
+#                               ^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html string.quoted.double.html meta.expression.pebble
+#                                ^^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html string.quoted.double.html meta.expression.pebble punctuation.definition.expression.end.pebble
+#                                  ^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-put.html string.quoted.double.html punctuation.definition.string.end.html
+#                                   ^ text.html.derivative meta.tag.structure.form.start.html
+#                                    ^^^^^^^^^^^^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-indicator.html entity.other.attribute-name.html
+#                                                ^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-indicator.html punctuation.separator.key-value.html
+#                                                 ^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-indicator.html string.quoted.double.html punctuation.definition.string.begin.html
+#                                                  ^^^^^^^^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-indicator.html string.quoted.double.html
+#                                                          ^ text.html.derivative meta.tag.structure.form.start.html meta.attribute.unrecognized.hx-indicator.html string.quoted.double.html punctuation.definition.string.end.html
+#                                                           ^ text.html.derivative meta.tag.structure.form.start.html punctuation.definition.tag.end.html
+#                                                            ^^ text.html.derivative meta.tag.statement.pebble punctuation.definition.tag.begin.pebble
+#                                                              ^ text.html.derivative meta.tag.statement.pebble
+#                                                               ^^^^^^^ text.html.derivative meta.tag.statement.pebble keyword.control.pebble
+#                                                                      ^ text.html.derivative meta.tag.statement.pebble
+#                                                                       ^^^^^^^^^^^^ text.html.derivative meta.tag.statement.pebble string.quoted.double.pebble entity.name.template.pebble
+#                                                                                   ^ text.html.derivative meta.tag.statement.pebble
+#                                                                                    ^^ text.html.derivative meta.tag.statement.pebble punctuation.definition.tag.end.pebble
+#                                                                                      ^^ text.html.derivative meta.tag.structure.form.end.html punctuation.definition.tag.begin.html
+#                                                                                        ^^^^ text.html.derivative meta.tag.structure.form.end.html entity.name.tag.html
+#                                                                                            ^ text.html.derivative meta.tag.structure.form.end.html punctuation.definition.tag.end.html
+>
