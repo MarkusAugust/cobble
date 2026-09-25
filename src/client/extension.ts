@@ -32,7 +32,9 @@ function createClient(
       { scheme: "untitled", language: "pebble" },
       ...(htmlEnabled ? [{ scheme: "file", language: "html" }] : []),
     ],
-    synchronize: { fileEvents: vscode.workspace.createFileSystemWatcher("**/*.{peb,pebble,html}") },
+    synchronize: {
+      fileEvents: vscode.workspace.createFileSystemWatcher("**/*.{peb,pebble,html,java,kt}"),
+    },
     outputChannel: output,
     traceOutputChannel: output,
   }

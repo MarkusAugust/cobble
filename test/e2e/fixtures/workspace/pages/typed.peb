@@ -1,0 +1,4 @@
+<h1>{{ user.name }}</h1>
+<p>{{ user.address.city }}</p>
+{% for item in items %}{{ item }}{% endfor %}
+{{ price | money("NOK") }}

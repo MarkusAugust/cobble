@@ -3,11 +3,16 @@ import type * as ast from "../ast"
 import { scopeAt } from "../model"
 import { locate } from "./locate"
 import type { Definition } from "./types"
+import { noTypes, propertyAt, type TypeProvider, typeOfVariable } from "./typing"
 
 const contains = (r: ast.Range, offset: number) => offset >= r.start && offset <= r.end
 
 /** What the symbol at the offset refers to; the server turns this into locations. */
-export function definition(analysis: Analysis, offset: number): Definition | null {
+export function definition(
+  analysis: Analysis,
+  offset: number,
+  types: TypeProvider = noTypes,
+): Definition | null {
   const { model } = analysis
   for (const ref of model.references) {
     if (ref.literalName && contains(ref.range, offset)) {
@@ -114,6 +119,18 @@ export function definition(analysis: Analysis, offset: number): Definition | nul
         }
       }
     }
+    if (e.type === "Member" && contains(e.property.range, offset)) {
+      const prop = propertyAt(e, analysis, types)
+      if (prop?.filePath !== undefined && prop.offset !== undefined) {
+        return {
+          kind: "external",
+          name: prop.name,
+          originRange: e.property.range,
+          filePath: prop.filePath,
+          offset: prop.offset,
+        }
+      }
+    }
     if (e.type === "Variable" && contains(e.range, offset)) {
       const scope = scopeAt(analysis.ast, model, offset)
       const v = scope.variables.find((x) => x.name === e.name)
@@ -125,6 +142,16 @@ export function definition(analysis: Analysis, offset: number): Definition | nul
           originRange: e.range,
           localRange: setNode?.node.range ?? v.range,
           localSelectionRange: v.range,
+        }
+      }
+      const external = typeOfVariable(e.name, analysis, offset, types)
+      if (external?.filePath !== undefined && external.offset !== undefined) {
+        return {
+          kind: "external",
+          name: e.name,
+          originRange: e.range,
+          filePath: external.filePath,
+          offset: external.offset,
         }
       }
       return null

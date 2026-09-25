@@ -321,6 +321,24 @@
           "default": true,
           "scope": "resource",
           "markdownDescription": "Show the block name after a bare `{% endblock %}`."
+        },
+        "pebble.java.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "resource",
+          "markdownDescription": "Read Java and Kotlin sources to learn which controllers render which templates, the model attributes they add (with types), bean properties for `{{ user.` completion, and Pebble extensions (filters, functions, tests) declared in code. Supports Spring MVC (Java and Kotlin), Ktor, Javalin and plain Pebble."
+        },
+        "pebble.java.sourceRoots": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "src/main/java",
+            "src/main/kotlin"
+          ],
+          "scope": "resource",
+          "markdownDescription": "Directories, relative to each workspace folder, scanned for `.java` and `.kt` sources."
         }
       }
     },

@@ -243,3 +243,77 @@ describe("semantic tokens", () => {
     ])
   })
 })
+
+describe("typed completion and hover", () => {
+  const core = require("../../../src/core") as typeof import("../../../src/core")
+  const t = (raw: string): import("../../../src/core").TypeInfo => core.parseType(raw)
+  const props: Record<string, { name: string; type: string }[]> = {
+    User: [
+      { name: "name", type: "String" },
+      { name: "address", type: "Address" },
+      { name: "orders", type: "List<Order>" },
+    ],
+    Address: [{ name: "city", type: "String" }],
+    Order: [{ name: "total", type: "BigDecimal" }],
+  }
+  const provider: import("../../../src/core").TypeProvider = {
+    externalVariable: (name) =>
+      name === "user"
+        ? {
+            type: t("User"),
+            detail: "model attribute added in UserController.detail",
+            filePath: "/j/UserController.java",
+            offset: 10,
+          }
+        : name === "orders"
+          ? { type: t("List<Order>"), detail: "x" }
+          : undefined,
+    externalVariableNames: () => ["user", "orders"],
+    propertiesOf: (type) =>
+      (props[type.name] ?? []).map((p) => ({
+        name: p.name,
+        type: t(p.type),
+        detail: `getter in ${type.name} (${type.name}.java)`,
+        filePath: `/j/${type.name}.java`,
+        offset: 5,
+      })),
+    elementType: (type) => (["List", "Set"].includes(type.name) ? type.args[0] : undefined),
+  }
+  const labels = (src: string) => {
+    const c = cursor(src)
+    return core
+      .completions(c.analysis, c.offset, spec, { types: provider })
+      .map((i) => `${i.label}${i.detail ? `:${i.detail}` : ""}`)
+  }
+  test("external variables and nested properties", () => {
+    expect(labels("{{ §").filter((l) => l.startsWith("user") || l.startsWith("orders"))).toEqual([
+      "user:User",
+      "orders:List<Order>",
+    ])
+    expect(labels("{{ user.§")).toEqual(["name:String", "address:Address", "orders:List<Order>"])
+    expect(labels("{{ user.address.§")).toEqual(["city:String"])
+    expect(labels("{{ user.nope.§")).toEqual([])
+  })
+  test("loop variables and set variables get element and expression types", () => {
+    expect(labels("{% for o in user.orders %}{{ o.§")).toEqual(["total:BigDecimal"])
+    expect(labels("{% for o in orders | sort %}{{ o.§")).toEqual(["total:BigDecimal"])
+    expect(labels("{% set a = user.address %}{{ a.§")).toEqual(["city:String"])
+    expect(labels("{{ (user.orders | first).§")).toEqual([])
+    expect(labels("{% for o in orders %}{% endfor %}{{ o.§")).toEqual([])
+  })
+  test("typeOfExpression handles calls, subscripts and filters", () => {
+    const type = (src: string) => {
+      const c = cursor(`{{ ${src} }}§`)
+      const print = c.analysis.ast.body[0]
+      return print.type === "Print" && print.expr
+        ? core.typeOfExpression(print.expr, c.analysis, provider)?.raw
+        : undefined
+    }
+    expect(type("user.getName()")).toBe("String")
+    expect(type("user.orders[0]")).toBe("Order")
+    expect(type("user.orders | first")).toBe("Order")
+    expect(type("user.name | upper")).toBe("String")
+    expect(type("user.orders | length")).toBe("Integer")
+    expect(type("unknown")).toBeUndefined()
+  })
+})

@@ -82,3 +82,11 @@ export type Definition =
       localRange: Range
       localSelectionRange: Range
     }
+  | {
+      kind: "external"
+      name: string
+      originRange: Range
+      /** Absolute path of the Java/Kotlin source file. */
+      filePath: string
+      offset: number
+    }

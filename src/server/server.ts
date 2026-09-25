@@ -29,6 +29,7 @@ import {
   analyze,
   autoCloseTag,
   buildSpec,
+  type CustomEntry,
   completionContext,
   completionsFor,
   codeActions as coreCodeActions,
@@ -41,17 +42,20 @@ import {
   hasPebble,
   linkedEditingRanges,
   listTemplates,
+  noTypes,
   resolveTemplate,
   type Spec,
   semanticTokenModifiers,
   semanticTokens,
   semanticTokenTypes,
   type TemplateSettings,
+  type TypeProvider,
   templateCandidates,
 } from "../core"
 import { toLspCompletion, toLspDiagnostic, toLspRange, toLspSymbol } from "./convert"
 import { NodeTemplateFileSystem } from "./fs"
 import { HtmlDelegate } from "./html"
+import { JvmIndex } from "./jvm"
 import { defaultSettings, mergeSettings, type PebbleSettings } from "./settings"
 import { TemplateIndex } from "./templates"
 import { symbolAt, WorkspaceFeatures } from "./workspace-features"
@@ -61,6 +65,7 @@ const documents = new TextDocuments(TextDocument)
 const fs = new NodeTemplateFileSystem()
 const html = new HtmlDelegate()
 const index = new TemplateIndex(fs, documents)
+const jvm = new JvmIndex(fs)
 const workspaceFeatures = new WorkspaceFeatures(index)
 
 let hasConfigurationCapability = false
@@ -124,7 +129,14 @@ connection.onDidChangeConfiguration(() => {
 
 connection.onDidChangeWatchedFiles((params) => {
   fs.invalidate()
-  index.invalidate(params.changes.map((c) => filePathOf(c.uri)).filter((p): p is string => !!p))
+  const changed = params.changes.map((c) => filePathOf(c.uri)).filter((p): p is string => !!p)
+  index.invalidate(changed)
+  const sources = changed.filter((p) => p.endsWith(".java") || p.endsWith(".kt"))
+  if (sources.length > 0) {
+    jvm.invalidate(sources)
+    specCache.clear()
+    analysisCache.clear()
+  }
   for (const doc of documents.all()) scheduleValidation(doc)
 })
 
@@ -143,21 +155,29 @@ function getSettings(uri: string): Promise<PebbleSettings> {
   return cached
 }
 
-function specFor(settings: PebbleSettings): Spec {
+async function specFor(settings: PebbleSettings): Promise<Spec> {
+  const jvmExtensions = settings.java.enabled
+    ? await jvm.extensions(settings.java.sourceRoots).catch(() => undefined)
+    : undefined
   const key = JSON.stringify([
     settings.spring,
     settings.customFilters,
     settings.customFunctions,
     settings.customTests,
     settings.customTags,
+    settings.java.enabled ? jvm.version : -1,
   ])
   let spec = specCache.get(key)
   if (!spec) {
+    const merge = (declared: CustomEntry[], found: CustomEntry[] = []) => [
+      ...declared,
+      ...found.filter((f) => !declared.some((d) => d.name === f.name)),
+    ]
     spec = buildSpec({
       spring: settings.spring.enabled,
-      customFilters: settings.customFilters,
-      customFunctions: settings.customFunctions,
-      customTests: settings.customTests,
+      customFilters: merge(settings.customFilters, jvmExtensions?.filters),
+      customFunctions: merge(settings.customFunctions, jvmExtensions?.functions),
+      customTests: merge(settings.customTests, jvmExtensions?.tests),
       customTags: settings.customTags,
     })
     specCache.set(key, spec)
@@ -176,13 +196,28 @@ async function getAnalysis(
 ): Promise<{ analysis: Analysis; spec: Spec; settings: PebbleSettings } | null> {
   const settings = await getSettings(doc.uri)
   if (!isActive(doc, settings)) return null
-  const spec = specFor(settings)
+  const spec = await specFor(settings)
   const cached = analysisCache.get(doc.uri)
   if (cached && cached.version === doc.version && cached.spec === spec)
     return { ...cached, settings }
   const analysis = analyze(doc.getText(), { customTags: settings.customTags })
   analysisCache.set(doc.uri, { version: doc.version, analysis, spec })
   return { analysis, spec, settings }
+}
+
+/** Type provider from Java/Kotlin sources for the template behind a document, or an empty one. */
+async function typesFor(doc: TextDocument, settings: PebbleSettings): Promise<TypeProvider> {
+  if (!settings.java.enabled) return noTypes
+  try {
+    return await jvm.typeProvider(
+      filePathOf(doc.uri),
+      settings.java.sourceRoots,
+      templateSettings(settings),
+    )
+  } catch (err) {
+    connection.console.warn(`java index failed: ${err}`)
+    return noTypes
+  }
 }
 
 const templateSettings = (s: PebbleSettings): TemplateSettings => ({
@@ -291,10 +326,13 @@ connection.onCompletion(async (params): Promise<CompletionList | CompletionItem[
           }),
         )
       : undefined
+  const types =
+    ctx.kind === "expression" || ctx.kind === "member" ? await typesFor(doc, settings) : undefined
   const items = completionsFor(ctx, analysis, offset, spec, {
     templateNames,
     importedMacros: (n) => importedMacros.get(n),
     inheritedBlocks,
+    types,
   })
   return { isIncomplete: false, items: items.map((i) => toLspCompletion(doc, i)) }
 })
@@ -328,7 +366,10 @@ connection.onHover(async (params): Promise<LspHover | null> => {
       )
     }
   }
-  const h = coreHover(analysis, offset, spec, { resolveTemplate: (n) => resolvedRefs.get(n) })
+  const h = coreHover(analysis, offset, spec, {
+    resolveTemplate: (n) => resolvedRefs.get(n),
+    types: await typesFor(doc, settings),
+  })
   if (h) {
     let value = h.markdown
     const resolvedPath = [...resolvedRefs.values()].find((p) => p)
@@ -412,7 +453,7 @@ connection.onDefinition(async (params): Promise<LspDefinition | LocationLink[] |
   const result = await getAnalysis(doc)
   if (!result) return null
   const { analysis, settings } = result
-  const target = definition(analysis, doc.offsetAt(params.position))
+  const target = definition(analysis, doc.offsetAt(params.position), await typesFor(doc, settings))
   if (!target) return null
   const fromFile = filePathOf(doc.uri)
   const ts = templateSettings(settings)
@@ -420,6 +461,24 @@ connection.onDefinition(async (params): Promise<LspDefinition | LocationLink[] |
   const zero = { start: { line: 0, character: 0 }, end: { line: 0, character: 0 } }
 
   switch (target.kind) {
+    case "external": {
+      const text = await jvm.textOf(target.filePath)
+      if (text === null) return null
+      const other = TextDocument.create(pathToFileURL(target.filePath).toString(), "java", 0, text)
+      const position = other.positionAt(target.offset)
+      const line = {
+        start: { line: position.line, character: 0 },
+        end: { line: position.line + 1, character: 0 },
+      }
+      return [
+        {
+          originSelectionRange: origin,
+          targetUri: other.uri,
+          targetRange: line,
+          targetSelectionRange: { start: position, end: position },
+        },
+      ]
+    }
     case "template": {
       const file = await resolveTemplate(target.name, fromFile, ts, fs)
       if (!file) return null
@@ -709,7 +768,10 @@ connection.languages.semanticTokens.on(async (params) => {
   const result = await getAnalysis(doc)
   if (!result) return { data: [] }
   const builder = new SemanticTokensBuilder()
-  for (const t of semanticTokens(result.analysis, result.spec)) {
+  const provider = await typesFor(doc, result.settings)
+  for (const t of semanticTokens(result.analysis, result.spec, {
+    externalVariables: new Set(provider.externalVariableNames()),
+  })) {
     const pos = doc.positionAt(t.start)
     const typeIndex = semanticTokenTypes.indexOf(t.type)
     let modifierBits = 0

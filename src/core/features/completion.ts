@@ -11,6 +11,7 @@ import {
 } from "../spec"
 import { type CompletionContext, completionContext } from "./context"
 import type { CompletionItem } from "./types"
+import { noTypes, type TypeProvider, typeOfChain } from "./typing"
 
 export interface CompletionOptions {
   /** Template names available for `extends`/`include` completion (relative to a root). */
@@ -19,6 +20,8 @@ export interface CompletionOptions {
   importedMacros?: (templateName: string) => string[] | undefined
   /** Block names defined up the extends chain, with the template they come from. */
   inheritedBlocks?: { name: string; from: string }[]
+  /** Types from outside the template (Java model attributes and bean properties). */
+  types?: TypeProvider
 }
 
 const docOf = (e: SpecEntry) =>
@@ -105,7 +108,7 @@ export function completionsFor(
         replaceRange: ctx.replaceRange,
       }))
     case "expression":
-      return expressionCompletions(ctx, analysis, offset, spec, ctx.replaceRange)
+      return expressionCompletions(ctx, analysis, offset, spec, ctx.replaceRange, options)
   }
 }
 
@@ -166,9 +169,8 @@ function memberCompletions(
   options: CompletionOptions,
   replaceRange: CompletionItem["replaceRange"],
 ): CompletionItem[] {
-  if (base.length !== 1) return []
   const scope = scopeAt(analysis.ast, analysis.model, offset)
-  if (base[0] === "loop" && scope.inFor) {
+  if (base.length === 1 && base[0] === "loop" && scope.inFor) {
     return loopVariables.map((v) => ({
       label: v.name,
       kind: "property",
@@ -177,19 +179,33 @@ function memberCompletions(
       replaceRange,
     }))
   }
-  const alias = analysis.model.imports.find((i) => i.kind === "import" && i.alias?.name === base[0])
-  if (alias?.ref.literalName) {
-    const names = options.importedMacros?.(alias.ref.literalName) ?? []
-    return names.map((n) => ({
-      label: n,
-      kind: "macro",
-      detail: `macro from ${alias.ref.literalName}`,
-      insertText: `${n}($1)`,
-      isSnippet: true,
-      replaceRange,
-    }))
+  if (base.length === 1) {
+    const alias = analysis.model.imports.find(
+      (i) => i.kind === "import" && i.alias?.name === base[0],
+    )
+    if (alias?.ref.literalName) {
+      const names = options.importedMacros?.(alias.ref.literalName) ?? []
+      return names.map((n) => ({
+        label: n,
+        kind: "macro",
+        detail: `macro from ${alias.ref.literalName}`,
+        insertText: `${n}($1)`,
+        isSnippet: true,
+        replaceRange,
+      }))
+    }
   }
-  return []
+  const provider = options.types ?? noTypes
+  const type = typeOfChain(base, analysis, offset, provider)
+  if (!type) return []
+  return provider.propertiesOf(type).map((p) => ({
+    label: p.name,
+    kind: "property",
+    detail: p.type.raw,
+    documentation: `${p.detail}`,
+    sortText: `0_${p.name}`,
+    replaceRange,
+  }))
 }
 
 function blockNameCompletions(
@@ -238,6 +254,7 @@ function expressionCompletions(
   offset: number,
   spec: Spec,
   replaceRange: CompletionItem["replaceRange"],
+  options: CompletionOptions = {},
 ): CompletionItem[] {
   const items: CompletionItem[] = []
   if (ctx.callee && ctx.argIndex !== undefined) {
@@ -274,6 +291,20 @@ function expressionCompletions(
       sortText: `4_${g}`,
       replaceRange,
     })
+  const provider = options.types ?? noTypes
+  const local = new Set(scope.variables.map((v) => v.name))
+  for (const name of provider.externalVariableNames()) {
+    if (local.has(name)) continue
+    const ext = provider.externalVariable(name)
+    items.push({
+      label: name,
+      kind: "variable",
+      detail: ext?.type.raw,
+      documentation: ext?.detail,
+      sortText: `1_${name}`,
+      replaceRange,
+    })
+  }
   for (const m of analysis.model.macros) {
     items.push({
       label: m.name,

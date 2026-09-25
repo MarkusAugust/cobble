@@ -4,6 +4,7 @@ import { scopeAt } from "../model"
 import { loopVariables, type Spec, type SpecEntry } from "../spec"
 import { locate } from "./locate"
 import type { Hover } from "./types"
+import { noTypes, propertyAt, type TypeProvider, typeOfVariable } from "./typing"
 
 const contains = (r: ast.Range, offset: number) => offset >= r.start && offset <= r.end
 const fence = (code: string) => `\`\`\`pebble\n${code}\n\`\`\``
@@ -15,6 +16,8 @@ const entryHover = (e: SpecEntry, range: ast.Range): Hover => ({
 export interface HoverOptions {
   /** Resolved path for a template reference: string = found, null = not found, undefined = unknown. */
   resolveTemplate?: (name: string) => string | null | undefined
+  /** Types from outside the template (Java/Kotlin). */
+  types?: TypeProvider
 }
 
 const VARIABLE_ORIGIN: Record<string, string> = {
@@ -37,6 +40,7 @@ export function hover(
   const located = locate(analysis.ast, offset)
   const node = located.node
   if (!node) return null
+  const types = options.types ?? noTypes
 
   const statementHover =
     node.type === "Print" || node.type === "Text" || node.type === "Comment"
@@ -77,26 +81,37 @@ export function hover(
         ? entryHover(s, e.name.range)
         : { markdown: `Test \`${e.name.name}\` (not built in)`, range: e.name.range }
     }
-    if (
-      e.type === "Member" &&
-      contains(e.property.range, offset) &&
-      e.object.type === "Variable" &&
-      e.object.name === "loop"
-    ) {
-      const v = loopVariables.find((l) => l.name === e.property.name)
-      if (v) return { markdown: `\`loop.${v.name}\`\n\n${v.doc}`, range: e.property.range }
+    if (e.type === "Member" && contains(e.property.range, offset)) {
+      if (e.object.type === "Variable" && e.object.name === "loop") {
+        const v = loopVariables.find((l) => l.name === e.property.name)
+        if (v) return { markdown: `\`loop.${v.name}\`\n\n${v.doc}`, range: e.property.range }
+      }
+      const prop = propertyAt(e, analysis, types)
+      if (prop)
+        return {
+          markdown: `${fence(`${prop.type.raw} ${prop.name}`)}\n\n${prop.detail}`,
+          range: e.property.range,
+        }
     }
     if (e.type === "Variable" && contains(e.range, offset)) {
       const scope = scopeAt(analysis.ast, analysis.model, offset)
       const v = scope.variables.find((x) => x.name === e.name)
+      const typed = typeOfVariable(e.name, analysis, offset, types)
       if (v) {
         const line = v.range ? lineOf(analysis.text, v.range.start) : undefined
         const origin = VARIABLE_ORIGIN[v.kind] ?? "Variable"
+        const head = typed ? `${fence(`${typed.type.raw} ${e.name}`)}\n\n` : `\`${e.name}\`\n\n`
+        const where = line !== undefined ? ` (line ${line})` : ""
         return {
-          markdown: `\`${e.name}\`\n\n${origin}${line !== undefined ? ` (line ${line})` : ""}${v.detail ? `\n\n${v.detail}` : ""}`,
+          markdown: `${head}${origin}${where}${v.detail ? `\n\n${v.detail}` : ""}`,
           range: e.range,
         }
       }
+      if (typed)
+        return {
+          markdown: `${fence(`${typed.type.raw} ${e.name}`)}\n\n${typed.detail}`,
+          range: e.range,
+        }
       if (spec.globalVariables.includes(e.name))
         return { markdown: `\`${e.name}\`\n\nProvided by the Spring extension.`, range: e.range }
       if (e.name === "loop")

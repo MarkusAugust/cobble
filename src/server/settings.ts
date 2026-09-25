@@ -19,6 +19,7 @@ export interface PebbleSettings {
   html: { enabled: boolean; delegate: boolean }
   codeLens: { enabled: boolean }
   inlayHints: { enabled: boolean }
+  java: { enabled: boolean; sourceRoots: string[] }
 }
 
 export const defaultSettings: PebbleSettings = {
@@ -44,6 +45,7 @@ export const defaultSettings: PebbleSettings = {
   html: { enabled: true, delegate: true },
   codeLens: { enabled: true },
   inlayHints: { enabled: true },
+  java: { enabled: true, sourceRoots: ["src/main/java", "src/main/kotlin"] },
 }
 
 /** Deep-merges a partial configuration object over the defaults. */
@@ -57,6 +59,13 @@ export function mergeSettings(partial: unknown): PebbleSettings {
     html: { ...defaultSettings.html, ...(p.html ?? {}) },
     codeLens: { ...defaultSettings.codeLens, ...(p.codeLens ?? {}) },
     inlayHints: { ...defaultSettings.inlayHints, ...(p.inlayHints ?? {}) },
+    java: {
+      ...defaultSettings.java,
+      ...(p.java ?? {}),
+      sourceRoots: Array.isArray(p.java?.sourceRoots)
+        ? p.java.sourceRoots
+        : defaultSettings.java.sourceRoots,
+    },
     templateRoots: Array.isArray(p.templateRoots) ? p.templateRoots : defaultSettings.templateRoots,
     templateSuffixes: Array.isArray(p.templateSuffixes)
       ? p.templateSuffixes
