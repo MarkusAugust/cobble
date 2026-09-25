@@ -10,6 +10,7 @@ const shared: esbuild.BuildOptions = {
   format: "cjs",
   target: "node20",
   external: ["vscode"],
+  mainFields: ["module", "main"],
   sourcemap: !production,
   minify: production,
   logLevel: "info",

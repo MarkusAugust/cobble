@@ -246,3 +246,60 @@ function expressionContext(
 }
 
 export { currentWord }
+
+export interface ActiveCall {
+  callee: string
+  calleeKind: "filter" | "function"
+  /** Zero-based index of the argument the offset is in, counting commas at depth 0. */
+  argIndex: number
+  /** Name of the named argument being written, when the offset is inside `name=…`. */
+  namedArg?: string
+}
+
+/**
+ * Token-based detection of the innermost unclosed call at the offset. Works while the user is
+ * still typing, when the AST has no complete call node yet.
+ */
+export function activeCallAt(analysis: Analysis, offset: number): ActiveCall | null {
+  const region = regionTokensAt(analysis.tokens, offset)
+  if (!region) return null
+  const before = region.tokens.filter((t) => t.end <= offset)
+  let depth = 0
+  for (let i = before.length - 1; i >= 0; i--) {
+    const t = before[i]
+    if (t.kind !== "punctuation") continue
+    if (t.value === ")" || t.value === "]" || t.value === "}") depth++
+    else if (t.value === "(" || t.value === "[" || t.value === "{") {
+      if (depth > 0) {
+        depth--
+        continue
+      }
+      if (t.value !== "(") return null
+      const callee = before[i - 1]
+      if (callee?.kind !== "name") return null
+      const pipe = before[i - 2]
+      const calleeKind = pipe?.kind === "operator" && pipe.value === "|" ? "filter" : "function"
+      let argIndex = 0
+      let d = 0
+      let lastCommaIndex = i
+      for (let j = i + 1; j < before.length; j++) {
+        const u = before[j]
+        if (u.kind !== "punctuation") continue
+        if (u.value === "(" || u.value === "[" || u.value === "{") d++
+        else if (u.value === ")" || u.value === "]" || u.value === "}") d--
+        else if (u.value === "," && d === 0) {
+          argIndex++
+          lastCommaIndex = j
+        }
+      }
+      const first = before[lastCommaIndex + 1]
+      const second = before[lastCommaIndex + 2]
+      const namedArg =
+        first?.kind === "name" && second?.kind === "punctuation" && second.value === "="
+          ? first.value
+          : undefined
+      return { callee: callee.value, calleeKind, argIndex, namedArg }
+    }
+  }
+  return null
+}

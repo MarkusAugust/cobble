@@ -1,6 +1,7 @@
 import type { Analysis } from "../analysis"
 import type * as ast from "../ast"
 import type { Spec, SpecEntry } from "../spec"
+import { activeCallAt } from "./context"
 import { locate } from "./locate"
 import type { SignatureInfo } from "./types"
 
@@ -89,5 +90,43 @@ export function signatureHelp(
       }
     }
   }
-  return null
+  return fallback(analysis, offset, spec)
+}
+
+/** Used while a call is still being typed and the parser has no complete node for it. */
+function fallback(analysis: Analysis, offset: number, spec: Spec): SignatureInfo | null {
+  const call = activeCallAt(analysis, offset)
+  if (!call) return null
+  let entry: SpecEntry | undefined
+  if (call.calleeKind === "filter") entry = spec.filters.get(call.callee)
+  else {
+    entry = spec.functions.get(call.callee)
+    if (!entry) {
+      const macro = analysis.model.macros.find((m) => m.name === call.callee)
+      if (macro) {
+        entry = {
+          name: macro.name,
+          kind: "function",
+          signature: `${macro.name}(${macro.params.join(", ")})`,
+          params: macro.params.map((p) => ({ name: p })),
+          doc: "Macro defined in this template.",
+          source: "custom",
+        }
+      }
+    }
+  }
+  if (!entry) return null
+  let active = call.argIndex
+  if (call.namedArg) {
+    const idx = entry.params.findIndex((p) => p.name === call.namedArg)
+    if (idx >= 0) active = idx
+  }
+  const variadicIndex = entry.params.findIndex((p) => p.variadic)
+  if (variadicIndex >= 0 && active > variadicIndex) active = variadicIndex
+  return {
+    label: entry.signature,
+    documentation: entry.doc,
+    parameters: entry.params.map((p) => ({ label: p.name, documentation: p.doc })),
+    activeParameter: Math.min(active, Math.max(entry.params.length - 1, 0)),
+  }
 }

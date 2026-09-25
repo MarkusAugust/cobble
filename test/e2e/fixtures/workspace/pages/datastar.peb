@@ -1,0 +1,3 @@
+<div data-signals="{count: {{ initial }}}" data-text="$count" data-on:click="$">
+  {% if user %}{{ user.name }}{% endif %}
+</div>

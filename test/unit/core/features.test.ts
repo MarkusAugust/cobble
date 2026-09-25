@@ -275,6 +275,21 @@ describe("signature help", () => {
     })
     expect(sig("{% filter date(§) %}x{% endfilter %}")).toMatchObject({ activeParameter: 0 })
   })
+  test("works while the call is still being typed", () => {
+    expect(sig('{{ d | date("y", §')).toMatchObject({
+      label: "date(format, existingFormat?, timeZone?)",
+      activeParameter: 1,
+    })
+    expect(sig("{{ max(1, §")).toMatchObject({ activeParameter: 0 })
+    expect(sig('{{ d | date("y", timeZone=§')).toMatchObject({ activeParameter: 2 })
+    expect(sig("{% macro m(a, b) %}{% endmacro %}{{ m(1, §")).toMatchObject({
+      label: "m(a, b)",
+      activeParameter: 1,
+    })
+    expect(sig("{{ nope(§")).toBeNull()
+    expect(sig("{{ a + §")).toBeNull()
+    expect(sig("<p>(§")).toBeNull()
+  })
 })
 
 describe("symbols and folding", () => {

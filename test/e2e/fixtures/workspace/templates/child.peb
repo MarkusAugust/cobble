@@ -1,0 +1,12 @@
+{% extends "base.peb" %}
+{% import "macros.peb" as forms %}
+{% from "macros.peb" import input as field %}
+{% block title %}Child{% endblock %}
+{% block content %}
+  {% for item in items %}
+    <li>{{ loop.index }}: {{ item.name | upper }}</li>
+  {% endfor %}
+  {{ forms.input("text", "name") }}
+  {{ field("x", "y") }}
+  {{ parent() }}
+{% endblock content %}

@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html>
+<head><title>{% block title %}Base{% endblock %}</title></head>
+<body>
+{% block content %}{% endblock %}
+{% block footer %}<footer>{{ year }}</footer>{% endblock footer %}
+</body>
+</html>

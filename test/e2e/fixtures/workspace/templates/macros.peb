@@ -1,0 +1,2 @@
+{% macro input(type, name) %}<input type="{{ type }}" name="{{ name }}">{% endmacro %}
+{% macro textarea(name) %}<textarea name="{{ name }}"></textarea>{% endmacro %}

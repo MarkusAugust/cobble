@@ -14,7 +14,8 @@
       "!test/grammar/vendor",
       "!**/*.snap",
       "!test/grammar/fixtures/**",
-      "!test/grammar/spec/**"
+      "!test/grammar/spec/**",
+      "!test/e2e/fixtures/**"
     ]
   },
   "formatter": {
