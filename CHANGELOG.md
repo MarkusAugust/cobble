@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Dedicated `pebble` language for `.peb` and `.pebble` files, built on the HTML grammar.
+- Language server skeleton (`vscode-languageserver`) started by the extension.
+- Grammar snapshot tests that load the real HTML grammar and the Datastar injection grammar.
+
+### Changed
+- Ground-up rewrite. The project now lives at https://github.com/MarkusAugust/cobble.
+- Build with esbuild; bun is used for scripts and unit tests.
+- Minimum VS Code version is 1.91.
+
+### Removed
+- The previous in-process completion provider. IntelliSense returns via the language server.
+
+## Earlier versions
+
+Versions up to 0.3.3 were developed at https://github.com/MarkusAugust/pebble-vscode.
+
 ## [0.3.3] - 2025-11-26
 
 ### Fixed

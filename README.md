@@ -12,7 +12,30 @@ This repository is a ground-up rewrite; history before 1.0.0 lives in
 
 ## Status
 
-Under construction. See CHANGELOG.md.
+Under construction: the 1.0 rewrite is in progress and is not published yet. See CHANGELOG.md.
+
+## File types
+
+| Where | How |
+|---|---|
+| `.html` files | Pebble syntax is injected into the built-in HTML language. HTML tooling, Datastar and HTMX extensions keep working as before. |
+| `.peb` and `.pebble` files | A dedicated `pebble` language built on top of HTML. |
+
+## Development
+
+Requires [bun](https://bun.sh) and VS Code 1.91 or later.
+
+```
+bun install          # install dependencies
+bun run build        # bundle client and server into dist/
+bun run watch        # rebuild on change
+bun run check        # lint, typecheck, unit tests and grammar snapshot tests
+bun run test:grammar:update   # regenerate grammar snapshots after a grammar change
+bun run package      # build a .vsix
+```
+
+Press `F5` in VS Code to launch an Extension Development Host with the extension loaded.
+Use “Developer: Inspect Editor Tokens and Scopes” to check highlighting.
 
 ## License
 
