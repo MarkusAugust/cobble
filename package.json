@@ -2,7 +2,7 @@
   "name": "pebble-support",
   "displayName": "Cobble – Pebble Templates",
   "description": "Cobble: Pebble Templates language support with highlighting, IntelliSense, diagnostics, navigation and Java/Kotlin awareness. Plays nicely with Datastar and HTMX.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "BSD-3-Clause",
   "publisher": "MarkusAugust",
   "author": {
