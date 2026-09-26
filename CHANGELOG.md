@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-09-26
+
+### Changed
+- Marketplace display name is now "Cobble – Pebble Templates". The extension ID is unchanged.
+
 ## [1.0.0] - 2026-09-26
 
 Ground-up rewrite as a language server. The project now lives at https://github.com/MarkusAugust/cobble.

@@ -1,4 +1,4 @@
-# Pebble Template Support for VS Code
+# Cobble – Pebble Templates for VS Code
 
 *"What is best in template coding? To crush your syntax errors, see them driven before you, and to hear the lamentations of the improperly closed Pebble tags!"*
 
