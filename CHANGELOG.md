@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- A Pebble filter, function or test registered in an extension's `getFilters()`, `getFunctions()`
+  or `getTests()` is no longer also listed under a name derived from its class name when its
+  source file is read before the extension's.
+
 ## [1.0.1] - 2026-09-26
 
 ### Changed

@@ -128,7 +128,10 @@ export class JavaModel {
         this.collectController(synthetic)
       }
     }
-    for (const f of files) for (const c of f.classes) this.collectExtensions(c)
+    // Registrations first, so an implementation parsed before its extension is not also
+    // listed under a name derived from its class name.
+    for (const f of files) for (const c of f.classes) this.collectRegistrations(c)
+    for (const f of files) for (const c of f.classes) this.collectImplementation(c)
   }
 
   classNamed(name: string): JavaClass | undefined {
@@ -683,18 +686,8 @@ export class JavaModel {
 
   // ----- Pebble extensions -----
 
-  private collectExtensions(cls: JavaClass) {
-    const implementsAny = (names: string[]) =>
-      cls.interfaces.some((i) => names.includes(i.name)) ||
-      (cls.superclass && names.includes(cls.superclass.name))
-    const kind: JavaExtensionEntry["kind"] | undefined = implementsAny(["Filter"])
-      ? "filter"
-      : implementsAny(["Function"])
-        ? "function"
-        : implementsAny(["Test"])
-          ? "test"
-          : undefined
-    // Registrations in extensions: filters.put("name", new NameFilter())
+  // Registrations in extensions: filters.put("name", new NameFilter())
+  private collectRegistrations(cls: JavaClass) {
     const registrations = new Map<
       string,
       { kind: JavaExtensionEntry["kind"]; name: string; className: string; offset: number }
@@ -750,6 +743,19 @@ export class JavaModel {
         offset: impl?.nameOffset ?? reg.offset,
       })
     }
+  }
+
+  private collectImplementation(cls: JavaClass) {
+    const implementsAny = (names: string[]) =>
+      cls.interfaces.some((i) => names.includes(i.name)) ||
+      (cls.superclass && names.includes(cls.superclass.name))
+    const kind: JavaExtensionEntry["kind"] | undefined = implementsAny(["Filter"])
+      ? "filter"
+      : implementsAny(["Function"])
+        ? "function"
+        : implementsAny(["Test"])
+          ? "test"
+          : undefined
     if (kind && !this.extensions.some((e) => e.className === cls.name)) {
       // Unregistered implementation: derive the name from the class name (MoneyFilter -> money)
       const derived = lowerFirst(cls.name.replace(/(Filter|Function|Test)$/, ""))

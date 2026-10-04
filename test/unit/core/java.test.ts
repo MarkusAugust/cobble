@@ -134,4 +134,28 @@ describe("java model", () => {
       "test:adult()@AdultTest",
     ])
   })
+
+  test("a registered implementation is listed once, whatever the file order", () => {
+    const impl = parseJava(
+      `package x;
+public class MoneyFilter implements Filter {
+    public List<String> getArgumentNames() { return List.of("currency"); }
+}`,
+      "/src/x/MoneyFilter.java",
+    )
+    const extension = parseJava(
+      `package x;
+public class ShopExtension extends AbstractExtension {
+    public Map<String, Filter> getFilters() { return Map.of("price", new MoneyFilter()); }
+}`,
+      "/src/x/ShopExtension.java",
+    )
+    for (const order of [
+      [impl, extension],
+      [extension, impl],
+    ]) {
+      const ext = new JavaModel(order).extensions.map((e) => `${e.kind}:${e.name}@${e.className}`)
+      expect(ext).toEqual(["filter:price@MoneyFilter"])
+    }
+  })
 })
