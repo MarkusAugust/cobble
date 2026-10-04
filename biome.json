@@ -10,6 +10,7 @@
       "src/**",
       "test/**",
       "scripts/**",
+      "site/scripts/**",
       "*.json",
       "!test/grammar/vendor",
       "!**/*.snap",

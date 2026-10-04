@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cobble – Pebble Templates for VS Code</title>
+    <meta
+      name="description"
+      content="Pebble template support for VS Code: highlighting, IntelliSense, diagnostics, navigation and Java/Kotlin awareness. Plays nicely with Datastar and HTMX."
+    />
+    <meta property="og:title" content="Cobble – Pebble Templates for VS Code" />
+    <meta
+      property="og:description"
+      content="Pebble template support for VS Code, built to coexist with Datastar and HTMX."
+    />
+    <meta property="og:image" content="https://cobble.sobernetics.no/screenshot.png" />
+    <meta property="og:url" content="https://cobble.sobernetics.no/" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="fristil.css" />
+    <link rel="stylesheet" href="site.css" />
+  </head>
+  <body>
+    <header class="street">
+      <div class="plaque">
+        <h1 class="fs-heading" data-size="mega">Cobble</h1>
+        <p class="fs-paragraph" data-variant="lead">Pebble Templates for VS Code</p>
+        <blockquote class="quote">
+          <p class="fs-paragraph">
+            “What is best in template coding? To crush your syntax errors, see them driven
+            before you, and to hear the lamentations of the improperly closed Pebble tags!”
+          </p>
+        </blockquote>
+        <div class="actions">
+          <a
+            class="fs-button"
+            href="https://marketplace.visualstudio.com/items?itemName=MarkusAugust.pebble-support"
+            >Install from the Marketplace</a
+          >
+          <a class="fs-button" data-variant="secondary" href="https://github.com/MarkusAugust/cobble"
+            >Source on GitHub</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section" aria-labelledby="see-it">
+        <h2 class="fs-heading" data-size="xl" id="see-it">Every stone in place</h2>
+        <p class="fs-paragraph">
+          Language support for <a class="fs-link" href="https://pebbletemplates.io">Pebble</a> 4.x,
+          in <code>.html</code> files and in <code>.peb</code> and <code>.pebble</code> files. A
+          language server does the work, so it stays responsive in large templates.
+        </p>
+        <figure class="demo">
+          <picture>
+            <source srcset="screenshot.png" media="(prefers-reduced-motion: reduce)" />
+            <img
+              src="demo.gif"
+              width="1000"
+              height="607"
+              alt="Typing in a Pebble template: completion of a model attribute's properties, a custom filter found in the Java sources, an error for an unclosed for loop, an end tag inserted automatically, and a jump into the Kotlin controller."
+            />
+          </picture>
+        </figure>
+      </section>
+
+      <div class="course" aria-hidden="true"></div>
+
+      <section class="section" aria-labelledby="features">
+        <h2 class="fs-heading" data-size="xl" id="features">What it lays down</h2>
+        <div class="cards">
+          <article class="fs-card">
+            <h3 class="fs-card__title">Highlighting</h3>
+            <p class="fs-paragraph">
+              The complete Pebble 4.1 syntax: interpolation, whitespace control,
+              <code>verbatim</code>, and every built-in tag, filter, function and test. Pebble
+              inside attribute values is highlighted too.
+            </p>
+          </article>
+          <article class="fs-card">
+            <h3 class="fs-card__title">IntelliSense</h3>
+            <p class="fs-paragraph">
+              Tags with the matching end tag first, filters, functions, tests, variables in
+              scope, macros, block names and template names. Hover documentation and signature
+              help for everything built in.
+            </p>
+          </article>
+          <article class="fs-card">
+            <h3 class="fs-card__title">Diagnostics and quick fixes</h3>
+            <p class="fs-paragraph">
+              Unclosed delimiters and tags, mismatched end tags, syntax errors, unknown filters
+              and missing templates, with fixes to insert the end tag or create the template.
+            </p>
+          </article>
+          <article class="fs-card">
+            <h3 class="fs-card__title">Navigation</h3>
+            <p class="fs-paragraph">
+              Go to definition, find references and rename across the whole
+              <code>extends</code> hierarchy. CodeLens shows which templates extend a layout and
+              where each block is overridden.
+            </p>
+          </article>
+          <article class="fs-card">
+            <h3 class="fs-card__title">Java and Kotlin awareness</h3>
+            <p class="fs-paragraph">
+              Reads your Spring, Ktor and Javalin code to learn what each template receives:
+              typed completion for model attributes and bean properties, and the filters,
+              functions and tests your extensions register.
+            </p>
+          </article>
+          <article class="fs-card">
+            <h3 class="fs-card__title">Datastar and HTMX</h3>
+            <p class="fs-paragraph">
+              No completions or diagnostics outside Pebble syntax, so the
+              <a class="fs-link" href="https://data-star.dev">Datastar</a> extension and HTMX
+              tooling keep working as before. In <code>.peb</code> files, Cobble brings the
+              Datastar highlighting along.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <div class="course" aria-hidden="true"></div>
+
+      <section class="section" aria-labelledby="install">
+        <h2 class="fs-heading" data-size="xl" id="install">Lay the first stone</h2>
+        <p class="fs-paragraph">From the command line, or search for Cobble in the Extensions view:</p>
+        <pre class="install"><code>code --install-extension MarkusAugust.pebble-support</code></pre>
+        <p class="fs-paragraph">
+          Settings, snippets and the full list of what Cobble reads from your Java and Kotlin code
+          are in the
+          <a class="fs-link" href="https://github.com/MarkusAugust/cobble#readme">README</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="fs-paragraph" data-size="small">
+        Cobble is free software under the
+        <a class="fs-link" href="https://github.com/MarkusAugust/cobble/blob/master/LICENSE.md"
+          >BSD-3-Clause</a
+        >
+        license.
+      </p>
+      <a class="sobernetics" href="https://sobernetics.no"><!-- sobernetics --></a>
+    </footer>
+  </body>
+</html>

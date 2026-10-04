@@ -1,0 +1,15 @@
+# The page on cobble.sobernetics.no. Its own Netlify project, with this folder as the base
+# directory, building from master like the extension's CI but independently of it: the
+# extension is released by pushing a v* tag, the page by pushing a change to it.
+
+[build]
+  command = "bun install && bun run build"
+  publish = "dist"
+  # Skip the build when nothing the page is made of has changed, so a commit that only touches
+  # the extension does not redeploy the page. The paths are relative to this folder. A first
+  # build has nothing cached to compare with, and then the two refs are equal: build anyway.
+  ignore = "test \"$CACHED_COMMIT_REF\" != \"$COMMIT_REF\" && git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ../docs/screenshot.png ../docs/demo.gif"
+
+# Bun is preinstalled in the build image; pin the version the lockfile was written by.
+[build.environment]
+  BUN_VERSION = "1.3.14"

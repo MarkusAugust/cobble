@@ -1,0 +1,13 @@
+{
+  "name": "cobble-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bun scripts/build.ts",
+    "tema": "bunx @fristil/designsystem tema fristil.tema.json --ut=styles/theme.css",
+    "sjekk": "bunx @fristil/designsystem sjekk dist/index.html"
+  },
+  "dependencies": {
+    "@fristil/designsystem": "0.28.0"
+  }
+}

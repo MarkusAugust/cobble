@@ -1,0 +1,15 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "cobble-site",
+      "dependencies": {
+        "@fristil/designsystem": "0.28.0",
+      },
+    },
+  },
+  "packages": {
+    "@fristil/designsystem": ["@fristil/designsystem@0.28.0", "", { "bin": { "fristil": "dist/cli.js" } }, "sha512-4rS3mgiLCcbMgOwyjotLJg5wOvFNtI1+H4oYsw5STyMMeJKDf1QcmLbH1zR36slbL2P4UxIrwP6har7t+Fh/QA=="],
+  }
+}
