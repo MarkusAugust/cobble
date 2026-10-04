@@ -204,3 +204,12 @@ Version 1.0 is a ground-up rewrite.
 
 BSD-3-Clause. The bundled Datastar grammar is MIT-licensed; see
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+---
+
+<a href="https://sobernetics.no">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/MarkusAugust/cobble/raw/HEAD/.github/sobernetics-dark.png">
+    <img alt="Søbernetics" src=".github/sobernetics-light.png" height="18">
+  </picture>
+</a>
