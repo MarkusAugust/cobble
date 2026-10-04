@@ -1,0 +1,233 @@
+/*
+ * The page's own layer. Everything Fristil ships sits in @layer fristil, so anything here wins
+ * without !important. Colours and spacing come from the theme's tokens; the street picks which
+ * of them are stone and which is mortar.
+ */
+
+:root {
+  --font-text: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-carved: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-code: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --measure: 64rem;
+  --radius-stone: var(--fs-spacing-3);
+
+  /* Pale granite and sandstone with dark joints in the light theme... */
+  --stone-1: var(--fs-color-brand1-border-subtle);
+  --stone-2: var(--fs-color-neutral-border-subtle);
+  --stone-3: var(--fs-color-brand2-border-subtle);
+  --stone-4: var(--fs-color-brand3-border-subtle);
+  --mortar: var(--fs-color-neutral-border);
+}
+
+/* ...and dark stones in near-black joints in the dark one. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --mortar: var(--fs-color-neutral-canvas);
+  }
+}
+
+[data-theme="dark"] {
+  --mortar: var(--fs-color-neutral-canvas);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light dark;
+  -webkit-text-size-adjust: 100%;
+  background: var(--fs-color-neutral-canvas);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-text);
+  color: var(--fs-color-neutral-text-strong);
+}
+
+code,
+pre {
+  font-family: var(--font-code);
+}
+
+:not(pre) > code {
+  padding: 0 var(--fs-spacing-1);
+  border-radius: var(--fs-spacing-1);
+  background: var(--fs-color-neutral-surface);
+  font-size: 0.9em;
+}
+
+/* The street: a field of stones with a plaque set into it. */
+
+.street {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-block-size: min(36rem, 90vh);
+  padding: var(--fs-spacing-16) var(--fs-spacing-4);
+  background: var(--mortar);
+  overflow: hidden;
+}
+
+.street > .cobbles {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.plaque {
+  position: relative;
+  max-inline-size: 40rem;
+  padding: var(--fs-spacing-8) var(--fs-spacing-8) var(--fs-spacing-7);
+  border: var(--fs-spacing-px) solid var(--fs-color-neutral-border);
+  border-radius: var(--radius-stone);
+  background: var(--fs-color-neutral-canvas);
+  box-shadow: var(--fs-shadow-overlay);
+  text-align: center;
+}
+
+.plaque h1 {
+  margin: 0;
+  font-family: var(--font-carved);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+}
+
+.plaque > .fs-paragraph {
+  margin-block: var(--fs-spacing-2) 0;
+}
+
+.quote {
+  margin: var(--fs-spacing-6) 0 0;
+  padding: 0;
+}
+
+.quote .fs-paragraph {
+  margin: 0;
+  font-family: var(--font-carved);
+  font-style: italic;
+  color: var(--fs-color-neutral-text-subtle);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--fs-spacing-3);
+  margin-block-start: var(--fs-spacing-7);
+}
+
+/* A single course of stones between sections. */
+
+.course {
+  display: block;
+  block-size: var(--fs-spacing-10);
+  background: var(--mortar);
+}
+
+.course > .cobbles {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* Content */
+
+.section {
+  max-inline-size: var(--measure);
+  margin-inline: auto;
+  padding: var(--fs-spacing-12) var(--fs-spacing-4);
+}
+
+.section > .fs-heading {
+  margin-block: 0 var(--fs-spacing-4);
+  font-family: var(--font-carved);
+}
+
+.section > .fs-paragraph {
+  max-inline-size: 44rem;
+}
+
+.demo {
+  margin: var(--fs-spacing-8) 0 0;
+}
+
+.demo img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  border: var(--fs-spacing-px) solid var(--fs-color-neutral-border-subtle);
+  border-radius: var(--radius-stone);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: var(--fs-spacing-4);
+}
+
+.cards .fs-card {
+  border-radius: var(--radius-stone);
+}
+
+.cards .fs-paragraph {
+  margin-block-end: 0;
+}
+
+.install {
+  margin: var(--fs-spacing-4) 0;
+  padding: var(--fs-spacing-4);
+  overflow-x: auto;
+  border: var(--fs-spacing-px) solid var(--fs-color-neutral-border-subtle);
+  border-radius: var(--radius-stone);
+  background: var(--fs-color-neutral-surface);
+}
+
+/* Footer */
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fs-spacing-4);
+  max-inline-size: var(--measure);
+  margin-inline: auto;
+  padding: var(--fs-spacing-8) var(--fs-spacing-4) var(--fs-spacing-10);
+  border-block-start: var(--fs-spacing-px) solid var(--fs-color-neutral-border-subtle);
+}
+
+.footer .fs-paragraph {
+  margin: 0;
+}
+
+/* The mark's red is Søbernetics' own, not the theme's, so it is the one colour written out. */
+.sobernetics {
+  --sobernetics-accent: #c8102e;
+  color: var(--fs-color-neutral-text-subtle);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .sobernetics {
+    --sobernetics-accent: #f44851;
+  }
+}
+
+[data-theme="dark"] .sobernetics {
+  --sobernetics-accent: #f44851;
+}
+
+.sobernetics:hover,
+.sobernetics:focus-visible {
+  color: var(--fs-color-neutral-text-strong);
+}
+
+.sobernetics svg {
+  display: block;
+  block-size: 1.125rem;
+  inline-size: auto;
+}
