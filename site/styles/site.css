@@ -17,17 +17,31 @@
   --stone-3: var(--fs-color-brand2-border-subtle);
   --stone-4: var(--fs-color-brand3-border-subtle);
   --mortar: var(--fs-color-neutral-border);
+
+  /* The street behind the plaque: one photograph per theme, a smaller one on narrow screens. */
+  --street-light: url("street-light-2400.webp");
+  --street-dark: url("street-dark-2400.webp");
+  --street: var(--street-light);
+}
+
+@media (max-width: 50rem) {
+  :root {
+    --street-light: url("street-light-1200.webp");
+    --street-dark: url("street-dark-1200.webp");
+  }
 }
 
 /* ...and dark stones in near-black joints in the dark one. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --mortar: var(--fs-color-neutral-canvas);
+    --street: var(--street-dark);
   }
 }
 
 [data-theme="dark"] {
   --mortar: var(--fs-color-neutral-canvas);
+  --street: var(--street-dark);
 }
 
 *,
@@ -60,7 +74,7 @@ pre {
   font-size: 0.9em;
 }
 
-/* The street: a field of stones with a plaque set into it. */
+/* The street: a photograph of stones with a plaque set into it. */
 
 .street {
   position: relative;
@@ -68,15 +82,7 @@ pre {
   place-items: center;
   min-block-size: min(36rem, 90vh);
   padding: var(--fs-spacing-16) var(--fs-spacing-4);
-  background: var(--mortar);
-  overflow: hidden;
-}
-
-.street > .cobbles {
-  position: absolute;
-  inset: 0;
-  inline-size: 100%;
-  block-size: 100%;
+  background: var(--mortar) var(--street) center / cover no-repeat;
 }
 
 .plaque {
@@ -121,18 +127,11 @@ pre {
   margin-block-start: var(--fs-spacing-7);
 }
 
-/* A single course of stones between sections. */
+/* A narrow band of the same street between sections, laid at a smaller scale. */
 
 .course {
-  display: block;
-  block-size: var(--fs-spacing-10);
-  background: var(--mortar);
-}
-
-.course > .cobbles {
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
+  block-size: var(--fs-spacing-12);
+  background: var(--mortar) var(--street) center / 64rem auto repeat-x;
 }
 
 /* Content */

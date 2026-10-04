@@ -3,15 +3,15 @@
  * and a copy step is the honest amount of machinery for that.
  *
  * Three things happen on the way:
- * - the cobblestones are drawn and set into the HTML, so they take their colours from the theme;
+ * - the Søbernetics mark is set into the HTML, so it takes its colour from the page;
  * - fristil.css is Fristil's flattened stylesheet followed by our generated theme;
- * - the screenshot and the recording come from ../docs, where the README uses them, so the page
- *   and the README never show different pictures.
+ * - the photographs of the street come from assets/web, and the screenshot and the recording
+ *   from ../docs, where the README uses them, so the page and the README never show different
+ *   pictures.
  */
 
-import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises"
+import { copyFile, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises"
 import { dirname, join } from "node:path"
-import { cobbles } from "./cobbles"
 
 const root = dirname(import.meta.dir)
 const dist = join(root, "dist")
@@ -20,12 +20,6 @@ const fristil = join(root, "node_modules", "@fristil", "designsystem", "dist", "
 
 const read = (path: string) => readFile(path, "utf8")
 
-const street = cobbles({ width: 1600, height: 640, course: 56, seed: 7 })
-
-let courseSeed = 100
-const course = () =>
-  `<div class="course" aria-hidden="true">${cobbles({ width: 3200, height: 40, course: 40, seed: courseSeed++ })}</div>`
-
 const sobernetics = (await read(join(root, "sobernetics.svg"))).trim()
 
 const favicon =
@@ -33,10 +27,7 @@ const favicon =
   `<path fill="#7D8288" d="M9 4Q4 4 3.5 9L3 23Q3 28 8 28.5L24 28Q29 28 29 23L28.5 9Q28 4 23 3.5Z"/>` +
   `</svg>\n`
 
-const html = (await read(join(root, "index.html")))
-  .replace("<!-- cobbles:street -->", street)
-  .replaceAll("<!-- cobbles:course -->", course)
-  .replace("<!-- sobernetics -->", sobernetics)
+const html = (await read(join(root, "index.html"))).replace("<!-- sobernetics -->", sobernetics)
 
 const css = [await read(fristil), await read(join(root, "styles", "theme.css"))].join("\n")
 
@@ -52,7 +43,7 @@ for (const [, value] of html.matchAll(/class="([^"]*)"/g)) {
 const missing = [...used].filter((name) => !css.includes(`.${name}`))
 if (missing.length > 0)
   throw new Error(`index.html uses ${missing.join(", ")}, which fristil.css lacks`)
-const leftover = html.match(/<!-- (cobbles:\w+|sobernetics) -->/)
+const leftover = html.match(/<!-- sobernetics -->/)
 if (leftover) throw new Error(`index.html still has the placeholder ${leftover[0]}`)
 
 await rm(dist, { recursive: true, force: true })
@@ -62,6 +53,9 @@ await writeFile(join(dist, "fristil.css"), css)
 await copyFile(join(root, "styles", "site.css"), join(dist, "site.css"))
 await writeFile(join(dist, "favicon.svg"), favicon)
 await copyFile(join(docs, "demo.gif"), join(dist, "demo.gif"))
+for (const name of await readdir(join(root, "assets", "web"))) {
+  await copyFile(join(root, "assets", "web", name), join(dist, name))
+}
 await copyFile(join(docs, "screenshot.png"), join(dist, "screenshot.png"))
 
 console.log(`Wrote dist/ (index.html ${Math.round(html.length / 1024)} kB)`)
