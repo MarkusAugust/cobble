@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,29 +15,34 @@
     />
     <meta property="og:image" content="https://cobble.sobernetics.no/screenshot.png" />
     <meta property="og:url" content="https://cobble.sobernetics.no/" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0e1116" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&display=swap"
+    />
     <link rel="stylesheet" href="fristil.css" />
     <link rel="stylesheet" href="site.css" />
   </head>
   <body>
     <header class="street">
-      <div class="plaque">
+      <div class="rain" aria-hidden="true"></div>
+      <div class="title">
+        <p class="eyebrow">Pebble templates for VS Code</p>
         <h1 class="fs-heading" data-size="mega">Cobble</h1>
-        <p class="fs-paragraph" data-variant="lead">Pebble Templates for VS Code</p>
-        <blockquote class="quote">
-          <p class="fs-paragraph">
-            “What is best in template coding? To crush your syntax errors, see them driven
-            before you, and to hear the lamentations of the improperly closed Pebble tags!”
-          </p>
-        </blockquote>
+        <p class="fs-paragraph" data-variant="lead">
+          Every tag closed. Every name accounted for. Nothing slips through in the dark.
+        </p>
         <div class="actions">
           <a
             class="fs-button"
             href="https://marketplace.visualstudio.com/items?itemName=MarkusAugust.pebble-support"
             >Install from the Marketplace</a
           >
-          <a class="fs-button" data-variant="secondary" href="https://github.com/MarkusAugust/cobble"
+          <a class="fs-button" data-variant="ghost" href="https://github.com/MarkusAugust/cobble"
             >Source on GitHub</a
           >
         </div>
@@ -46,6 +51,7 @@
 
     <main>
       <section class="section" aria-labelledby="see-it">
+        <p class="eyebrow">Under the lamp</p>
         <h2 class="fs-heading" data-size="xl" id="see-it">Every stone in place</h2>
         <p class="fs-paragraph">
           Language support for <a class="fs-link" href="https://pebbletemplates.io">Pebble</a> 4.x,
@@ -68,48 +74,55 @@
       <div class="course" aria-hidden="true"></div>
 
       <section class="section" aria-labelledby="features">
-        <h2 class="fs-heading" data-size="xl" id="features">What it lays down</h2>
-        <div class="cards">
-          <article class="fs-card">
+        <p class="eyebrow">Case files</p>
+        <h2 class="fs-heading" data-size="xl" id="features">What it uncovers</h2>
+        <ol class="cases">
+          <li class="fs-card">
+            <p class="case">Case 01</p>
             <h3 class="fs-card__title">Highlighting</h3>
             <p class="fs-paragraph">
               The complete Pebble 4.1 syntax: interpolation, whitespace control,
               <code>verbatim</code>, and every built-in tag, filter, function and test. Pebble
               inside attribute values is highlighted too.
             </p>
-          </article>
-          <article class="fs-card">
+          </li>
+          <li class="fs-card">
+            <p class="case">Case 02</p>
             <h3 class="fs-card__title">IntelliSense</h3>
             <p class="fs-paragraph">
               Tags with the matching end tag first, filters, functions, tests, variables in
               scope, macros, block names and template names. Hover documentation and signature
               help for everything built in.
             </p>
-          </article>
-          <article class="fs-card">
+          </li>
+          <li class="fs-card">
+            <p class="case">Case 03</p>
             <h3 class="fs-card__title">Diagnostics and quick fixes</h3>
             <p class="fs-paragraph">
               Unclosed delimiters and tags, mismatched end tags, syntax errors, unknown filters
               and missing templates, with fixes to insert the end tag or create the template.
             </p>
-          </article>
-          <article class="fs-card">
+          </li>
+          <li class="fs-card">
+            <p class="case">Case 04</p>
             <h3 class="fs-card__title">Navigation</h3>
             <p class="fs-paragraph">
               Go to definition, find references and rename across the whole
               <code>extends</code> hierarchy. CodeLens shows which templates extend a layout and
               where each block is overridden.
             </p>
-          </article>
-          <article class="fs-card">
+          </li>
+          <li class="fs-card">
+            <p class="case">Case 05</p>
             <h3 class="fs-card__title">Java and Kotlin awareness</h3>
             <p class="fs-paragraph">
               Reads your Spring, Ktor and Javalin code to learn what each template receives:
               typed completion for model attributes and bean properties, and the filters,
               functions and tests your extensions register.
             </p>
-          </article>
-          <article class="fs-card">
+          </li>
+          <li class="fs-card">
+            <p class="case">Case 06</p>
             <h3 class="fs-card__title">Datastar and HTMX</h3>
             <p class="fs-paragraph">
               No completions or diagnostics outside Pebble syntax, so the
@@ -117,16 +130,17 @@
               tooling keep working as before. In <code>.peb</code> files, Cobble brings the
               Datastar highlighting along.
             </p>
-          </article>
-        </div>
+          </li>
+        </ol>
       </section>
 
       <div class="course" aria-hidden="true"></div>
 
       <section class="section" aria-labelledby="install">
-        <h2 class="fs-heading" data-size="xl" id="install">Lay the first stone</h2>
+        <p class="eyebrow">The first stone</p>
+        <h2 class="fs-heading" data-size="xl" id="install">Bring it in</h2>
         <p class="fs-paragraph">From the command line, or search for Cobble in the Extensions view:</p>
-        <pre class="install"><code>code --install-extension MarkusAugust.pebble-support</code></pre>
+        <pre class="install"><code><span class="prompt" aria-hidden="true">$ </span>code --install-extension MarkusAugust.pebble-support</code></pre>
         <p class="fs-paragraph">
           Settings, snippets and the full list of what Cobble reads from your Java and Kotlin code
           are in the

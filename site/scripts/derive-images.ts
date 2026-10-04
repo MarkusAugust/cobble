@@ -28,26 +28,25 @@ const run = async (cmd: string[]) => {
     throw new Error(`${cmd[0]} failed: ${await new Response(p.stderr).text()}`)
 }
 
-/*
- * The street behind the plaque, in both themes. The two photographs share one layout, so the
- * stones stay put when the theme changes. 2400 pixels covers a wide screen at 1x and most at 2x
- * once the plaque hides the middle; 1200 is for phones.
- */
-for (const theme of ["light", "dark"]) {
-  for (const width of [2400, 1200]) {
-    const resized = join(tmp, `street-${theme}-${width}.jpg`)
-    await run(["sips", "-Z", String(width), join(assets, `street-${theme}.jpeg`), "--out", resized])
-    await run([
-      "cwebp",
-      "-q",
-      "70",
-      "-quiet",
-      resized,
-      "-o",
-      join(web, `street-${theme}-${width}.webp`),
-    ])
-  }
+const derive = async (original: string, name: string, width: number, quality: number) => {
+  const resized = join(tmp, `${name}.jpg`)
+  await run(["sips", "-Z", String(width), join(assets, original), "--out", resized])
+  await run(["cwebp", "-q", String(quality), "-quiet", resized, "-o", join(web, `${name}.webp`)])
 }
+
+/*
+ * The street at night behind the title. 2400 pixels covers a wide screen; 1200 is for phones,
+ * where the picture is cropped to its middle anyway. The photograph is mostly shadow, which
+ * compresses well, so the quality can stay high enough to keep the lamp's reflections clean.
+ */
+await derive("night-street.jpeg", "night-street-2400", 2400, 72)
+await derive("night-street.jpeg", "night-street-1200", 1200, 72)
+
+/*
+ * Wet stones for the bands between sections. They are laid at about 56rem wide, so 1800 pixels
+ * is sharp on a 2x screen.
+ */
+await derive("night-cobbles.jpeg", "night-cobbles-1800", 1800, 70)
 
 for (const name of (await Array.fromAsync(new Bun.Glob("*.webp").scan(web))).sort()) {
   const size = (await Bun.file(join(web, name)).arrayBuffer()).byteLength
