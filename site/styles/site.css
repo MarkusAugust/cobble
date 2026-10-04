@@ -94,7 +94,6 @@ pre {
 .street {
   position: relative;
   display: grid;
-  grid-template-rows: 1fr auto;
   min-block-size: 100svh;
   padding: var(--fs-spacing-16) var(--fs-spacing-4) var(--fs-spacing-8);
   overflow: hidden;
@@ -152,19 +151,6 @@ pre {
   box-shadow: inset 0 0 0 var(--fs-spacing-px) var(--fs-color-neutral-border);
 }
 
-.quote {
-  justify-self: center;
-  max-inline-size: 36rem;
-  margin: var(--fs-spacing-10) 0 0;
-  padding: 0;
-  text-align: center;
-}
-
-.quote .fs-paragraph {
-  margin: 0;
-  font-style: italic;
-  color: var(--fs-color-neutral-text-subtle);
-}
 
 /* Rain: two sheets of fine streaks falling at slightly different angles and speeds. */
 
