@@ -11,3 +11,6 @@ coverage
 # local tooling state
 .claude
 CLAUDE.local.md
+
+# Generated originals for the page; only the derived images in site/assets/web are committed
+site/assets/*.jpeg

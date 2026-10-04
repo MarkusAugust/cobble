@@ -1,6 +1,9 @@
 /*
  * Derives what the page ships from the generated photographs in assets/.
  *
+ * The originals are several megabytes each and are not in git (see .gitignore); only what this
+ * script writes to assets/web is. Keep the originals somewhere safe to derive again.
+ *
  * This does NOT run on Netlify or in CI. It needs sips and cwebp, which is a macOS plus Homebrew
  * assumption, so the derived files are committed and this script is what you run when an
  * original changes:
