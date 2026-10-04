@@ -14,8 +14,8 @@
   --night: var(--fs-color-neutral-canvas);
   --shade: color-mix(in oklch, var(--night) 82%, transparent);
 
-  --street: url("street-dark-2400.webp");
-  --cobbles: url("street-dark-1200.webp");
+  --street: url("night-street-2400.webp");
+  --cobbles: url("night-cobbles-1800.webp");
 
   /* Film grain: fractal noise, desaturated, laid over everything at low opacity. */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -23,7 +23,7 @@
 
 @media (max-width: 50rem) {
   :root {
-    --street: url("street-dark-1200.webp");
+    --street: url("night-street-1200.webp");
   }
 }
 
@@ -86,7 +86,10 @@ pre {
   color: var(--lamp);
 }
 
-/* The street: the photograph, darkened toward the edges and into the page below. */
+/*
+ * The street: the photograph, darkened toward the edges and into the page below. It is anchored
+ * a little right of centre so the lamp stays in the picture when a phone crops it.
+ */
 
 .street {
   position: relative;
@@ -99,7 +102,16 @@ pre {
   background:
     radial-gradient(ellipse 70% 60% at 50% 45%, transparent 0%, var(--shade) 100%),
     linear-gradient(to bottom, var(--shade) 0%, transparent 30%, transparent 60%, var(--night) 100%),
-    var(--night) var(--street) center / cover no-repeat;
+    var(--night) var(--street) 62% center / cover no-repeat;
+}
+
+@media (max-width: 50rem) {
+  .street {
+    background-position:
+      center,
+      center,
+      74% center;
+  }
 }
 
 .title {
