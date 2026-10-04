@@ -371,5 +371,5 @@
     }
   },
   "name": "Datastar attributes (vendored for Pebble files)",
-  "comment": "Vendored from https://raw.githubusercontent.com/starfederation/datastar-vscode-extension/main/src/html.injection.tmLanguage.json (MIT). Regenerate with: bun scripts/update-datastar-grammar.ts"
+  "comment": "Vendored from https://raw.githubusercontent.com/starfederation/datastar-vscode-extension/main/src/html.injection.tmLanguage.json (MIT, see THIRD_PARTY_NOTICES.md). Regenerate with: bun scripts/update-datastar-grammar.ts"
 }

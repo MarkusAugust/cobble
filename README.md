@@ -202,4 +202,5 @@ Version 1.0 is a ground-up rewrite.
 
 ## License
 
-BSD-3-Clause
+BSD-3-Clause. The bundled Datastar grammar is MIT-licensed; see
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

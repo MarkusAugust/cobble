@@ -14,6 +14,6 @@ if (!response.ok) throw new Error(`download failed: ${response.status}`)
 const grammar = await response.json()
 grammar.scopeName = "source.datastar.html.injection.pebble"
 grammar.name = "Datastar attributes (vendored for Pebble files)"
-grammar.comment = `Vendored from ${SOURCE} (MIT). Regenerate with: bun scripts/update-datastar-grammar.ts`
+grammar.comment = `Vendored from ${SOURCE} (MIT, see THIRD_PARTY_NOTICES.md). Regenerate with: bun scripts/update-datastar-grammar.ts`
 writeFileSync(TARGET, `${JSON.stringify(grammar, null, 2)}\n`)
 console.log(`updated ${TARGET}`)
