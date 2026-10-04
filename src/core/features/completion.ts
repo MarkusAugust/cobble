@@ -122,6 +122,7 @@ function tagCompletions(
   const scope = scopeAt(analysis.ast, analysis.model, offset)
   const open = scope.enclosing.filter((s) => "closeRange" in s && !s.closeRange).map((s) => s.tag)
   const innermost = open[open.length - 1]
+  const pad = delimiterPadding(analysis.text, replaceRange ?? { start: offset, end: offset })
   const items: CompletionItem[] = []
   for (const tag of spec.tags.values()) {
     const closes = closesTag.get(tag.name)
@@ -146,7 +147,7 @@ function tagCompletions(
       kind: "keyword",
       detail: tag.signature,
       documentation: docOf(tag),
-      insertText,
+      insertText: pad(insertText),
       isSnippet,
       sortText,
       replaceRange,
@@ -157,10 +158,22 @@ function tagCompletions(
       label: name,
       kind: "keyword",
       detail: "custom tag",
+      insertText: pad(name),
       sortText: `2_${name}`,
       replaceRange,
     })
   return items
+}
+
+/**
+ * Pads a tag inserted at `range` so it sits well between the delimiters around it: a space after
+ * an auto-closed `{%`, a space before an existing `%}`, or a whole ` %}` when none follows yet.
+ */
+function delimiterPadding(text: string, range: { start: number; end: number }) {
+  const lead = /\{%-?$/.test(text.slice(0, range.start)) ? " " : ""
+  const rest = /^[^\n]*/.exec(text.slice(range.end))?.[0] ?? ""
+  const trail = !/^[ \t]*-?%\}/.test(rest) ? " %}" : /^-?%\}/.test(rest) ? " " : ""
+  return (insert: string) => lead + insert + trail
 }
 
 function memberCompletions(

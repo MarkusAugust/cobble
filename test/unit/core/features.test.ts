@@ -117,7 +117,25 @@ describe("completions", () => {
   test("endblock inserts the block name", () => {
     const c = cursor("{% block content %}{% §")
     const item = completions(c.analysis, c.offset, spec).find((i) => i.label === "endblock")
-    expect(item?.insertText).toBe("endblock content")
+    expect(item?.insertText).toBe("endblock content %}")
+  })
+
+  test("tag completions pad the delimiters they are inserted between", () => {
+    const insert = (src: string, label: string) => {
+      const c = cursor(src)
+      const item = completions(c.analysis, c.offset, spec).find((i) => i.label === label)
+      return item?.insertText
+    }
+    // Auto-closed `{%` with no spaces
+    expect(insert("{%§%}", "if")).toBe(" if ${1:condition} %}\n\t$0\n{% endif ")
+    expect(insert("{%-§-%}", "else")).toBe(" else ")
+    // Spaces already typed
+    expect(insert("{% §%}", "if")).toBe("if ${1:condition} %}\n\t$0\n{% endif ")
+    expect(insert("{% § %}", "if")).toBe("if ${1:condition} %}\n\t$0\n{% endif")
+    expect(insert("{% i§ %}", "if")).toBe("if ${1:condition} %}\n\t$0\n{% endif")
+    // No closing delimiter yet
+    expect(insert("{% §", "else")).toBe("else %}")
+    expect(insert("{%§\n<p>", "if")).toBe(" if ${1:condition} %}\n\t$0\n{% endif %}")
   })
 
   test("filters include snippets for parameters", () => {

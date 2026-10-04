@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A Pebble filter, function or test registered in an extension's `getFilters()`, `getFunctions()`
   or `getTests()` is no longer also listed under a name derived from its class name when its
   source file is read before the extension's.
+- Picking a tag from the completion list inside an auto-closed `{%%}` no longer produces
+  `{%if condition %} … {% endif%}`. Tag completions add the spaces next to the delimiters, and a
+  closing `%}` when none follows yet.
 
 ## [1.0.1] - 2026-09-26
 
