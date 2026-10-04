@@ -6,9 +6,11 @@ Language support for [Pebble Templates](https://pebbletemplates.io) 4.x in Visua
 `.html` files and in `.peb`/`.pebble` files. Built to coexist with the
 [Datastar](https://data-star.dev) extension and with HTMX attributes.
 
-<!-- screenshot placeholder: docs/screenshot.png -->
+![A Pebble template in VS Code with highlighting, CodeLens and inlay hints](docs/screenshot.png)
 
 ## Features
+
+![Typed completion, a discovered filter, diagnostics, auto-closing tags and navigation into Kotlin](docs/demo.gif)
 
 - **Syntax highlighting** for the complete Pebble 4.1 syntax, including string interpolation,
   whitespace control, `verbatim`, list and map literals and every built-in tag, filter, function
