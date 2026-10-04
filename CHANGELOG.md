@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-10-05
+
 ### Added
 - `THIRD_PARTY_NOTICES.md` with the MIT License of the bundled Datastar grammar, shipped in the
   extension package.
+
+### Changed
+- The README shows a screenshot and a short recording of the extension at work.
 
 ### Fixed
 - A Pebble filter, function or test registered in an extension's `getFilters()`, `getFunctions()`
