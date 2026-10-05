@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/MarkusAugust/cobble/issues"
   },
-  "icon": "pebbleInHtml.png",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.91.0"
   },

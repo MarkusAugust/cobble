@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- A new extension icon: a wet cobblestone with `{%` carved into it, in the colours of the
+  Cobble site.
+
 ## [1.0.2] - 2026-10-05
 
 ### Added
